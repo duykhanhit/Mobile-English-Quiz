@@ -55,7 +55,7 @@ const SettingScreen = ({ navigation }) => {
             </View>
             <View style={styles.inforContainer}>
               <Text style={styles.lableInput}>Mã sinh viên</Text>
-              <TextInput editable={disable} style={styles.input} />
+              <TextInput editable={false} style={styles.input} />
               <Text style={styles.lableInput}>Họ và tên</Text>
               <TextInput editable={disable} style={styles.input} />
               <Text style={styles.lableInput}>Giới tính</Text>
