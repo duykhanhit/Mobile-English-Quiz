@@ -29,6 +29,7 @@ export default StyleSheet.create({
   textTitle: {
     fontSize: 28,
     fontWeight: "700",
+    fontFamily: 'AptimaBold'
   },
   contentContainer: {
     flex: 7,
@@ -46,6 +47,7 @@ export default StyleSheet.create({
   },
   textContent: {
     fontSize: 20,
+    fontFamily: 'Aptima'
   },
   buttonContainer: {
     flex: 1,
