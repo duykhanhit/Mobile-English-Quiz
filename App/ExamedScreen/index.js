@@ -4,7 +4,7 @@ import { View, Text, Image, SafeAreaView, TouchableOpacity } from "react-native"
 import styles from "./styles";
 import avatar from "../../assets/avatar.jpg";
 
-const ExamedScreen = ({ navigation }) => {
+const ExamedScreen = ({ navigation, route }) => {
   return (
     <SafeAreaView style={{flex: 1}}>
       <View style={styles.container}>
@@ -18,7 +18,7 @@ const ExamedScreen = ({ navigation }) => {
         <View style={styles.score}>
           <Text style={styles.textPoint}>Điểm số</Text>
           <Text style={styles.point}>
-            20
+            {route.params.point}
             <Text style={styles.perPoint}>/20</Text>
           </Text>
         </View>

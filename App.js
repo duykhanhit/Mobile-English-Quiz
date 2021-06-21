@@ -1,14 +1,13 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import TabBottomNavigation from './navigation/TabBottomNavigation';
+import HomeStack from './navigation/HomeStack';
 import { useFonts } from 'expo-font';
 // import { View, Text } from 'react-native';
 
 export default function App() {
 
   const [loaded] = useFonts({
-    AptimaBold: require('./assets/fonts/AptimaBold.ttf'),
-    Aptima: require('./assets/fonts/Aptima.ttf'),
+    Helve: require('./assets/fonts/Helve.ttf'),
   })
   
   if(!loaded){
@@ -16,7 +15,7 @@ export default function App() {
   }
   return (
     <NavigationContainer>
-      <TabBottomNavigation/>
+      <HomeStack/>
     </NavigationContainer>
   );
 }

@@ -6,7 +6,7 @@ export default StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    paddingHorizontal: 20
+    padding: 20
   },
   header: {
     justifyContent: 'center',
@@ -52,7 +52,7 @@ export default StyleSheet.create({
     // flex: 1,
     justifyContent: 'flex-end',
     alignItems: 'center',
-    marginBottom: 100,
+    // marginBottom: 100,
     width: '100%'
   },
   touch: { 

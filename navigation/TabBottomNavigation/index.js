@@ -2,7 +2,8 @@ import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
-import HomeStack from "../HomeStack";
+// import HomeStack from "../HomeStack";
+import HomeScreen from '../../App/HomeScreen';
 import SettingScreen from "../../App/SettingScreen";
 
 import styles from './styles';
@@ -38,8 +39,8 @@ const TabBottomNavigation = () => {
             );
           },
         }}
-        name="HomeTab"
-        component={HomeStack}
+        name="HomeScreen"
+        component={HomeScreen}
       />
       <Tab.Screen
         options={{
