@@ -4,7 +4,7 @@ export default StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: 20
+    padding: 20
   },
   header: {
     height: 60,
@@ -15,7 +15,7 @@ export default StyleSheet.create({
   },
   textQuesNumber: {
     fontSize: 24,
-    fontWeight: '700'
+    fontWeight: '700',
   },
   totalQuesNumber: {
     fontSize: 20,
@@ -27,7 +27,7 @@ export default StyleSheet.create({
     // backgroundColor: 'red',
     flexDirection: 'row'
   },
-  quizBar: {
+  quizBarTouched: {
     height: 5,
     // width: '100%',
     flex: 1,
@@ -35,9 +35,20 @@ export default StyleSheet.create({
     backgroundColor: 'green',
     borderRadius: 2
   },
+  quizBar: {
+    height: 5,
+    flex: 1,
+    marginHorizontal: 1,
+    backgroundColor: 'red',
+    borderRadius: 2
+  },
   quiz: {
     maxHeight: 200,
-    marginTop: 20
+    marginTop: 20,
+  },
+  question: {
+    fontFamily: 'Helve',
+    fontSize: 16
   },
   answers: {
     flex: 1,
@@ -61,7 +72,7 @@ export default StyleSheet.create({
     color: '#fff'
   },
   footer: {
-    marginBottom: 80,
+    // marginBottom: 80,
     width: '100%',
     flexDirection: 'row',
   },
@@ -77,6 +88,10 @@ export default StyleSheet.create({
     alignItems: 'center',
     flex: 1
   },
+  textPre:{
+    textTransform: 'uppercase',
+    fontWeight: '700'
+  },
   next: {
     justifyContent: 'center',
     alignItems: 'center',
@@ -84,7 +99,9 @@ export default StyleSheet.create({
     backgroundColor: '#000'
   },
   textNext: {
-    color: '#fff'
+    color: '#fff',
+    textTransform: 'uppercase',
+    fontWeight: '700'
   },
   closeIcon: {
     flex: 1,

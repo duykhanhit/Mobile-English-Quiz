@@ -29,7 +29,7 @@ export default StyleSheet.create({
   textTitle: {
     fontSize: 28,
     fontWeight: "700",
-    fontFamily: 'AptimaBold'
+    // fontFamily: 'Helve'
   },
   contentContainer: {
     flex: 7,
@@ -40,14 +40,14 @@ export default StyleSheet.create({
     borderTopRightRadius: 20,
     shadowColor: "rgba(0,0,0,1)",
     shadowOffset: { width: 1, height: 0 },
-    shadowOpacity: 0.2,
+    shadowOpacity: 0.2
   },
   rules: {
 
   },
   textContent: {
     fontSize: 20,
-    fontFamily: 'Aptima'
+    fontFamily: 'Helve'
   },
   buttonContainer: {
     flex: 1,
@@ -57,7 +57,7 @@ export default StyleSheet.create({
   touch: { 
     padding: 5,
     width: '100%',
-    marginBottom: 60
+    // marginBottom: 60
   },
   degree: {
     borderWidth: 2,
