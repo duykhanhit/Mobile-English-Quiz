@@ -22,7 +22,7 @@ import * as ImagePicker from 'expo-image-picker';
 
 import styles from "./styles";
 import avatar from "../../assets/avatar.jpg";
-import background from "../../assets/background.png";
+import background from "../../assets/background.jpg";
 import { useEffect } from "react/cjs/react.development";
 
 const SettingScreen = ({ navigation }) => {

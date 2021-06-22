@@ -25,7 +25,7 @@ const Login = ({ navigation }) => {
         </View>
 
         <View style={styles["login-button-block"]}>
-          <TouchableOpacity style={styles.login_button}>
+          <TouchableOpacity onPress={() => navigation.navigate("HomeStack")} style={styles.login_button}>
             <Text style={styles.text_button}>Đăng nhập</Text>
           </TouchableOpacity>
         </View>

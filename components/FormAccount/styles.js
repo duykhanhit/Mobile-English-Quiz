@@ -5,6 +5,8 @@ const styles = StyleSheet.create({
     flex: 1,
     position: "relative",
     alignItems: "center",
+    flex: 1,
+    backgroundColor: "#fff",
   },
   image_block: {
     width: "100%",
