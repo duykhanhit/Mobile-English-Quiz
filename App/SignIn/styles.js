@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     width: "100%",
     flexDirection: "row",
     position: "absolute",
-    bottom: 58,
+    bottom: 28,
     left: 0,
     right: 0,
     justifyContent: "center",
