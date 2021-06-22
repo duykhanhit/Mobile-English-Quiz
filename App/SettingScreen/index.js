@@ -269,7 +269,7 @@ const SettingScreen = ({ navigation }) => {
               {!edit && (
                 <View style={styles.buttonContainer}>
                   <TouchableOpacity
-                    onPress={() => navigation.navigate("HomeScreen")}
+                    onPress={() => navigation.navigate("GetStarted")}
                     style={styles.touch}
                   >
                     <View style={styles.logout}>
