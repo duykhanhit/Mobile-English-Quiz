@@ -9,6 +9,7 @@ export default StyleSheet.create({
     shadowColor: "rgba(0,0,0,1)",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.5,
+    zIndex: 0
   },
   background: {
     borderBottomLeftRadius: 20,
@@ -16,17 +17,14 @@ export default StyleSheet.create({
     height: '100%',
     width: "100%",
     resizeMode: "cover",
-    justifyContent: "center",
+    justifyContent: "center"
   },
   container: {
     flex: 1,
     width: "100%",
     alignItems: "center",
     paddingHorizontal: 20,
-    position: "absolute",
-    top: 0,
-    left: 0,
-    height: '100%'
+    marginTop: -200,
   },
   buttonEdit: {
     width: "100%",
@@ -34,10 +32,14 @@ export default StyleSheet.create({
     padding: 5,
   },
   avatar: {
-    // flex: 1
     borderColor: "#333",
     borderWidth: 5,
     borderRadius: 200,
+    position: 'relative'
+  },
+  camera: {
+    position: 'absolute',
+    marginTop: 200
   },
   image: {
     width: width * 0.5,
@@ -84,4 +86,45 @@ export default StyleSheet.create({
     fontWeight: "700",
     textTransform: "uppercase",
   },
+  barContainer: {
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
+    height: 30,
+    shadowOffset: { width: 0, height: -2 },
+    shadowOpacity: 0.2,
+    shadowColor: "#000",
+    backgroundColor: "#eee",
+  },
+  bar: {
+    width: 50,
+    height: 5,
+    backgroundColor: "#aaa",
+    borderRadius: 3,
+  },
+  buttonsAvatar: {
+    width: '100%',
+    height: '100%',
+    backgroundColor: '#f9f9f9',
+    padding: 20
+  },
+  textUploadPhoto: {
+    textAlign: 'center',
+    // fontFamily: 'Helve',
+    fontSize: 24,
+    fontWeight: '700'
+  },
+  textChoosePhoto: {
+    textAlign: 'center',
+    // fontFamily: 'Helve',
+    fontSize: 14,
+    fontWeight: '500',
+    color: 'rgba(0,0,0,.5)'
+  },
+  buttonsUpload: {
+    width: "100%",
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'space-around',
+    marginBottom: 60
+  }
 });

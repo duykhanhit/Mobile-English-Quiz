@@ -9,18 +9,27 @@ import {
   KeyboardAvoidingView,
   Platform,
   TouchableWithoutFeedback,
+  TouchableHighlight,
   Keyboard,
   StatusBar,
 } from "react-native";
 import RNPickerSelect from "react-native-picker-select";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
+import BottomSheet from "reanimated-bottom-sheet";
 import MaterialIcon from "react-native-vector-icons/MaterialCommunityIcons";
+import Animated from "react-native-reanimated";
+import * as ImagePicker from 'expo-image-picker';
 
 import styles from "./styles";
 import avatar from "../../assets/avatar.jpg";
 import background from "../../assets/background.png";
+import { useEffect } from "react/cjs/react.development";
 
 const SettingScreen = ({ navigation }) => {
+  const bs = React.createRef();
+  const fall = new Animated.Value(1);
+  const [closeButtomSheet, setCloseButtomSheet] = useState(false);
+  const [image, setImage] = useState(null);
   const [gender, setGender] = useState(null);
   const [edit, setEdit] = useState(false);
   const [disable, setDisable] = useState(false);
@@ -29,6 +38,102 @@ const SettingScreen = ({ navigation }) => {
     open: false,
   });
 
+  useEffect(() => {
+    if (edit === false && closeButtomSheet === true) {
+      bs.current.snapTo(1);
+    }
+  }, [edit, closeButtomSheet]);
+
+  useEffect(() => {
+    bs.current.snapTo(1);
+  },[image]);
+
+  const renderHeader = () => {
+    return (
+      <TouchableHighlight
+        underlayColor="#DDDDDD"
+        onPress={() => {
+          bs.current.snapTo(1);
+        }}
+        style={styles.barContainer}
+      >
+        <View
+          style={{
+            justifyContent: "center",
+            alignItems: "center",
+            width: "100%",
+            height: "100%",
+          }}
+        >
+          <View style={styles.bar} />
+        </View>
+      </TouchableHighlight>
+    );
+  };
+
+  const renderContent = () => {
+    return (
+      <View style={styles.buttonsAvatar}>
+        <Text style={styles.textUploadPhoto}>Tải ảnh lên</Text>
+        <Text style={styles.textChoosePhoto}>Chọn ảnh đại diện của bạn</Text>
+        <View style={styles.buttonsUpload}>
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity
+              onPress={takePhotoFromCamera}
+              style={styles.touch}
+            >
+              <View style={styles.logout}>
+                <Text style={styles.textLogout}>Chụp ảnh</Text>
+              </View>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity
+              onPress={choosePhotoFromLibrary}
+              style={styles.touch}
+            >
+              <View style={styles.logout}>
+                <Text style={styles.textLogout}>Chọn ảnh</Text>
+              </View>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity
+              onPress={() => bs.current.snapTo(1)}
+              style={styles.touch}
+            >
+              <View style={styles.logout}>
+                <Text style={styles.textLogout}>Đóng</Text>
+              </View>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </View>
+    );
+  };
+
+  const takePhotoFromCamera = () => {
+    // ImagePicker.openCamera({
+    //   width: 300,
+    //   height: 400,
+    //   cropping: true,
+    // }).then(image => {
+    //   console.log(image);
+    // });
+  };
+
+  const choosePhotoFromLibrary = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+    if (!result.cancelled) {
+      setImage(result.uri);
+    };
+  };
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <KeyboardAvoidingView
@@ -36,12 +141,8 @@ const SettingScreen = ({ navigation }) => {
         style={{ flex: 1 }}
       >
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-          <View>
-            <StatusBar
-              animated={true}
-              barStyle='dark-content'
-              hidden={false}
-            />
+          <View style={{ flex: 1, width: "100%" }}>
+            <StatusBar animated={true} barStyle="dark-content" hidden={false} />
             <View style={styles.backgroundContainer}>
               <Image source={background} style={styles.background} />
             </View>
@@ -50,6 +151,7 @@ const SettingScreen = ({ navigation }) => {
                 onPress={() => {
                   setEdit(!edit);
                   setDisable(!disable);
+                  setCloseButtomSheet(true);
                 }}
                 style={styles.buttonEdit}
               >
@@ -60,8 +162,16 @@ const SettingScreen = ({ navigation }) => {
                 )}
               </TouchableOpacity>
               <View style={styles.avatar}>
-                <Image source={avatar} style={styles.image} />
+                <Image source={image === null ? avatar : {uri: image}} style={styles.image} />
               </View>
+              {edit && (
+                <TouchableOpacity
+                  onPress={() => bs.current.snapTo(0)}
+                  style={styles.camera}
+                >
+                  <MaterialIcon name="camera-outline" size={40} />
+                </TouchableOpacity>
+              )}
               <View style={styles.inforContainer}>
                 <Text style={styles.lableInput}>Mã sinh viên</Text>
                 <TextInput editable={false} style={styles.input} />
@@ -170,6 +280,15 @@ const SettingScreen = ({ navigation }) => {
                 </View>
               )}
             </View>
+            <BottomSheet
+              ref={bs}
+              snapPoints={[400, 0]}
+              renderContent={renderContent}
+              renderHeader={renderHeader}
+              initialSnap={1}
+              callbackNode={fall}
+              enabledGestureInteraction={true}
+            />
           </View>
         </TouchableWithoutFeedback>
       </KeyboardAvoidingView>
