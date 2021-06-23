@@ -23,10 +23,9 @@ import * as ImagePicker from "expo-image-picker";
 import styles from "./styles";
 import avatar from "../../assets/avatar.jpg";
 import background from "../../assets/background.jpg";
-import * as colors from '../../assets/colors';
+import * as colors from "../../assets/colors";
 
 const SettingScreen = ({ navigation }) => {
-
   const bs = React.createRef();
   const fall = new Animated.Value(1);
 
@@ -114,13 +113,13 @@ const SettingScreen = ({ navigation }) => {
     );
   };
 
-  const callBack = ( image ) => {
+  const callBack = (image) => {
     setImage(image);
-  }
+  };
 
   const takePhotoFromCamera = () => {
     navigation.navigate("CameraScreen", {
-      callBack: callBack
+      callBack: callBack,
     });
   };
 
@@ -149,20 +148,51 @@ const SettingScreen = ({ navigation }) => {
               <View style={styles.background} />
             </View> */}
             <View style={styles.container}>
-              <TouchableOpacity
-                onPress={() => {
-                  setEdit(!edit);
-                  setDisable(!disable);
-                  setCloseButtomSheet(true);
-                }}
-                style={styles.buttonEdit}
-              >
-                {!edit ? (
-                  <MaterialIcon name="account-edit" size={26} color={colors.darkGreen}/>
-                ) : (
-                  <MaterialIcon name="check" size={26} color={colors.darkGreen}/>
-                )}
-              </TouchableOpacity>
+              {!edit ? (
+                <TouchableOpacity
+                  onPress={() => {
+                    setEdit(!edit);
+                    setDisable(!disable);
+                    setCloseButtomSheet(true);
+                  }}
+                  style={styles.buttonEdit}
+                >
+                  <MaterialIcon
+                    name="account-edit"
+                    size={26}
+                    color={colors.darkGreen}
+                  />
+                </TouchableOpacity>
+              ) : (
+                <View style={styles.closeAndCheckContain}>
+                  <TouchableOpacity
+                    onPress={() => {
+                      setEdit(!edit);
+                      setDisable(!disable);
+                      setCloseButtomSheet(true);
+                    }}
+                  >
+                    <MaterialIcon
+                      name="close"
+                      size={26}
+                      color={colors.darkGreen}
+                    />
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={() => {
+                      setEdit(!edit);
+                      setDisable(!disable);
+                      setCloseButtomSheet(true);
+                    }}
+                  >
+                    <MaterialIcon
+                      name="check"
+                      size={26}
+                      color={colors.darkGreen}
+                    />
+                  </TouchableOpacity>
+                </View>
+              )}
               <View style={styles.avatar}>
                 <Image
                   source={image === null ? avatar : { uri: image }}
@@ -276,7 +306,7 @@ const SettingScreen = ({ navigation }) => {
                   >
                     <View style={styles.logout}>
                       <Text style={styles.textLogout}>Đăng xuất</Text>
-                      <MaterialIcon name="exit-to-app" size={26} color="#fff"/>
+                      <MaterialIcon name="exit-to-app" size={26} color="#fff" />
                     </View>
                   </TouchableOpacity>
                 </View>
