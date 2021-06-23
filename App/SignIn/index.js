@@ -24,7 +24,8 @@ const SignIn = ({ navigation }) => {
   return (
     <FormAccount>
       <View style={styles.login_block}>
-        <Text style={styles.text_input}>Đăng ký</Text>
+        <Text style={styles.text_input}>ĐĂNG KÝ</Text>
+
         {InputField(account, "Họ tên")}
         {InputField(studentcode, "Mã sinh viên")}
         {InputField(email, "Email")}
@@ -68,8 +69,11 @@ const SignIn = ({ navigation }) => {
         </View>
 
         <View style={styles["login-button-block"]}>
-          <TouchableOpacity onPress={() => navigation.navigate("HomeStack")} style={styles.login_button}>
-            <Text style={styles.text_button}>Đăng ký</Text>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("HomeStack")}
+            style={styles.login_button}
+          >
+            <Text style={styles.text_button}>ĐĂNG KÝ</Text>
           </TouchableOpacity>
         </View>
       </View>

@@ -12,9 +12,10 @@ const styles = StyleSheet.create({
   },
   view_touchable: {
     flex: 1,
-    alignItems: "center",
+    alignItems: "flex-end",
     justifyContent: "flex-end",
-    marginBottom: 80,
+    marginBottom: 70,
+    marginRight: 20,
   },
   touchable: {
     width: 150,

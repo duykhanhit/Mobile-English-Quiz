@@ -4,11 +4,12 @@ import styles from "./styles";
 import image from "../../assets/DefaultImage.png";
 import FormAccount from "../../components/FormAccount/index";
 
+
 const Login = ({ navigation }) => {
   return (
     <FormAccount>
       <View style={styles.login_block}>
-        <Text style={styles.text_input}>Đăng nhập</Text>
+        <Text style={styles.text_input}>ĐĂNG NHẬP</Text>
         <View style={styles.input_block}>
           <Image
             source={require("../../assets/studentcode.png")}
@@ -25,8 +26,11 @@ const Login = ({ navigation }) => {
         </View>
 
         <View style={styles["login-button-block"]}>
-          <TouchableOpacity onPress={() => navigation.navigate("HomeStack")} style={styles.login_button}>
-            <Text style={styles.text_button}>Đăng nhập</Text>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("HomeStack")}
+            style={styles.login_button}
+          >
+            <Text style={styles.text_button}>ĐĂNG NHẬP</Text>
           </TouchableOpacity>
         </View>
       </View>
