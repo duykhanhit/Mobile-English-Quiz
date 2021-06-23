@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { mainGreen } from "../../assets/colors/index";
 
 const styles = StyleSheet.create({
   login_block: {
@@ -44,7 +45,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 15,
     lineHeight: 19,
-    color: "#0A52A8",
+    color: mainGreen,
   },
   input_block: {
     position: "relative",
@@ -57,6 +58,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginTop: 19,
     marginBottom: 25.64,
+    color: mainGreen,
   },
   input: {
     backgroundColor: "#E4EBF1",
@@ -86,10 +88,10 @@ const styles = StyleSheet.create({
   login_button: {
     width: "100%",
     height: 45,
-    backgroundColor: "#0A52A8",
+    backgroundColor: mainGreen,
     justifyContent: "center",
     alignItems: "center",
-    borderRadius: 10,
+    borderRadius: 5,
   },
   text_button: {
     fontSize: 22,

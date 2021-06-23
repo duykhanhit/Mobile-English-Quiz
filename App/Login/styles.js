@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { mainGreen } from "../../assets/colors/index";
 
 const styles = StyleSheet.create({
   login_block: {
@@ -42,7 +43,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 15,
     lineHeight: 19,
-    color: "#0A52A8",
+    color: mainGreen,
     marginLeft: 5,
   },
   input_block: {
@@ -55,7 +56,8 @@ const styles = StyleSheet.create({
     lineHeight: 37,
     textAlign: "center",
     marginTop: 19,
-    marginBottom: 25.64
+    marginBottom: 25.64,
+    color: mainGreen
   },
   input: {
     backgroundColor: "#E4EBF1",
@@ -66,7 +68,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: "#A0A0A0",
     paddingLeft: 41,
-    marginBottom: 26.17
+    marginBottom: 26.17,
   },
   icons: {
     width: 20,
@@ -74,30 +76,28 @@ const styles = StyleSheet.create({
     position: "absolute",
     left: 30,
     top: 13.17,
-    zIndex: 3
+    zIndex: 3,
   },
-  'login-button-block': {
-    alignItems: 'center',
+  "login-button-block": {
+    alignItems: "center",
     flex: 1,
     marginTop: 8.83,
-    paddingHorizontal:21 
+    paddingHorizontal: 21,
   },
   login_button: {
-    width: '100%',
+    width: "100%",
     height: 45,
-    backgroundColor: '#0A52A8',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 10,
-    
+    backgroundColor: mainGreen,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 5,
   },
   text_button: {
     fontSize: 22,
     lineHeight: 27,
     fontWeight: "normal",
-    color: '#fff',
-    
-  }
+    color: "#fff",
+  },
 });
 
 export default styles;
