@@ -59,11 +59,11 @@ export default StyleSheet.create({
   touch: { 
     padding: 5,
     width: '100%',
-    // marginBottom: 60
   },
   degree: {
+    backgroundColor: colors.mainGreen,
     borderWidth: 2,
-    borderColor: 'black',
+    borderColor: colors.mainGreen,
     borderRadius: 5,
     width: '100%',
     display: 'flex',
@@ -74,5 +74,6 @@ export default StyleSheet.create({
   textDegree: {
     fontWeight: '700',
     textTransform: 'uppercase',
+    color: "#fff"
   }
 });
