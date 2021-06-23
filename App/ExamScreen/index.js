@@ -2,18 +2,17 @@ import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
-  Button,
   SafeAreaView,
   ScrollView,
-  CheckBox,
   TouchableHighlight,
   TouchableOpacity,
   Alert,
 } from "react-native";
 import MaterialIcon from "react-native-vector-icons/MaterialCommunityIcons";
-import * as Animatable from 'react-native-animatable';
+import * as Animatable from "react-native-animatable";
 
 import styles from "./styles";
+import * as colors from '../../assets/colors';
 
 const ExamScreen = ({ navigation }) => {
   const [selected, setSelected] = useState({
@@ -23,7 +22,7 @@ const ExamScreen = ({ navigation }) => {
     cauD: false,
   });
 
-  const [result, setResult] = useState('');
+  const [result, setResult] = useState("");
   const [point, setPoint] = useState(0);
   const [listQues, setListQues] = useState([
     {
@@ -303,8 +302,18 @@ const ExamScreen = ({ navigation }) => {
     setDisplayQues(listQues[numberQues]);
   }, [numberQues]);
 
-  const Bar = ({ touched }) => {
-    return <View style={[touched ? styles.quizBarTouched : styles.quizBar]} />;
+  const Bar = ({ touched, index }) => {
+    return (
+      <View
+        style={[
+          touched
+            ? styles.quizBarTouched
+            : numberQues === index
+            ? styles.inThisQuesBar
+            : styles.quizBar,
+        ]}
+      />
+    );
   };
 
   const handleButtonContinute = () => {
@@ -317,27 +326,30 @@ const ExamScreen = ({ navigation }) => {
         ]);
       }
     }
-    if(result === listQues[numberQues].rightAnswer) {
-      setPoint(point+1);
+    if (result === listQues[numberQues].rightAnswer) {
+      setPoint(point + 1);
     }
     setSelected({
       cauA: false,
       cauB: false,
       cauC: false,
-      cauD: false
+      cauD: false,
     });
-    if(numberQues===19) {
-      navigation.navigate("ExamedScreen", { point: point+1 });
+    if (numberQues === 19) {
+      navigation.navigate("ExamedScreen", { point: point + 1 });
     }
-    if(numberQues < 19) {
+    if (numberQues < 19) {
       setNumberQues(numberQues + 1);
-
     }
   };
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <Animatable.View animation='bounceInDown' useNativeDriver={true} style={styles.container}>
+      <Animatable.View
+        animation="bounceInDown"
+        useNativeDriver={true}
+        style={styles.container}
+      >
         <View style={styles.header}>
           <Text style={styles.textQuesNumber}>Câu hỏi {numberQues + 1}</Text>
           <Text style={styles.totalQuesNumber}>/20</Text>
@@ -357,19 +369,19 @@ const ExamScreen = ({ navigation }) => {
             }}
             style={styles.closeIcon}
           >
-            <MaterialIcon name="close" color="black" size={26} />
+            <MaterialIcon name="close" color={colors.darkGreen} size={26} />
           </TouchableOpacity>
         </View>
         <View style={styles.quizsBar}>
           {listQues.map((val, index) => (
-            <Bar key={index} touched={val.touched} />
+            <Bar key={index} touched={val.touched} index={index} />
           ))}
         </View>
         <ScrollView style={styles.quiz}>
           <Text style={styles.question}>{displayQues.question}</Text>
         </ScrollView>
         <View style={styles.answers}>
-          <TouchableHighlight
+          <TouchableOpacity
             onPress={() => {
               setSelected({
                 cauA: !selected.cauA,
@@ -389,24 +401,24 @@ const ExamScreen = ({ navigation }) => {
                 ...listQues.slice(numberQues + 1),
               ]);
               // console.log(selected.cauA);
-              if(!selected.cauA) {
+              if (!selected.cauA) {
                 setResult(displayQues.cauA);
+              } else {
+                setResult("");
               }
-              else {
-                setResult('');
-              }
-              
             }}
             style={[
               styles.answer,
               listQues[numberQues].choseA && styles.selected,
             ]}
           >
-            <Text style={[listQues[numberQues].choseA ? styles.textSelected : {}]}>
+            <Text
+              style={[listQues[numberQues].choseA ? styles.textSelected : {}]}
+            >
               A: {displayQues.cauA}
             </Text>
-          </TouchableHighlight>
-          <TouchableHighlight
+          </TouchableOpacity>
+          <TouchableOpacity
             onPress={() => {
               setSelected({
                 cauA: false,
@@ -426,11 +438,10 @@ const ExamScreen = ({ navigation }) => {
                 },
                 ...listQues.slice(numberQues + 1),
               ]);
-              if(!selected.cauB) {
+              if (!selected.cauB) {
                 setResult(displayQues.cauB);
-              }
-              else {
-                setResult('');
+              } else {
+                setResult("");
               }
             }}
             style={[
@@ -438,11 +449,13 @@ const ExamScreen = ({ navigation }) => {
               listQues[numberQues].choseB && styles.selected,
             ]}
           >
-            <Text style={[listQues[numberQues].choseB ? styles.textSelected : {}]}>
+            <Text
+              style={[listQues[numberQues].choseB ? styles.textSelected : {}]}
+            >
               B: {displayQues.cauB}
             </Text>
-          </TouchableHighlight>
-          <TouchableHighlight
+          </TouchableOpacity>
+          <TouchableOpacity
             onPress={() => {
               setSelected({
                 cauA: false,
@@ -461,11 +474,10 @@ const ExamScreen = ({ navigation }) => {
                 },
                 ...listQues.slice(numberQues + 1),
               ]);
-              if(!selected.cauC) {
+              if (!selected.cauC) {
                 setResult(displayQues.cauC);
-              }
-              else {
-                setResult('');
+              } else {
+                setResult("");
               }
             }}
             style={[
@@ -473,11 +485,13 @@ const ExamScreen = ({ navigation }) => {
               listQues[numberQues].choseC && styles.selected,
             ]}
           >
-            <Text style={[listQues[numberQues].choseC ? styles.textSelected : {}]}>
+            <Text
+              style={[listQues[numberQues].choseC ? styles.textSelected : {}]}
+            >
               C: {displayQues.cauC}
             </Text>
-          </TouchableHighlight>
-          <TouchableHighlight
+          </TouchableOpacity>
+          <TouchableOpacity
             onPress={() => {
               setSelected({
                 cauA: false,
@@ -496,11 +510,10 @@ const ExamScreen = ({ navigation }) => {
                 },
                 ...listQues.slice(numberQues + 1),
               ]);
-              if(!selected.cauD) {
+              if (!selected.cauD) {
                 setResult(displayQues.cauD);
-              }
-              else {
-                setResult('');
+              } else {
+                setResult("");
               }
             }}
             style={[
@@ -508,15 +521,17 @@ const ExamScreen = ({ navigation }) => {
               listQues[numberQues].choseD && styles.selected,
             ]}
           >
-            <Text style={[listQues[numberQues].choseD ? styles.textSelected : {}]}>
+            <Text
+              style={[listQues[numberQues].choseD ? styles.textSelected : {}]}
+            >
               D: {displayQues.cauD}
             </Text>
-          </TouchableHighlight>
+          </TouchableOpacity>
         </View>
         <View style={styles.footer}>
-          {(numberQues !== 0 && numberQues !== 19) && (
+          {numberQues !== 0 && numberQues !== 19 && (
             <TouchableOpacity
-              onPress={() => setNumberQues(numberQues - 1)}
+              onPress={() => {setNumberQues(numberQues - 1); setPoint(point-1)}}
               style={[styles.touch, { marginRight: 5 }]}
             >
               <View style={styles.previous}>
@@ -529,7 +544,9 @@ const ExamScreen = ({ navigation }) => {
             style={[styles.touch, numberQues !== 0 && { marginLeft: 5 }]}
           >
             <View style={styles.next}>
-              <Text style={styles.textNext}>{numberQues !== 19 ? 'Tiếp theo' : 'Hoàn thành'}</Text>
+              <Text style={styles.textNext}>
+                {numberQues !== 19 ? "Tiếp theo" : "Hoàn thành"}
+              </Text>
             </View>
           </TouchableOpacity>
         </View>

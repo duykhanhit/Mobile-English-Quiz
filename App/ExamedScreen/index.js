@@ -3,6 +3,7 @@ import { View, Text, Image, SafeAreaView, TouchableOpacity } from "react-native"
 
 import styles from "./styles";
 import avatar from "../../assets/avatar.jpg";
+import * as colors from '../../assets/colors';
 
 const ExamedScreen = ({ navigation, route }) => {
   return (

@@ -1,10 +1,12 @@
 import { StyleSheet } from 'react-native';
+import * as colors from '../../assets/colors';
+
 export default StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 20
+    padding: 20,
   },
   header: {
     height: 60,
@@ -16,10 +18,11 @@ export default StyleSheet.create({
   textQuesNumber: {
     fontSize: 24,
     fontWeight: '700',
+    color: colors.mainGreen
   },
   totalQuesNumber: {
     fontSize: 20,
-    color: 'rgba(0,0,0,.5)'
+    color: colors.lightGreen
   },
   quizsBar: {
     width: '100%',
@@ -42,6 +45,13 @@ export default StyleSheet.create({
     backgroundColor: 'red',
     borderRadius: 2
   },
+  inThisQuesBar: {
+    height: 5,
+    flex: 1,
+    marginHorizontal: 1,
+    backgroundColor: "orange",
+    borderRadius: 2,
+  },
   quiz: {
     maxHeight: 200,
     marginTop: 20,
@@ -63,10 +73,10 @@ export default StyleSheet.create({
     borderRadius: 10,
     paddingHorizontal: 10,
     borderWidth: 2,
-    borderColor: 'rgba(0,0,0,.5)'
+    borderColor: 'rgba(0,0,0,.3)'
   },
   selected: {
-    backgroundColor: '#000',
+    backgroundColor: colors.yellow,
   },
   textSelected: {
     color: '#fff'
@@ -80,7 +90,7 @@ export default StyleSheet.create({
     flex: 1,
     height: 50,
     borderWidth: 2,
-    borderColor: 'black',
+    borderColor: colors.mainGreen,
     borderRadius: 5,
   },
   previous: {
@@ -90,13 +100,15 @@ export default StyleSheet.create({
   },
   textPre:{
     textTransform: 'uppercase',
-    fontWeight: '700'
+    fontWeight: '700',
+    color: colors.mainGreen
   },
   next: {
     justifyContent: 'center',
     alignItems: 'center',
     flex: 1,
-    backgroundColor: '#000'
+    backgroundColor: '#000',
+    backgroundColor: colors.mainGreen,
   },
   textNext: {
     color: '#fff',

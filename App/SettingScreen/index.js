@@ -23,8 +23,9 @@ import * as ImagePicker from "expo-image-picker";
 import styles from "./styles";
 import avatar from "../../assets/avatar.jpg";
 import background from "../../assets/background.jpg";
+import * as colors from '../../assets/colors';
 
-const SettingScreen = ({ navigation, route }) => {
+const SettingScreen = ({ navigation }) => {
 
   const bs = React.createRef();
   const fall = new Animated.Value(1);
@@ -83,7 +84,7 @@ const SettingScreen = ({ navigation, route }) => {
               onPress={takePhotoFromCamera}
               style={styles.touch}
             >
-              <View style={styles.logout}>
+              <View style={styles.photo}>
                 <Text style={styles.textLogout}>Chụp ảnh</Text>
               </View>
             </TouchableOpacity>
@@ -93,7 +94,7 @@ const SettingScreen = ({ navigation, route }) => {
               onPress={choosePhotoFromLibrary}
               style={styles.touch}
             >
-              <View style={styles.logout}>
+              <View style={styles.photo}>
                 <Text style={styles.textLogout}>Chọn ảnh</Text>
               </View>
             </TouchableOpacity>
@@ -103,7 +104,7 @@ const SettingScreen = ({ navigation, route }) => {
               onPress={() => bs.current.snapTo(1)}
               style={styles.touch}
             >
-              <View style={styles.logout}>
+              <View style={styles.photo}>
                 <Text style={styles.textLogout}>Đóng</Text>
               </View>
             </TouchableOpacity>
@@ -144,9 +145,9 @@ const SettingScreen = ({ navigation, route }) => {
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <View style={{ flex: 1, width: "100%" }}>
             <StatusBar animated={true} barStyle="dark-content" hidden={false} />
-            <View style={styles.backgroundContainer}>
-              <Image source={background} style={styles.background} />
-            </View>
+            {/* <View style={styles.backgroundContainer}>
+              <View style={styles.background} />
+            </View> */}
             <View style={styles.container}>
               <TouchableOpacity
                 onPress={() => {
@@ -157,9 +158,9 @@ const SettingScreen = ({ navigation, route }) => {
                 style={styles.buttonEdit}
               >
                 {!edit ? (
-                  <MaterialIcon name="account-edit" size={26} />
+                  <MaterialIcon name="account-edit" size={26} color={colors.darkGreen}/>
                 ) : (
-                  <MaterialIcon name="check" size={26} />
+                  <MaterialIcon name="check" size={26} color={colors.darkGreen}/>
                 )}
               </TouchableOpacity>
               <View style={styles.avatar}>
@@ -181,12 +182,14 @@ const SettingScreen = ({ navigation, route }) => {
                 <TextInput editable={false} style={styles.input} />
                 <Text style={styles.lableInput}>Họ và tên</Text>
                 <TextInput editable={disable} style={styles.input} />
+                <Text style={styles.lableInput}>Email</Text>
+                <TextInput editable={false} style={styles.input} />
                 <Text style={styles.lableInput}>Giới tính</Text>
                 <RNPickerSelect
                   placeholder={{
                     label: "Select an gender",
                     value: null,
-                    color: "#9EA0A4",
+                    color: "#000",
                   }}
                   onValueChange={(value) => setGender(value)}
                   items={
@@ -250,11 +253,6 @@ const SettingScreen = ({ navigation, route }) => {
                 <DateTimePickerModal
                   date={date.date}
                   mode="date"
-                  // pickerContainerStyleIOS={{
-                  //   backgroundColor: "#000",
-                  //   color: "#000",
-                  // }}
-                  // isDarkModeEnabled={false}
                   isVisible={date.open}
                   onConfirm={(date) => {
                     setDate({
@@ -278,7 +276,7 @@ const SettingScreen = ({ navigation, route }) => {
                   >
                     <View style={styles.logout}>
                       <Text style={styles.textLogout}>Đăng xuất</Text>
-                      <MaterialIcon name="exit-to-app" size={26} />
+                      <MaterialIcon name="exit-to-app" size={26} color="#fff"/>
                     </View>
                   </TouchableOpacity>
                 </View>

@@ -1,12 +1,14 @@
 import { StyleSheet, Dimensions } from 'react-native';
+import * as colors from '../../assets/colors';
 
-const {width} = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 
 export default StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    padding: 20
+    padding: 20,
+    backgroundColor: colors.mainGreen
   },
   header: {
     justifyContent: 'center',
@@ -17,7 +19,8 @@ export default StyleSheet.create({
   },
   congratulations: {
     fontSize: 26,
-    fontWeight: '700'
+    fontWeight: '700',
+    color: '#fff'
   },
   avatar: {
     flex: 1
@@ -36,17 +39,17 @@ export default StyleSheet.create({
   textPoint: {
     fontSize: 22,
     fontWeight: '700',
-
+    color: '#fff'
   },
   point: {
     fontSize: 24,
     fontWeight: '900',
-    color: 'green'
+    color: colors.yellow
   },
   perPoint: {
     fontSize: 22,
     fontWeight: '900',
-    color: 'black'
+    color: colors.lightGreen
   },
   buttonContainer: {
     // flex: 1,
@@ -62,16 +65,18 @@ export default StyleSheet.create({
   },
   continute: {
     borderWidth: 2,
-    borderColor: 'black',
+    borderColor: '#fff',
     borderRadius: 5,
     width: '100%',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    paddingVertical: 15
+    paddingVertical: 15,
+    backgroundColor: '#fff'
   },
   textContinute: {
     fontWeight: '700',
     textTransform: 'uppercase',
+    color: colors.mainGreen
   }
 });
