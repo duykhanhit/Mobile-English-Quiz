@@ -250,11 +250,11 @@ const SettingScreen = ({ navigation, route }) => {
                 <DateTimePickerModal
                   date={date.date}
                   mode="date"
-                  pickerContainerStyleIOS={{
-                    backgroundColor: "#000",
-                    color: "#000",
-                  }}
-                  isDarkModeEnabled={false}
+                  // pickerContainerStyleIOS={{
+                  //   backgroundColor: "#000",
+                  //   color: "#000",
+                  // }}
+                  // isDarkModeEnabled={false}
                   isVisible={date.open}
                   onConfirm={(date) => {
                     setDate({
