@@ -9,9 +9,7 @@ import {
 } from "react-native";
 import styles from "./styles";
 
-const image = {
-  uri: "https://png.pngtree.com/png-clipart/20200401/original/pngtree-online-education-training-course-design-concept-vector-illustration-png-image_5331074.jpg",
-};
+import image from '../../assets/default_background.png'
 
 const GetStarted = ({ navigation }) => {
   return (
