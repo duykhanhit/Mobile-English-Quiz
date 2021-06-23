@@ -1,10 +1,11 @@
 import { StyleSheet } from "react-native";
+import * as colors from "../../assets/colors";
 export default StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#f9f9f9",
+    backgroundColor: colors.mainGreen,
   },
   header: {
     flex: 3,
@@ -29,6 +30,7 @@ export default StyleSheet.create({
   textTitle: {
     fontSize: 28,
     fontWeight: "700",
+    color: "#fff"
     // fontFamily: 'Helve'
   },
   contentContainer: {
@@ -38,9 +40,9 @@ export default StyleSheet.create({
     paddingVertical: 25,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
-    shadowColor: "rgba(0,0,0,1)",
+    shadowColor: "#fff",
     shadowOffset: { width: 1, height: 0 },
-    shadowOpacity: 0.2
+    shadowOpacity: 0.5
   },
   rules: {
 

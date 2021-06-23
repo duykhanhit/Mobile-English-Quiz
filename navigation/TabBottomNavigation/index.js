@@ -1,6 +1,7 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import * as colors from "../../assets/colors";
 
 // import HomeStack from "../HomeStack";
 import HomeScreen from '../../App/HomeScreen';
@@ -20,7 +21,7 @@ const TabBottomNavigation = () => {
           bottom: 10,
           left: 10,
           right: 10,
-          backgroundColor: "#fff",
+          backgroundColor: colors.mainGreen,
           borderRadius: 10,
           height: 60,
           ...styles.shadow,
@@ -34,7 +35,7 @@ const TabBottomNavigation = () => {
               <MaterialCommunityIcons
                 name="home"
                 size={26}
-                color={focused ? "black" : "#666"}
+                color={focused ? colors.darkGreen : colors.lightGreen}
               />
             );
           },
@@ -49,7 +50,7 @@ const TabBottomNavigation = () => {
               <MaterialCommunityIcons
                 name="account-cog"
                 size={26}
-                color={focused ? "black" : "#666"}
+                color={focused ? colors.darkGreen : colors.lightGreen}
               />
             );
           },

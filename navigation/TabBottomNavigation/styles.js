@@ -7,6 +7,6 @@ export default StyleSheet.create({
       width: 0,
       height: 0
     },
-    shadowColor: 'black'
+    shadowColor: '#aaa'
   },
 });

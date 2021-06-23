@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -18,16 +18,17 @@ import DateTimePickerModal from "react-native-modal-datetime-picker";
 import BottomSheet from "reanimated-bottom-sheet";
 import MaterialIcon from "react-native-vector-icons/MaterialCommunityIcons";
 import Animated from "react-native-reanimated";
-import * as ImagePicker from 'expo-image-picker';
+import * as ImagePicker from "expo-image-picker";
 
 import styles from "./styles";
 import avatar from "../../assets/avatar.jpg";
 import background from "../../assets/background.jpg";
-import { useEffect } from "react/cjs/react.development";
 
-const SettingScreen = ({ navigation }) => {
+const SettingScreen = ({ navigation, route }) => {
+
   const bs = React.createRef();
   const fall = new Animated.Value(1);
+
   const [closeButtomSheet, setCloseButtomSheet] = useState(false);
   const [image, setImage] = useState(null);
   const [gender, setGender] = useState(null);
@@ -46,7 +47,7 @@ const SettingScreen = ({ navigation }) => {
 
   useEffect(() => {
     bs.current.snapTo(1);
-  },[image]);
+  }, [image]);
 
   const renderHeader = () => {
     return (
@@ -112,14 +113,14 @@ const SettingScreen = ({ navigation }) => {
     );
   };
 
+  const callBack = ( image ) => {
+    setImage(image);
+  }
+
   const takePhotoFromCamera = () => {
-    // ImagePicker.openCamera({
-    //   width: 300,
-    //   height: 400,
-    //   cropping: true,
-    // }).then(image => {
-    //   console.log(image);
-    // });
+    navigation.navigate("CameraScreen", {
+      callBack: callBack
+    });
   };
 
   const choosePhotoFromLibrary = async () => {
@@ -131,7 +132,7 @@ const SettingScreen = ({ navigation }) => {
     });
     if (!result.cancelled) {
       setImage(result.uri);
-    };
+    }
   };
 
   return (
@@ -162,12 +163,15 @@ const SettingScreen = ({ navigation }) => {
                 )}
               </TouchableOpacity>
               <View style={styles.avatar}>
-                <Image source={image === null ? avatar : {uri: image}} style={styles.image} />
+                <Image
+                  source={image === null ? avatar : { uri: image }}
+                  style={styles.image}
+                />
               </View>
               {edit && (
                 <TouchableOpacity
                   onPress={() => bs.current.snapTo(0)}
-                  style={styles.camera}
+                  style={styles.cameraIcon}
                 >
                   <MaterialIcon name="camera-outline" size={40} />
                 </TouchableOpacity>
@@ -246,11 +250,11 @@ const SettingScreen = ({ navigation }) => {
                 <DateTimePickerModal
                   date={date.date}
                   mode="date"
-                  pickerContainerStyleIOS={{
-                    backgroundColor: "#000",
-                    color: "#000",
-                  }}
-                  isDarkModeEnabled={false}
+                  // pickerContainerStyleIOS={{
+                  //   backgroundColor: "#000",
+                  //   color: "#000",
+                  // }}
+                  // isDarkModeEnabled={false}
                   isVisible={date.open}
                   onConfirm={(date) => {
                     setDate({
