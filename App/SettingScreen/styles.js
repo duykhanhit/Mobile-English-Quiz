@@ -37,7 +37,7 @@ export default StyleSheet.create({
     borderRadius: 200,
     position: 'relative'
   },
-  camera: {
+  cameraIcon: {
     position: 'absolute',
     marginTop: 200
   },
@@ -126,5 +126,5 @@ export default StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'space-around',
     marginBottom: 60
-  }
+  },
 });
