@@ -22,8 +22,8 @@ const styles = StyleSheet.create({
   "checking-account-block": {
     width: "100%",
     flexDirection: "row",
-    position: "absolute",
-    bottom: 28,
+    position: "relative",
+    top: 380,
     left: 0,
     right: 0,
     justifyContent: "center",

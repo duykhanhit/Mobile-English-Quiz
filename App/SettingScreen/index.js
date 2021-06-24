@@ -18,6 +18,7 @@ import DateTimePickerModal from "react-native-modal-datetime-picker";
 import BottomSheet from "reanimated-bottom-sheet";
 import MaterialIcon from "react-native-vector-icons/MaterialCommunityIcons";
 import Animated from "react-native-reanimated";
+import { RadioButton } from "react-native-paper";
 import * as ImagePicker from "expo-image-picker";
 
 import styles from "./styles";
@@ -32,7 +33,7 @@ const SettingScreen = ({ navigation }) => {
 
   const [closeButtomSheet, setCloseButtomSheet] = useState(false);
   const [image, setImage] = useState(null);
-  const [gender, setGender] = useState(null);
+  const [gender, setGender] = useState('male');
   const [edit, setEdit] = useState(false);
   const [disable, setDisable] = useState(false);
   const [date, setDate] = useState({
@@ -179,12 +180,41 @@ const SettingScreen = ({ navigation }) => {
               )}
               <View style={styles.inforContainer}>
                 <Text style={styles.lableInput}>Mã sinh viên</Text>
-                <TextInput editable={false} style={styles.input} />
+                <TextInput editable={disable} style={styles.input} />
                 <Text style={styles.lableInput}>Họ và tên</Text>
                 <TextInput editable={disable} style={styles.input} />
                 <Text style={styles.lableInput}>Email</Text>
-                <TextInput editable={false} style={styles.input} />
-                <Text style={styles.lableInput}>Giới tính</Text>
+                <TextInput editable={disable} style={styles.input} />
+                <TextInput editable={disable} style={styles.input} />
+                <View style={{ flexDirection: "row", alignItems: "center", marginVertical: 10 }}>
+                  <Text style={styles.textGender}>Giới tính:</Text>
+                  <View style={styles.genderContainer}>
+                    <TouchableOpacity
+                      onPress={() => edit && setGender("male")}
+                      style={{ flexDirection: "row", alignItems: "center" }}
+                    >
+                      <Text style={styles.textGender}>Nam</Text>
+                      <RadioButton
+                        value="male"
+                        status={gender === "male" ? "checked" : "unchecked"}
+                        onPress={() => edit && setGender("male")}
+                      />
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      onPress={() => edit && setGender("female")}
+                      style={{ flexDirection: "row", alignItems: "center" }}
+                    >
+                      <Text style={styles.textGender}>Nữ</Text>
+                      <RadioButton
+                        color="red"
+                        value="female"
+                        status={gender === "female" ? "checked" : "unchecked"}
+                        onPress={() => edit && setGender("female")}
+                      />
+                    </TouchableOpacity>
+                  </View>
+                </View>
+                {/* <Text style={styles.lableInput}>Giới tính</Text>
                 <RNPickerSelect
                   placeholder={{
                     label: "Select an gender",
@@ -227,7 +257,7 @@ const SettingScreen = ({ navigation }) => {
                       />
                     );
                   }}
-                />
+                /> */}
                 <Text style={styles.lableInput}>Ngày sinh</Text>
                 <TouchableOpacity
                   style={[
