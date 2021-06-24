@@ -4,7 +4,6 @@ import styles from "./styles";
 import image from "../../assets/DefaultImage.png";
 import FormAccount from "../../components/FormAccount/index";
 
-
 const Login = ({ navigation }) => {
   return (
     <FormAccount>

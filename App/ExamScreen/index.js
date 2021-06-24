@@ -377,9 +377,11 @@ const ExamScreen = ({ navigation }) => {
             <Bar key={index} touched={val.touched} index={index} />
           ))}
         </View>
-        <ScrollView style={styles.quiz}>
-          <Text style={styles.question}>{displayQues.question}</Text>
-        </ScrollView>
+        <View style={styles.quizContainer}>
+          <ScrollView style={styles.quiz}>
+            <Text style={styles.question}>{displayQues.question}</Text>
+          </ScrollView>
+        </View>
         <View style={styles.answers}>
           <TouchableOpacity
             onPress={() => {
@@ -545,7 +547,7 @@ const ExamScreen = ({ navigation }) => {
           >
             <View style={styles.next}>
               <Text style={styles.textNext}>
-                {numberQues !== 19 ? "Tiếp theo" : "Hoàn thành"}
+                {numberQues !== 19 ? "Tiếp theo" : "Nộp bài"}
               </Text>
             </View>
           </TouchableOpacity>
