@@ -33,6 +33,12 @@ export default StyleSheet.create({
     alignItems: "flex-end",
     padding: 5,
   },
+  closeAndCheckContain: {
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    padding: 5,
+  },
   avatar: {
     borderColor: "#333",
     borderWidth: 5,
@@ -79,7 +85,7 @@ export default StyleSheet.create({
     width: "100%",
     justifyContent: "flex-end",
     alignItems: "center",
-    marginButton: 80
+    marginBottom: 80
   },
   touch: {
     width: "100%",
