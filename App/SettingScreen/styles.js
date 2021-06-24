@@ -56,9 +56,19 @@ export default StyleSheet.create({
   },
   inforContainer: {
     width: "100%",
-    // flex: 1
+    flex: 1
   },
   lableInput: {
+    fontWeight: "700",
+    color: colors.darkGreen
+  },
+  genderContainer: {
+    flex: 1, 
+    flexDirection: "row", 
+    alignItems: 'center',
+    justifyContent: 'space-around'
+  },
+  textGender: {
     fontWeight: "700",
     color: colors.darkGreen
   },
@@ -75,6 +85,7 @@ export default StyleSheet.create({
     width: "100%",
     justifyContent: "flex-end",
     alignItems: "center",
+    marginButton: 80
   },
   touch: {
     width: "100%",

@@ -54,11 +54,21 @@ export default StyleSheet.create({
   },
   quiz: {
     maxHeight: 200,
+    width: '100%',
     marginTop: 20,
+    backgroundColor: colors.mainGreen,
+    paddingVertical: 20,
+    borderRadius: 10,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 0},
+    shadowOpacity: .8,
+    shadowRadius: 5
   },
   question: {
     fontFamily: 'Helve',
-    fontSize: 16
+    fontSize: 16,
+    alignSelf: 'center',
+    color: '#fff'
   },
   answers: {
     flex: 1,
