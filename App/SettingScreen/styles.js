@@ -43,7 +43,19 @@ export default StyleSheet.create({
     borderColor: "#333",
     borderWidth: 5,
     borderRadius: 200,
-    position: 'relative'
+    position: 'relative',
+    overflow: 'hidden'
+  },
+  backgroundCamera: {
+    backgroundColor: 'rgba(0,0,0,.3)',
+    width: width * 0.3,
+    height: width * 0.3,
+    borderBottomLeftRadius: 200,
+    borderBottomRightRadius: 200,
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'absolute'
+    // height: width * 0.3,
   },
   cameraIcon: {
     position: 'absolute',

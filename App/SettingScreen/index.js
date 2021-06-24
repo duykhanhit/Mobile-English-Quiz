@@ -32,7 +32,7 @@ const SettingScreen = ({ navigation }) => {
 
   const [closeButtomSheet, setCloseButtomSheet] = useState(false);
   const [image, setImage] = useState(null);
-  const [gender, setGender] = useState('male');
+  const [gender, setGender] = useState("male");
   const [edit, setEdit] = useState(false);
   const [disable, setDisable] = useState(false);
   const [date, setDate] = useState({
@@ -199,13 +199,14 @@ const SettingScreen = ({ navigation }) => {
                   source={image === null ? avatar : { uri: image }}
                   style={styles.image}
                 />
+                {edit &&<View style={styles.backgroundCamera}/>}
               </View>
               {edit && (
                 <TouchableOpacity
                   onPress={() => bs.current.snapTo(0)}
                   style={styles.cameraIcon}
                 >
-                  <MaterialIcon name="camera-outline" size={40} />
+                  <MaterialIcon name="camera-outline" style={{color: '#ddd'}} size={30} />
                 </TouchableOpacity>
               )}
               <View style={styles.inforContainer}>
@@ -215,7 +216,13 @@ const SettingScreen = ({ navigation }) => {
                 <TextInput editable={disable} style={styles.input} />
                 <Text style={styles.lableInput}>Email</Text>
                 <TextInput editable={disable} style={styles.input} />
-                <View style={{ flexDirection: "row", alignItems: "center", paddingVertical: 10}}>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    alignItems: "center",
+                    paddingVertical: 10,
+                  }}
+                >
                   <Text style={styles.textGender}>Giới tính:</Text>
                   <View style={styles.genderContainer}>
                     <TouchableOpacity
@@ -243,7 +250,7 @@ const SettingScreen = ({ navigation }) => {
                     </TouchableOpacity>
                   </View>
                 </View>
-                
+
                 <Text style={styles.lableInput}>Ngày sinh</Text>
                 <TouchableOpacity
                   style={[
