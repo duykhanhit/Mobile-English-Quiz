@@ -22,27 +22,29 @@ export default function App() {
   }
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="GetStarted" headerMode="none">
-        <Stack.Screen name="GetStarted" component={GetStarted} />
-        <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="SignIn" component={SignIn} />
-        <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
-        <Stack.Screen
-          name="HomeStack"
-          component={HomeStack}
-          options={{
-            gestureEnabled: false,
-          }}
-        />
-        <Stack.Screen
-          name="CameraScreen"
-          component={CameraScreen}
-          options={{
-            gestureEnabled: false,
-          }}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+    // <GlobalExamProvider>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="GetStarted" headerMode="none">
+          <Stack.Screen name="GetStarted" component={GetStarted} />
+          <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="SignIn" component={SignIn} />
+          <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
+          <Stack.Screen
+            name="HomeStack"
+            component={HomeStack}
+            options={{
+              gestureEnabled: false,
+            }}
+          />
+          <Stack.Screen
+            name="CameraScreen"
+            component={CameraScreen}
+            options={{
+              gestureEnabled: false,
+            }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    // </GlobalExamProvider>
   );
 }

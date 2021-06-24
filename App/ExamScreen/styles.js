@@ -52,17 +52,22 @@ export default StyleSheet.create({
     backgroundColor: "orange",
     borderRadius: 2,
   },
-  quiz: {
+  quizContainer: {
     maxHeight: 200,
     width: '100%',
+    borderRadius: 10,
+    shadowColor: colors.lightGreen,
+    shadowOffset: { width: 0, height: 0},
+    shadowOpacity: .6,
+    shadowRadius: 5,
     marginTop: 20,
+  },
+  quiz: {
+    borderRadius: 10,
+    width: '100%',
+    height: '100%',
     backgroundColor: colors.mainGreen,
     paddingVertical: 20,
-    borderRadius: 10,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 0},
-    shadowOpacity: .8,
-    shadowRadius: 5
   },
   question: {
     fontFamily: 'Helve',

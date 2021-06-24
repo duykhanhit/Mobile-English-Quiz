@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   View,
   Text,
   SafeAreaView,
   ScrollView,
-  TouchableHighlight,
   TouchableOpacity,
   Alert,
 } from "react-native";
@@ -13,8 +12,17 @@ import * as Animatable from "react-native-animatable";
 
 import styles from "./styles";
 import * as colors from '../../assets/colors';
+import { ExamContext } from '../../contexts/GlobalState/GlobalExamState';
 
 const ExamScreen = ({ navigation }) => {
+
+  const { getExam, examState } = useContext(ExamContext);
+  console.log(examState.data);
+
+  useEffect(() => {
+    getExam('60d35577691f2b0970fd711d');
+  }, [])
+
   const [selected, setSelected] = useState({
     cauA: false,
     cauB: false,
@@ -377,9 +385,11 @@ const ExamScreen = ({ navigation }) => {
             <Bar key={index} touched={val.touched} index={index} />
           ))}
         </View>
-        <ScrollView style={styles.quiz}>
-          <Text style={styles.question}>{displayQues.question}</Text>
-        </ScrollView>
+        <View style={styles.quizContainer}>
+          <ScrollView style={styles.quiz}>
+            <Text style={styles.question}>{displayQues.question}</Text>
+          </ScrollView>
+        </View>
         <View style={styles.answers}>
           <TouchableOpacity
             onPress={() => {
@@ -545,7 +555,7 @@ const ExamScreen = ({ navigation }) => {
           >
             <View style={styles.next}>
               <Text style={styles.textNext}>
-                {numberQues !== 19 ? "Tiếp theo" : "Hoàn thành"}
+                {numberQues !== 19 ? "Tiếp theo" : "Nộp bài"}
               </Text>
             </View>
           </TouchableOpacity>
