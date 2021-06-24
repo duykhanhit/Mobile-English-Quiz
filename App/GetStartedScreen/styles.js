@@ -1,4 +1,5 @@
 import { Dimensions, StyleSheet } from "react-native";
+import * as colors from '../../assets/colors';
 
 const styles = StyleSheet.create({
   container_started: {
@@ -9,26 +10,26 @@ const styles = StyleSheet.create({
     flex: 1,
     resizeMode: "cover",
     justifyContent: "center",
+    padding: 20
   },
   view_touchable: {
     flex: 1,
     alignItems: "flex-end",
     justifyContent: "flex-end",
-    marginBottom: 70,
-    marginRight: 20,
   },
   touchable: {
     width: 150,
     height: 50,
-    backgroundColor: "red",
+    backgroundColor: colors.red,
     justifyContent: "center",
-    borderRadius: 10,
+    borderRadius: 5,
   },
   text: {
     color: "#fff",
-    fontSize: 24,
+    // fontSize: 24,
     fontWeight: "700",
     textAlign: "center",
+    textTransform: 'uppercase'
   },
 });
 
