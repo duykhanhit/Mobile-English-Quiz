@@ -30,7 +30,6 @@ const styles = StyleSheet.create({
     zIndex: 10,
   },
   touchable: {
-    width: 90,
     height: 18.18,
     marginLeft: 5,
   },
