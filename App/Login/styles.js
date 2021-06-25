@@ -29,7 +29,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   touchable: {
-    width: 70,
     height: 18.18,
   },
   "register-account": {
