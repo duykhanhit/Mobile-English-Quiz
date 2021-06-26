@@ -144,7 +144,7 @@ const SettingScreen = ({ navigation }) => {
       >
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <View style={{ flex: 1, width: "100%" }}>
-            <StatusBar animated={true} barStyle="dark-content" hidden={false} />
+            {/* <StatusBar animated={true} barStyle="dark-content" hidden={false} /> */}
             {/* <View style={styles.backgroundContainer}>
               <View style={styles.background} />
             </View> */}

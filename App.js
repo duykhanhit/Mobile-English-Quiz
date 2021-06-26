@@ -1,14 +1,17 @@
 import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
 import HomeStack from "./navigation/HomeStack";
 import { useFonts } from "expo-font";
+
 import GetStarted from "./App/GetStartedScreen";
 import Login from "./App/Login";
 import SignIn from "./App/SignIn";
 import ForgotPassword from "./App/ForgotPassword";
 import CameraScreen from "./App/CameraScreen";
 
-import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
+import GlobalExamProvider from "./contexts/GlobalState/GlobalExamState";
+
 
 const Stack = createStackNavigator();
 
@@ -22,7 +25,7 @@ export default function App() {
   }
 
   return (
-    // <GlobalExamProvider>
+    <GlobalExamProvider>
       <NavigationContainer>
         <Stack.Navigator initialRouteName="GetStarted" headerMode="none">
           <Stack.Screen name="GetStarted" component={GetStarted} />
@@ -45,6 +48,6 @@ export default function App() {
           />
         </Stack.Navigator>
       </NavigationContainer>
-    // </GlobalExamProvider>
+    </GlobalExamProvider>
   );
 }

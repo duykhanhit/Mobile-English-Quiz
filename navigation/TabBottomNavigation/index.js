@@ -1,16 +1,30 @@
 import React from "react";
+import { TouchableOpacity, View } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import * as colors from "../../assets/colors";
 
 // import HomeStack from "../HomeStack";
-import HomeScreen from '../../App/HomeScreen';
+import HomeScreen from "../../App/HomeScreen";
 import SettingScreen from "../../App/SettingScreen";
+import HistoryScreen from "../../App/HistoryScreen";
 
-import styles from './styles';
+import styles from "./styles";
 
-const TabBottomNavigation = () => {
+const TabBottomNavigation = ({ navigation }) => {
   const Tab = createBottomTabNavigator();
+
+  const CustomTabBarButton = () => {
+    return (
+      <View style={styles.buttonHistory}>
+        <View style={styles.customButton}>
+          <TouchableOpacity onPress={() => navigation.navigate("HistoryScreen")}>
+            <MaterialCommunityIcons style={{}} name="history" color={colors.lightGreen} size={26} />
+          </TouchableOpacity>
+        </View>
+      </View>
+    );
+  };
 
   return (
     <Tab.Navigator
@@ -42,6 +56,13 @@ const TabBottomNavigation = () => {
         }}
         name="HomeScreen"
         component={HomeScreen}
+      />
+      <Tab.Screen
+        options={{
+          tabBarButton: (props) => <CustomTabBarButton {...props} />,
+        }}
+        name="HistoryScreen"
+        component={HistoryScreen}
       />
       <Tab.Screen
         options={{
