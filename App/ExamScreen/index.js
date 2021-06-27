@@ -72,19 +72,54 @@ const ExamScreen = ({ navigation }) => {
     return (
       <View
         style={[
-          touched
-            ? styles.quizBarTouched
-            : numberQues === index
-            ? styles.inThisQuesBar
-            : styles.quizBar,
+          touched ? styles.quizBarTouched : styles.quizBar,
+          ,
+          numberQues === index && styles.inThisQuesBar,
         ]}
       />
     );
   };
 
+  useEffect(() => {
+    if (!_.isEmpty(listQues)) {
+      listQues[numberQues].choseA &&
+        setSelected({
+          cauA: true,
+          cauB: false,
+          cauC: false,
+          cauD: false,
+        });
+
+      listQues[numberQues].choseB &&
+        setSelected({
+          cauA: false,
+          cauB: true,
+          cauC: false,
+          cauD: false,
+        });
+
+      listQues[numberQues].choseD &&
+        setSelected({
+          cauA: false,
+          cauB: false,
+          cauC: false,
+          cauD: true,
+        });
+
+      listQues[numberQues].choseC &&
+        setSelected({
+          cauA: false,
+          cauB: false,
+          cauC: true,
+          cauD: false,
+        });
+    }
+  }, [listQues[numberQues]]);
+
   const handleButtonContinute = () => {
     let index = -1;
     let indexAnswer = -1;
+    console.log(selected);
     for (const property in selected) {
       index++;
       if (selected[property] && !_.isEmpty(listQues)) {
@@ -100,6 +135,12 @@ const ExamScreen = ({ navigation }) => {
       const resultId = exam.result;
       const answerId = exam.data[numberQues].answers[indexAnswer]._id;
       submitAnswer(resultId, answerId);
+    } else {
+      setListQues([
+        ...listQues.slice(0, numberQues),
+        { ...listQues[numberQues], touched: false },
+        ...listQues.slice(numberQues + 1),
+      ]);
     }
     setSelected({
       cauA: false,
@@ -107,10 +148,13 @@ const ExamScreen = ({ navigation }) => {
       cauC: false,
       cauD: false,
     });
-    if (!_.isEmpty(exam.data) && numberQues === exam.data.length-1) {
-      navigation.navigate("ExamedScreen", { resultId: exam.result });
+    if (!_.isEmpty(exam.data) && numberQues === exam.data.length - 1) {
+      navigation.navigate("ExamedScreen", {
+        resultId: exam.result,
+        totalQuesNumber: exam.data.length,
+      });
     }
-    if (!_.isEmpty(exam.data) && numberQues < exam.data.length-1) {
+    if (!_.isEmpty(exam.data) && numberQues < exam.data.length - 1) {
       setNumberQues(numberQues + 1);
     }
   };
@@ -241,6 +285,7 @@ const ExamScreen = ({ navigation }) => {
                 cauC: !selected.cauC,
                 cauD: false,
               });
+
               setListQues([
                 ...listQues.slice(0, numberQues),
                 {
@@ -332,7 +377,7 @@ const ExamScreen = ({ navigation }) => {
           >
             <View style={styles.next}>
               <Text style={styles.textNext}>
-                {!_.isEmpty(exam.data) && numberQues !== exam.data.length -1
+                {!_.isEmpty(exam.data) && numberQues !== exam.data.length - 1
                   ? "Tiếp theo"
                   : "Nộp bài"}
               </Text>
