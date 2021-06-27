@@ -1,11 +1,20 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { View, Text, Image, SafeAreaView, TouchableOpacity } from "react-native";
+import { ExamContext } from "../../contexts/GlobalState/GlobalExamState";
 
 import styles from "./styles";
 import avatar from "../../assets/avatar.jpg";
 import * as colors from '../../assets/colors';
+import _ from 'lodash';
 
 const ExamedScreen = ({ navigation, route }) => {
+
+  const { getResult, result } = useContext(ExamContext);
+
+  useEffect(() => {
+    getResult(route.params.resultId);
+  }, [route.params.resultId]);
+
   return (
     <SafeAreaView style={{flex: 1}}>
       <View style={styles.container}>
@@ -19,8 +28,8 @@ const ExamedScreen = ({ navigation, route }) => {
         <View style={styles.score}>
           <Text style={styles.textPoint}>Điểm số</Text>
           <Text style={styles.point}>
-            {route.params.point}
-            <Text style={styles.perPoint}>/20</Text>
+            {!_.isEmpty(result) && result.data.successAnswer}
+            <Text style={styles.perPoint}>/{route.params.totalQuesNumber}</Text>
           </Text>
         </View>
         <View style={styles.buttonContainer}>

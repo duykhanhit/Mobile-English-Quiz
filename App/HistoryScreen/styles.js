@@ -1,28 +1,29 @@
 import { StyleSheet } from "react-native";
-import { mainGreen } from "../../assets/colors/index";
+import * as colors from "../../assets/colors";
+
 export default StyleSheet.create({
   container: {
     flex: 1,
   },
-  "view-header": {
+  viewHeader: {
     width: "100%",
     height: 88,
-    backgroundColor: mainGreen,
+    backgroundColor: colors.yellow,
     borderBottomRightRadius: 12,
     borderBottomLeftRadius: 12,
     justifyContent: "flex-end",
   },
-  "view-title": {
+  viewTitle: {
     fontWeight: "700",
     fontSize: 29,
     color: "#fff",
     textAlign: "center",
     marginBottom: 14,
   },
-  "view-list-question": {
+  viewListQuestion: {
     alignItems: "center",
   },
-  "exam-blog": {
+  examBlog: {
     width: "94%",
     height: 114,
     padding: 18,
@@ -30,19 +31,19 @@ export default StyleSheet.create({
     flexDirection: "row",
     marginTop: 18,
   },
-  "custom-text-blog": {
+  customTextBlog: {
     marginLeft: 20,
     flexDirection: "column",
     justifyContent: "space-between",
   },
-  "title-text-blog": {
+  titleTextBlog: {
     color: "#0A52A8",
     fontStyle: "normal",
     fontWeight: "bold",
     fontSize: 20,
     lineHeight: 24,
   },
-  "common-text-blog": {
+  commonTextBlog: {
     fontStyle: "normal",
     fontWeight: "bold",
     fontSize: 15,
