@@ -5,3 +5,4 @@ export const LOGIN = "LOGIN";
 export const SIGNUP = "SIGNUP";
 export const FORGOT_PASSWORD = "FORGOT_PASSWORD";
 export const GET_EXAMS = "GET_EXAMS";
+export const GET_USER = "GET_USER";

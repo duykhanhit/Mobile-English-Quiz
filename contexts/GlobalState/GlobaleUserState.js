@@ -56,6 +56,22 @@ export default GlobalUserProvider = ({ children }) => {
   //     });
   //   }
   // };
+
+  const getUser = async ( token ) => {
+    try {
+      const res = await api.getUser(token);
+      if (res?.data.success) {
+        dispatch({
+          type: types.GET_USER,
+          payload: res?.data
+        });
+      } else {
+        console.log(res?.data.data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
   return (
     <UserContext.Provider
       value={{
