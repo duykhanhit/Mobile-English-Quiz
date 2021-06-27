@@ -26,7 +26,6 @@ const ExamScreen = ({ navigation }) => {
     cauD: false,
   });
 
-  // const [result, setResult] = useState("");
   const [listQues, setListQues] = useState([]);
 
   const [displayQues, setDisplayQues] = useState({
@@ -119,7 +118,6 @@ const ExamScreen = ({ navigation }) => {
   const handleButtonContinute = () => {
     let index = -1;
     let indexAnswer = -1;
-    console.log(selected);
     for (const property in selected) {
       index++;
       if (selected[property] && !_.isEmpty(listQues)) {

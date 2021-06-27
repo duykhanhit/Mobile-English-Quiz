@@ -23,7 +23,7 @@ export const postAnswer = (resultId, answerId) =>
       },
     }
   );
-export const getResult = (params) => 
+export const getResult = (params) =>
   axios.get(`${baseUrl}/api/result/${params}`, {
     headers: {
       "Content-Type": "application/json",
@@ -48,3 +48,11 @@ export const loginUser = async (params) => {
 export const registerUser = async (params) => {
   return await axios.post(`${baseUrl}/api/auth/register`, params);
 };
+
+export const getUser = () =>
+  axios.get(`${baseUrl}/api/auth/me`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwY2YwYmE4M2ZiNTA2MzAwNDYwODdiOCIsImlhdCI6MTYyNDc4MDU2NiwiZXhwIjoxNjI0ODY2OTY2fQ.irtFUHOX4LapzDNqzCqOcT7MV60YnAm-0kEViiYng_Q`,
+    },
+  });

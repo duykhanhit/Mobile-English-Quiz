@@ -8,6 +8,8 @@ export default UserReducer = (prevState, action) => {
       return { ...action.payload };
       // case types.GET_EXAMS:
       // return { ...prevState, ...action.payload };
+    case types.GET_USER:
+      return { ...prevState, };
     default:
       return { ...prevState };
   }

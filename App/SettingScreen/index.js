@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   View,
   Text,
@@ -13,7 +13,6 @@ import {
   Keyboard,
   StatusBar,
 } from "react-native";
-import RNPickerSelect from "react-native-picker-select";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import BottomSheet from "reanimated-bottom-sheet";
 import MaterialIcon from "react-native-vector-icons/MaterialCommunityIcons";
@@ -25,8 +24,11 @@ import styles from "./styles";
 import avatar from "../../assets/avatar.jpg";
 import background from "../../assets/background.jpg";
 import * as colors from "../../assets/colors";
+import { UserContext } from "../../contexts/GlobalState/GlobaleUserState";
 
 const SettingScreen = ({ navigation }) => {
+
+  const { userState } = useContext(UserContext);
   const bs = React.createRef();
   const fall = new Animated.Value(1);
 
@@ -49,6 +51,10 @@ const SettingScreen = ({ navigation }) => {
   useEffect(() => {
     bs.current.snapTo(1);
   }, [image]);
+
+  useEffect(() => {
+    console.log(userState);
+  }, [userState])
 
   const renderHeader = () => {
     return (
@@ -292,7 +298,7 @@ const SettingScreen = ({ navigation }) => {
                 />
               </View>
               {!edit && (
-                <View style={styles.buttonContainer}>
+                <View style={styles.buttonContainerLogout}>
                   <TouchableOpacity
                     onPress={() => navigation.navigate("GetStarted")}
                     style={styles.touch}
