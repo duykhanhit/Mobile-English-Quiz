@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, Button } from "react";
 import { Text, TextInput, TouchableOpacity, View } from "react-native";
 import styles from "./styles";
 import FormAccount from "../../components/FormAccount";
@@ -7,8 +7,6 @@ import MaterialIcon from "react-native-vector-icons/AntDesign";
 import DatetimeIcon from "react-native-vector-icons/Fontisto";
 import CheckIcon from "react-native-vector-icons/MaterialIcons";
 import { UserContext } from "../../contexts/GlobalState/GlobaleUserState";
-import DateTimePickerModal from "react-native-datetimepicker-modal";
-import moment from "moment";
 
 const SignIn = ({ navigation }) => {
   const [check, setCheck] = useState(true);
@@ -17,15 +15,10 @@ const SignIn = ({ navigation }) => {
   const [show, showModal] = useState(false);
   //data with each input field
   const [name, setName] = useState("");
-  const [birthday, setBirthDay] = useState(new Date());
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setComfirmPassword] = useState("");
   const [gender, setGender] = useState("male");
-
-  // useEffect(() => {
-
-  // });
 
   const toggle = () => showModal(!show);
 
@@ -39,23 +32,7 @@ const SignIn = ({ navigation }) => {
       />
     );
   };
-  const datetime = () => {
-    return (
-      <TouchableOpacity style={styles.input_block} onPress={() => toggle()}>
-        <DatetimeIcon
-          name="date"
-          size={20}
-          color="#A0A0A0"
-          style={styles.icons}
-        />
-        <View style={styles.input}>
-          <Text style={styles.date_time_custom}>
-            {birthday ? moment(birthday).format("MMMM DD, YYYY") : "-"}
-          </Text>
-        </View>
-      </TouchableOpacity>
-    );
-  };
+
   const InputField = (source, placeholder, setState, secureTextEntry) => {
     return (
       <View style={styles.input_block}>
@@ -71,14 +48,7 @@ const SignIn = ({ navigation }) => {
   };
 
   const handleRegister = () => {
-    if (
-      !name ||
-      !email ||
-      !password ||
-      !gender ||
-      !birthday ||
-      !confirmPassword
-    ) {
+    if (!name || !email || !password || !gender || !confirmPassword) {
       alert("Please enter entire field");
       return;
     }
@@ -96,7 +66,6 @@ const SignIn = ({ navigation }) => {
       email,
       password,
       gender,
-      birthday,
     });
   };
   useEffect(() => {
@@ -109,17 +78,14 @@ const SignIn = ({ navigation }) => {
         <Text style={styles.text_input}>ĐĂNG KÝ</Text>
 
         {InputField(account("user"), "Họ tên", setName, false)}
-        <DateTimePickerModal
-          value={birthday}
-          onChange={(event, date) => setBirthDay(date.format("MM, DD, YYYY"))}
-          show={show}
-          toggle={toggle}
-        >
-          {datetime()}
-        </DateTimePickerModal>
         {InputField(account("mail"), "Email", setEmail, false)}
         {InputField(account("lock"), "Mật khẩu", setPassword, true)}
-        {InputField(account("lock"), "Nhập lại mật khẩu", setComfirmPassword, true)}
+        {InputField(
+          account("lock"),
+          "Nhập lại mật khẩu",
+          setComfirmPassword,
+          true
+        )}
 
         <View style={styles["checkbox-block"]}>
           <CheckBox

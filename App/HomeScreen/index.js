@@ -7,11 +7,7 @@ import {
   Image,
   SafeAreaView,
   ScrollView,
-<<<<<<< HEAD
-  TouchableOpacity,
-=======
   TouchableOpacity
->>>>>>> 5921f1c061d9adede7a1b4cf3f3d70b750ae26eb
 } from "react-native";
 // import { UserContext } from "../../contexts/GlobalState/GlobaleUserState";
 // import { ExamContext } from "../../contexts/GlobalState/GlobalExamState";
@@ -50,10 +46,7 @@ const ListExamScreen = ({ navigation }) => {
   };
   return (
     <View style={styles.container}>
-<<<<<<< HEAD
-=======
       <StatusBar animated={true} barStyle="dark-content" hidden={false} />
->>>>>>> 5921f1c061d9adede7a1b4cf3f3d70b750ae26eb
       <View style={styles["view-header"]}>
         <Text style={styles["view-title"]}>Danh sách đề thi</Text>
       </View>
