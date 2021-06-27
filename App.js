@@ -9,9 +9,6 @@ import Login from "./App/Login";
 import SignIn from "./App/SignIn";
 import ForgotPassword from "./App/ForgotPassword";
 import CameraScreen from "./App/CameraScreen";
-
-import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
 import GlobalUserProvider from "./contexts/GlobalState/GlobaleUserState";
 import GlobalExamProvider from "./contexts/GlobalState/GlobalExamState";
 

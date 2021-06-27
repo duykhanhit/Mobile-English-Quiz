@@ -1,12 +1,12 @@
 import { StyleSheet } from "react-native";
-import { mainGreen } from "../../assets/colors/index";
+import { mainGreen, darkGreen } from "../../assets/colors/index";
 
 const styles = StyleSheet.create({
   login_block: {
     width: 310,
-    height: 598,
+    height: 538,
     position: "absolute",
-    top: 72,
+    top: 112,
     backgroundColor: "#fff",
     zIndex: 3,
     borderRadius: 12,
@@ -107,6 +107,14 @@ const styles = StyleSheet.create({
   },
   date_time_custom: {
     color: "#A0A0A0",
+  },
+  input_date: {
+    borderColor: darkGreen,
+    borderWidth: 2,
+    fontSize: 18,
+    height: 50,
+    paddingHorizontal: 15,
+    marginBottom: 15,
   },
 });
 
