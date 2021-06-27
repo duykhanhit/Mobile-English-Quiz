@@ -30,7 +30,6 @@ export const getResult = (params) =>
       Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwY2YwYmE4M2ZiNTA2MzAwNDYwODdiOCIsImlhdCI6MTYyNDc4MDU2NiwiZXhwIjoxNjI0ODY2OTY2fQ.irtFUHOX4LapzDNqzCqOcT7MV60YnAm-0kEViiYng_Q`,
     },
   });
-<<<<<<< HEAD
 export const getExams = (token) => {
   axios.get(`${baseUrl}/api/exam`, {
     headers: {
@@ -49,5 +48,3 @@ export const loginUser = async (params) => {
 export const registerUser = async (params) => {
   return await axios.post(`${baseUrl}/api/auth/register`, params);
 };
-=======
->>>>>>> 6c62855 (delete file and create file, call api get exam)
