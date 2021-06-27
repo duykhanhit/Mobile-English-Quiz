@@ -70,9 +70,9 @@ export default StyleSheet.create({
 =======
 >>>>>>> b8ed626 (change GUI ExameScreen)
     borderRadius: 10,
-    shadowColor: '#000',
+    shadowColor: colors.lightGreen,
     shadowOffset: { width: 0, height: 0},
-    shadowOpacity: .4,
+    shadowOpacity: .6,
     shadowRadius: 5,
     marginTop: 20,
   },

@@ -23,7 +23,11 @@ export default function App() {
   }
 
   return (
+<<<<<<< HEAD
     <GlobalUserProvider>
+=======
+    // <GlobalExamProvider>
+>>>>>>> 6c62855 (delete file and create file, call api get exam)
       <NavigationContainer>
         <Stack.Navigator initialRouteName="GetStarted" headerMode="none">
           <Stack.Screen name="GetStarted" component={GetStarted} />
@@ -46,6 +50,10 @@ export default function App() {
           />
         </Stack.Navigator>
       </NavigationContainer>
+<<<<<<< HEAD
     </GlobalUserProvider>
+=======
+    // </GlobalExamProvider>
+>>>>>>> 6c62855 (delete file and create file, call api get exam)
   );
 }
