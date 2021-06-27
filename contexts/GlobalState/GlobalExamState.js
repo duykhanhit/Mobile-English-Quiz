@@ -47,7 +47,6 @@ export default GlobalExamProvider = ({ children }) => {
 
   const getResult = async (resultId) => {
     try {
-      console.log(resultId);
       const res = await api.getResult(resultId);
       if (res?.data.success) {
         dispatch({

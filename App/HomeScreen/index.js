@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React from "react";
 import {
   View,
   Text,
@@ -9,8 +9,6 @@ import {
   ScrollView,
   TouchableOpacity
 } from "react-native";
-// import { UserContext } from "../../contexts/GlobalState/GlobaleUserState";
-// import { ExamContext } from "../../contexts/GlobalState/GlobalExamState";
 
 import styles from "./styles";
 

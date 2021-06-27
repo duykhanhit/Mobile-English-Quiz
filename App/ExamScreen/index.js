@@ -120,9 +120,13 @@ const ExamScreen = ({ navigation }) => {
     let index = -1;
     let indexAnswer = -1;
 <<<<<<< HEAD
+<<<<<<< HEAD
     console.log(selected);
 =======
 >>>>>>> bf53e70 (done screen exam and add history screen and add library lodash)
+=======
+    console.log(selected);
+>>>>>>> 6adc1d6 (fixed bug bar screen exam)
     for (const property in selected) {
       index++;
       if (selected[property] && !_.isEmpty(listQues)) {
@@ -139,14 +143,20 @@ const ExamScreen = ({ navigation }) => {
       const answerId = exam.data[numberQues].answers[indexAnswer]._id;
       submitAnswer(resultId, answerId);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 6adc1d6 (fixed bug bar screen exam)
     } else {
       setListQues([
         ...listQues.slice(0, numberQues),
         { ...listQues[numberQues], touched: false },
         ...listQues.slice(numberQues + 1),
       ]);
+<<<<<<< HEAD
 =======
 >>>>>>> bf53e70 (done screen exam and add history screen and add library lodash)
+=======
+>>>>>>> 6adc1d6 (fixed bug bar screen exam)
     }
     setSelected({
       cauA: false,
@@ -155,11 +165,15 @@ const ExamScreen = ({ navigation }) => {
       cauD: false,
     });
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 6adc1d6 (fixed bug bar screen exam)
     if (!_.isEmpty(exam.data) && numberQues === exam.data.length - 1) {
       navigation.navigate("ExamedScreen", {
         resultId: exam.result,
         totalQuesNumber: exam.data.length,
       });
+<<<<<<< HEAD
     }
     if (!_.isEmpty(exam.data) && numberQues < exam.data.length - 1) {
 =======
@@ -168,6 +182,10 @@ const ExamScreen = ({ navigation }) => {
     }
     if (!_.isEmpty(exam.data) && numberQues < exam.data.length-1) {
 >>>>>>> bf53e70 (done screen exam and add history screen and add library lodash)
+=======
+    }
+    if (!_.isEmpty(exam.data) && numberQues < exam.data.length - 1) {
+>>>>>>> 6adc1d6 (fixed bug bar screen exam)
       setNumberQues(numberQues + 1);
     }
   };
@@ -394,10 +412,14 @@ const ExamScreen = ({ navigation }) => {
             <View style={styles.next}>
               <Text style={styles.textNext}>
 <<<<<<< HEAD
+<<<<<<< HEAD
                 {!_.isEmpty(exam.data) && numberQues !== exam.data.length - 1
 =======
                 {!_.isEmpty(exam.data) && numberQues !== exam.data.length -1
 >>>>>>> bf53e70 (done screen exam and add history screen and add library lodash)
+=======
+                {!_.isEmpty(exam.data) && numberQues !== exam.data.length - 1
+>>>>>>> 6adc1d6 (fixed bug bar screen exam)
                   ? "Tiếp theo"
                   : "Nộp bài"}
               </Text>
