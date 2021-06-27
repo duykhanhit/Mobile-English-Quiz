@@ -32,7 +32,7 @@ const SettingScreen = ({ navigation }) => {
 
   const [closeButtomSheet, setCloseButtomSheet] = useState(false);
   const [image, setImage] = useState(null);
-  const [gender, setGender] = useState("male");
+  const [gender, setGender] = useState('male');
   const [edit, setEdit] = useState(false);
   const [disable, setDisable] = useState(false);
   const [date, setDate] = useState({
@@ -216,13 +216,8 @@ const SettingScreen = ({ navigation }) => {
                 <TextInput editable={disable} style={styles.input} />
                 <Text style={styles.lableInput}>Email</Text>
                 <TextInput editable={disable} style={styles.input} />
-                <View
-                  style={{
-                    flexDirection: "row",
-                    alignItems: "center",
-                    paddingVertical: 10,
-                  }}
-                >
+                <TextInput editable={disable} style={styles.input} />
+                <View style={{ flexDirection: "row", alignItems: "center", marginVertical: 10 }}>
                   <Text style={styles.textGender}>Giới tính:</Text>
                   <View style={styles.genderContainer}>
                     <TouchableOpacity
@@ -250,7 +245,43 @@ const SettingScreen = ({ navigation }) => {
                     </TouchableOpacity>
                   </View>
                 </View>
-
+                {/* <Text style={styles.lableInput}>Giới tính</Text>
+                <RNPickerSelect
+                  placeholder={{
+                    label: "Select an gender",
+                    value: null,
+                    color: "#000",
+                  }}
+                  onValueChange={(value) => setGender(value)}
+                  items={
+                    disable
+                      ? [
+                          { label: "Nam", value: false },
+                          { label: "Nữ", value: true },
+                        ]
+                      : []
+                  }
+                  style={{
+                    flexDirection: "row",
+                    alignItems: "center",
+                    paddingVertical: 10,
+                  }}
+                >
+                  <Text style={styles.textGender}>Giới tính:</Text>
+                  <View style={styles.genderContainer}>
+                    <TouchableOpacity
+                      onPress={() => edit && setGender("male")}
+                      style={{ flexDirection: "row", alignItems: "center" }}
+                    >
+                      <Text style={styles.textGender}>Nam</Text>
+                      <RadioButton
+                        value="male"
+                        status={gender === "male" ? "checked" : "unchecked"}
+                        onPress={() => edit && setGender("male")}
+                      />
+                    );
+                  }}
+                /> */}
                 <Text style={styles.lableInput}>Ngày sinh</Text>
                 <TouchableOpacity
                   style={[

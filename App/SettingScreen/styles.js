@@ -97,7 +97,7 @@ export default StyleSheet.create({
     width: "100%",
     justifyContent: "flex-end",
     alignItems: "center",
-    marginBottom: 80
+    marginButton: 80
   },
   touch: {
     width: "100%",

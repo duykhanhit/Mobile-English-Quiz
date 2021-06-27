@@ -55,12 +55,22 @@ export default StyleSheet.create({
   quizContainer: {
     maxHeight: 200,
     width: '100%',
+<<<<<<< HEAD
     borderRadius: 10,
     shadowColor: colors.lightGreen,
     shadowOffset: { width: 0, height: 0},
     shadowOpacity: .6,
     shadowRadius: 5,
+=======
+>>>>>>> 0d511a1 (edit GUI login setstarted, change gender by radio)
     marginTop: 20,
+    backgroundColor: colors.mainGreen,
+    paddingVertical: 20,
+    borderRadius: 10,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 0},
+    shadowOpacity: .8,
+    shadowRadius: 5
   },
   quiz: {
     borderRadius: 10,

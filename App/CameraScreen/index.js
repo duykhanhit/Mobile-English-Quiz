@@ -12,12 +12,12 @@ import IconMaterial from 'react-native-vector-icons/MaterialCommunityIcons';
 import { YellowBox, LogBox } from 'react-native';
 
 const CameraScreen = ({ navigation, route }) => {
-  // useEffect(() => {
-  //   YellowBox.ignoreWarnings([
-  //     'Non-serializable values were found in the navigation state',
-  //   ]);
-  //   LogBox.ignoreAllLogs();
-  // }, [])
+  useEffect(() => {
+    YellowBox.ignoreWarnings([
+      'Non-serializable values were found in the navigation state',
+    ]);
+    LogBox.ignoreAllLogs();
+  }, [])
   
   const { callBack } = route.params;
   
