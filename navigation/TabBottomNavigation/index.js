@@ -13,7 +13,7 @@ import HistoryScreen from "../../App/HistoryScreen";
 import styles from "./styles";
 
 const buttonSize = new Animated.Value(1);
-const mode = new Animated.Value(0);
+// const mode = new Animated.Value(0);
 
 const handlePress = () => {
   Animated.sequence([
@@ -26,10 +26,10 @@ const handlePress = () => {
       toValue: 1,
       useNativeDriver: true,
     }),
-    Animated.timing(mode, {
-      toValue: mode._value === 0 ? 1 : 0,
-      useNativeDriver: false,
-    }),
+    // Animated.timing(mode, {
+    //   toValue: mode._value === 0 ? 1 : 0,
+    //   useNativeDriver: false,
+    // }),
   ]).start();
 };
 const CustomTabBarButton = () => {
@@ -39,10 +39,10 @@ const CustomTabBarButton = () => {
     transform: [{ scale: buttonSize }],
   };
 
-  const spin = mode.interpolate({
-    inputRange: [0, 1],
-    outputRange: ["0deg", "-270deg"],
-  });
+  // const spin = mode.interpolate({
+  //   inputRange: [0, 1],
+  //   outputRange: ["0deg", "-270deg"],
+  // });
 
   return (
     <View style={styles.buttonHistory}>
@@ -53,7 +53,9 @@ const CustomTabBarButton = () => {
             navigation.navigate("HistoryScreen");
           }}
         >
-          <Animated.View style={[{ transform: [{ rotate: spin }]}]}>
+          <Animated.View 
+          // style={[{ transform: [{ rotate: spin }]}]}
+          >
             <MaterialCommunityIcons
               name="history"
               color={colors.lightGreen}
@@ -89,7 +91,6 @@ const TabBottomNavigation = ({ navigation }) => {
       <Tab.Screen
         options={{
           tabBarIcon: ({ focused }) => {
-            focused && mode._value === 1 ? handlePress() : null;
             return (
               <MaterialCommunityIcons
                 name="home"
@@ -112,7 +113,7 @@ const TabBottomNavigation = ({ navigation }) => {
       <Tab.Screen
         options={{
           tabBarIcon: ({ focused }) => {
-            focused && mode._value === 1 ? handlePress() : null;
+            // focused && mode._value === 1 ? handlePress() : null;
             return (
               <MaterialCommunityIcons
                 name="account-cog"
