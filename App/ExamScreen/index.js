@@ -181,7 +181,10 @@ const ExamScreen = ({ navigation }) => {
                 },
                 {
                   text: "Đồng ý",
-                  onPress: () => navigation.navigate("HomeScreen"),
+                  onPress: () =>  navigation.navigate("ExamedScreen", {
+                    resultId: exam.result,
+                    totalQuesNumber: exam.data.length,
+                  }),
                 },
               ]);
             }}
