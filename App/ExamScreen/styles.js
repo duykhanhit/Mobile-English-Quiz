@@ -56,6 +56,7 @@ export default StyleSheet.create({
     maxHeight: 200,
     width: '100%',
 <<<<<<< HEAD
+<<<<<<< HEAD
     borderRadius: 10,
     shadowColor: colors.lightGreen,
     shadowOffset: { width: 0, height: 0},
@@ -66,11 +67,21 @@ export default StyleSheet.create({
     marginTop: 20,
     backgroundColor: colors.mainGreen,
     paddingVertical: 20,
+=======
+>>>>>>> b8ed626 (change GUI ExameScreen)
     borderRadius: 10,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 0},
-    shadowOpacity: .8,
-    shadowRadius: 5
+    shadowOpacity: .4,
+    shadowRadius: 5,
+    marginTop: 20,
+  },
+  quiz: {
+    borderRadius: 10,
+    width: '100%',
+    height: '100%',
+    backgroundColor: colors.mainGreen,
+    paddingVertical: 20,
   },
   quiz: {
     borderRadius: 10,
