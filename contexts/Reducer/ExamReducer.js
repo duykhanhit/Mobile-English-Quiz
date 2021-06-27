@@ -1,7 +1,7 @@
 import * as types from "../../constants";
 
 export default ExamReducer = (prevState, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case types.GET_EXAM:
       return { ...prevState, exam: {...action.payload}};
     case types.SUBMIT_ANSWER:
@@ -9,6 +9,6 @@ export default ExamReducer = (prevState, action) => {
     case types.GET_RESULT:
       return { ...prevState, result: {...action.payload}};
     default:
-      return {...prevState};
+      return { ...prevState };
   }
-}
+};

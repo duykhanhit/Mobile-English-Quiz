@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { createRef } from "react";
 import {
   TouchableOpacity,
@@ -64,6 +65,17 @@ const HistoryScreen = ({ navigation }) => {
         </View>
       </ScrollView>
     </View>
+=======
+import React from "react";
+import { View, Text, SafeAreaView, ScrollView } from "react-native";
+import styles from "./styles";
+
+const HistoryScreen = () => {
+  return (
+    <SafeAreaView style={styles.container}>
+      <Text>History</Text>
+    </SafeAreaView>
+>>>>>>> bf53e70 (done screen exam and add history screen and add library lodash)
   );
 };
 

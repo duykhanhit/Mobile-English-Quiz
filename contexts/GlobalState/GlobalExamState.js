@@ -1,7 +1,7 @@
-import React, { createContext, useReducer, useEffect } from 'react';
+import React, { createContext, useReducer, useEffect } from "react";
 import * as types from "../../constants";
-import ExamReducer from '../Reducer/ExamReducer';
-import * as api from '../../api';
+import ExamReducer from "../Reducer/ExamReducer";
+import * as api from "../../api";
 
 const initialState = {
   exam: {},
@@ -47,6 +47,7 @@ export default GlobalExamProvider = ({ children }) => {
 
   const getResult = async (resultId) => {
     try {
+      console.log(resultId);
       const res = await api.getResult(resultId);
       if (res?.data.success) {
         dispatch({
@@ -73,5 +74,5 @@ export default GlobalExamProvider = ({ children }) => {
     >
       {children}
     </ExamContext.Provider>
-  )
-}
+  );
+};

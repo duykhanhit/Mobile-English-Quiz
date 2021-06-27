@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+<<<<<<< HEAD
 import * as colors from "../../assets/colors";
 
 export default StyleSheet.create({
@@ -50,3 +51,14 @@ export default StyleSheet.create({
     lineHeight: 18,
   },
 });
+=======
+import * as colors from "../../assets/colors/index";
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1
+  }
+});
+
+export default styles;
+>>>>>>> bf53e70 (done screen exam and add history screen and add library lodash)

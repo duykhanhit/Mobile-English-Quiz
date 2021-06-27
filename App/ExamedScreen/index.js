@@ -9,7 +9,11 @@ import _ from 'lodash';
 
 const ExamedScreen = ({ navigation, route }) => {
 
+<<<<<<< HEAD
   const { getResult, result } = useContext(ExamContext);
+=======
+  const { getResult } = useContext(ExamContext);
+>>>>>>> bf53e70 (done screen exam and add history screen and add library lodash)
 
   useEffect(() => {
     getResult(route.params.resultId);
@@ -28,8 +32,13 @@ const ExamedScreen = ({ navigation, route }) => {
         <View style={styles.score}>
           <Text style={styles.textPoint}>Điểm số</Text>
           <Text style={styles.point}>
+<<<<<<< HEAD
             {!_.isEmpty(result) && result.data.successAnswer}
             <Text style={styles.perPoint}>/{route.params.totalQuesNumber}</Text>
+=======
+            0
+            <Text style={styles.perPoint}>/20</Text>
+>>>>>>> bf53e70 (done screen exam and add history screen and add library lodash)
           </Text>
         </View>
         <View style={styles.buttonContainer}>

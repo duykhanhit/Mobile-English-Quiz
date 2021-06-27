@@ -119,7 +119,10 @@ const ExamScreen = ({ navigation }) => {
   const handleButtonContinute = () => {
     let index = -1;
     let indexAnswer = -1;
+<<<<<<< HEAD
     console.log(selected);
+=======
+>>>>>>> bf53e70 (done screen exam and add history screen and add library lodash)
     for (const property in selected) {
       index++;
       if (selected[property] && !_.isEmpty(listQues)) {
@@ -135,12 +138,15 @@ const ExamScreen = ({ navigation }) => {
       const resultId = exam.result;
       const answerId = exam.data[numberQues].answers[indexAnswer]._id;
       submitAnswer(resultId, answerId);
+<<<<<<< HEAD
     } else {
       setListQues([
         ...listQues.slice(0, numberQues),
         { ...listQues[numberQues], touched: false },
         ...listQues.slice(numberQues + 1),
       ]);
+=======
+>>>>>>> bf53e70 (done screen exam and add history screen and add library lodash)
     }
     setSelected({
       cauA: false,
@@ -148,6 +154,7 @@ const ExamScreen = ({ navigation }) => {
       cauC: false,
       cauD: false,
     });
+<<<<<<< HEAD
     if (!_.isEmpty(exam.data) && numberQues === exam.data.length - 1) {
       navigation.navigate("ExamedScreen", {
         resultId: exam.result,
@@ -155,6 +162,12 @@ const ExamScreen = ({ navigation }) => {
       });
     }
     if (!_.isEmpty(exam.data) && numberQues < exam.data.length - 1) {
+=======
+    if (!_.isEmpty(exam.data) && numberQues === exam.data.length-1) {
+      navigation.navigate("ExamedScreen", { resultId: exam.result });
+    }
+    if (!_.isEmpty(exam.data) && numberQues < exam.data.length-1) {
+>>>>>>> bf53e70 (done screen exam and add history screen and add library lodash)
       setNumberQues(numberQues + 1);
     }
   };
@@ -380,7 +393,11 @@ const ExamScreen = ({ navigation }) => {
           >
             <View style={styles.next}>
               <Text style={styles.textNext}>
+<<<<<<< HEAD
                 {!_.isEmpty(exam.data) && numberQues !== exam.data.length - 1
+=======
+                {!_.isEmpty(exam.data) && numberQues !== exam.data.length -1
+>>>>>>> bf53e70 (done screen exam and add history screen and add library lodash)
                   ? "Tiếp theo"
                   : "Nộp bài"}
               </Text>
