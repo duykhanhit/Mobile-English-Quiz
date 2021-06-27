@@ -37,14 +37,12 @@ export default StyleSheet.create({
   },
   "title-text-blog": {
     color: "#0A52A8",
-    fontFamily: "Inter",
     fontStyle: "normal",
     fontWeight: "bold",
     fontSize: 20,
     lineHeight: 24,
   },
   "common-text-blog": {
-    fontFamily: "Inter",
     fontStyle: "normal",
     fontWeight: "bold",
     fontSize: 15,

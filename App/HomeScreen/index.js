@@ -1,18 +1,28 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   View,
   Text,
   Image,
   SafeAreaView,
   ScrollView,
+  TouchableOpacity,
 } from "react-native";
+// import { UserContext } from "../../contexts/GlobalState/GlobaleUserState";
+// import { ExamContext } from "../../contexts/GlobalState/GlobalExamState";
 
 import styles from "./styles";
 
 const ListExamScreen = ({ navigation }) => {
+  // const { userState, getListExams } = useContext(UserContext);
+
+  // useEffect(() => {
+  //   console.log("ExamContext", userState);
+  //   getListExams(userState);
+  // });
+
   const examItem = () => {
     return (
-      <View
+      <TouchableOpacity
         style={styles["exam-blog"]}
         onPress={() => {
           navigation.navigate("RulesScreen");
@@ -29,19 +39,13 @@ const ListExamScreen = ({ navigation }) => {
           <Text style={styles["common-text-blog"]}>Loại đề: ABC</Text>
           <Text style={styles["common-text-blog"]}>Ngày tạo: 24/06/2021</Text>
         </View>
-      </View>
+      </TouchableOpacity>
     );
   };
   return (
     <View style={styles.container}>
-      {/* <Button
-        onPress={() => {navigation.navigate('RulesScreen')}}
-        title="Điều lệ thi"
-        color="#841584"
-      /> */}
-
       <View style={styles["view-header"]}>
-        <Text style={styles["view-title"]}>Cuộc thi</Text>
+        <Text style={styles["view-title"]}>Danh sách đề thi</Text>
       </View>
       <SafeAreaView style={styles.container}>
         <ScrollView style={styles.scrollView}>

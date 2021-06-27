@@ -23,3 +23,21 @@ export const getResult = (params) =>
       Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwY2YwYmE4M2ZiNTA2MzAwNDYwODdiOCIsImlhdCI6MTYyNDU0MjQ3NywiZXhwIjoxNjI0NjI4ODc3fQ.p9ltTpNiRDtlEkZQHm3_UWnYrAbMyNX79LRapKXir38`,
     },
   });
+export const getExams = (token) => {
+  axios.get(`${baseUrl}/api/exam`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+
+// login
+export const loginUser = async (params) => {
+  console.log("api was called");
+  return await axios.post(`${baseUrl}/api/auth/login`, params);
+};
+//sign up
+export const registerUser = async (params) => {
+  return await axios.post(`${baseUrl}/api/auth/register`, params);
+};

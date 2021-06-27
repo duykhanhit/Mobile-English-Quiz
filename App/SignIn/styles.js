@@ -69,6 +69,7 @@ const styles = StyleSheet.create({
     color: "#A0A0A0",
     paddingLeft: 41,
     marginBottom: 26.17,
+    justifyContent: "center",
   },
   icons: {
     width: 20,
@@ -103,6 +104,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 11,
     justifyContent: "space-around",
     marginBottom: 20.17,
+  },
+  date_time_custom: {
+    color: "#A0A0A0",
   },
 });
 
