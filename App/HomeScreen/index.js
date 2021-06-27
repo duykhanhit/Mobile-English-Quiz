@@ -2,10 +2,12 @@ import React, { useContext, useEffect, useState } from "react";
 import {
   View,
   Text,
+  Button,
+  StatusBar,
   Image,
   SafeAreaView,
   ScrollView,
-  TouchableOpacity,
+  TouchableOpacity
 } from "react-native";
 // import { UserContext } from "../../contexts/GlobalState/GlobaleUserState";
 // import { ExamContext } from "../../contexts/GlobalState/GlobalExamState";
@@ -34,7 +36,7 @@ const ListExamScreen = ({ navigation }) => {
         />
         <View style={styles["custom-text-blog"]}>
           <Text style={styles["title-text-blog"]}>
-            Tên đề: Đấu trường IT 2020...
+            Tên đề: Tiếng Anh Công Nghệ Thông Tin...
           </Text>
           <Text style={styles["common-text-blog"]}>Loại đề: ABC</Text>
           <Text style={styles["common-text-blog"]}>Ngày tạo: 24/06/2021</Text>
@@ -44,6 +46,7 @@ const ListExamScreen = ({ navigation }) => {
   };
   return (
     <View style={styles.container}>
+      <StatusBar animated={true} barStyle="dark-content" hidden={false} />
       <View style={styles["view-header"]}>
         <Text style={styles["view-title"]}>Danh sách đề thi</Text>
       </View>
