@@ -57,7 +57,7 @@ export default GlobalExamProvider = ({ children }) => {
         console.log(res?.data.data);
       }
     } catch (error) {
-      console.log(error);
+      console.log(error.responses)
     }
   };
 

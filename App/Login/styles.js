@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginTop: 19,
     marginBottom: 25.64,
-    color: mainGreen
+    color: mainGreen,
   },
   input: {
     backgroundColor: "#E4EBF1",
