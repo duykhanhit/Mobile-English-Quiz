@@ -97,11 +97,15 @@ export default StyleSheet.create({
     width: "100%",
     justifyContent: "flex-end",
     alignItems: "center",
+  },
+  buttonContainerLogout: {
+    width: "100%",
+    justifyContent: "flex-end",
+    alignItems: "center",
     marginBottom: 100
   },
   touch: {
     width: "100%",
-    // marginBottom: 60
   },
   logout: {
     borderWidth: 2,

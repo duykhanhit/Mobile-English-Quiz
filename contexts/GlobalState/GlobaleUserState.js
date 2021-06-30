@@ -76,6 +76,38 @@ export default GlobalUserProvider = ({ children }) => {
       });
     }
   };
+  // const getListExams = async (token) => {
+  //   try {
+  //     const data = api.getExams(token);
+  //     console.log("data", data);
+  //     dispatch({
+  //       type: types.GET_EXAMS,
+  //       payload: data,
+  //     });
+  //   } catch (error) {
+  //     console.log(error.responses);
+  //     dispatch({
+  //       type: types.GET_EXAMS,
+  //       payload: error.responses,
+  //     });
+  //   }
+  // };
+
+  const getUser = async ( token ) => {
+    try {
+      const res = await api.getUser(token);
+      if (res?.data.success) {
+        dispatch({
+          type: types.GET_USER,
+          payload: res?.data
+        });
+      } else {
+        console.log(res?.data.data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
   return (
     <UserContext.Provider
       value={{
