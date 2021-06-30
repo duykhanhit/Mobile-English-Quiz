@@ -6,6 +6,7 @@ import * as api from "../../api";
 const initialState = {
   exam: {},
   result: {},
+  list_exams: [],
 };
 
 export const ExamContext = createContext(initialState);
@@ -57,18 +58,35 @@ export default GlobalExamProvider = ({ children }) => {
         console.log(res?.data.data);
       }
     } catch (error) {
-      console.log(error.responses)
+      console.log(error.responses);
     }
   };
-
+  const listExams = async (token) => {
+    try {
+      const { data } = await api.getListExam(token);
+      dispatch({
+        type: types.GET_LIST_EXAM,
+        payload: data,
+      });
+    } catch (error) {
+      console.log(error.response.data);
+      dispatch({
+        type: types.GET_LIST_EXAM,
+        payload: error.response.data,
+      });
+    }
+  };
   return (
     <ExamContext.Provider
       value={{
         exam: examState.exam,
         result: examState.result,
+        list_exams: examState.listExams,
+        examState,
         getExam,
         submitAnswer,
         getResult,
+        listExams,
       }}
     >
       {children}

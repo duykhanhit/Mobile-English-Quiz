@@ -20,8 +20,6 @@ const SignIn = ({ navigation }) => {
   const [confirmPassword, setComfirmPassword] = useState("");
   const [gender, setGender] = useState("male");
 
-  const toggle = () => showModal(!show);
-
   const account = (name) => {
     return (
       <MaterialIcon
@@ -69,8 +67,16 @@ const SignIn = ({ navigation }) => {
     });
   };
   useEffect(() => {
-    console.log("userState", userState);
-    !!userState && userState.success && navigation.navigate("HomeStack");
+    !!userState &&
+      userState.success &&
+      navigation.reset({
+        index: 0,
+        routes: [
+          {
+            name: "HomeStack",
+          },
+        ],
+      });
   }, [userState]);
   return (
     <FormAccount>

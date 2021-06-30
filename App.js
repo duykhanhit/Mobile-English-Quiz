@@ -11,6 +11,7 @@ import ForgotPassword from "./App/ForgotPassword";
 import CameraScreen from "./App/CameraScreen";
 import GlobalUserProvider from "./contexts/GlobalState/GlobaleUserState";
 import GlobalExamProvider from "./contexts/GlobalState/GlobalExamState";
+import VerifyCode from "./App/VerifyCode";
 
 const Stack = createStackNavigator();
 
@@ -32,6 +33,7 @@ export default function App() {
             <Stack.Screen name="Login" component={Login} />
             <Stack.Screen name="SignIn" component={SignIn} />
             <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
+            <Stack.Screen name="VerifyCode" component={VerifyCode} />
             <Stack.Screen
               name="HomeStack"
               component={HomeStack}
