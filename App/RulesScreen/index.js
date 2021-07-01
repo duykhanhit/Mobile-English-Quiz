@@ -11,7 +11,7 @@ import {
 import styles from "./styles";
 import rules from "../../assets/rules.png";
 
-const RulesScreen = ({ navigation }) => {
+const RulesScreen = ({ navigation, route }) => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View style={styles.container}>
@@ -35,7 +35,7 @@ const RulesScreen = ({ navigation }) => {
           </View>
           <View style={styles.buttonContainer}>
             <TouchableOpacity
-              onPress={() => navigation.navigate("ExamScreen")}
+              onPress={() => navigation.navigate("ExamScreen", { id: route.params.id})}
               style={styles.touch}
             >
               <View style={styles.degree}>
