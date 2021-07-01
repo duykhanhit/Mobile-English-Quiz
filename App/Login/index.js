@@ -15,12 +15,18 @@ const Login = ({ navigation }) => {
       alert("Please enter your email and password");
       return;
     }
-    userLogin({ email, password });
+    if (userState.dataToken.success === false) {
+      alert(userState.dataToken.data);
+      return;
+    }
+    userLogin(email, password);
     setEmail("");
     setPassword("");
   };
   useEffect(() => {
-    !!userState && userState.success && navigation.navigate("HomeStack");
+    !!userState &&
+      userState.dataToken.success &&
+      navigation.navigate("HomeStack");
   }, [userState]);
   return (
     <FormAccount>
@@ -62,6 +68,12 @@ const Login = ({ navigation }) => {
             style={styles.login_button}
           >
             <Text style={styles.text_button}>ĐĂNG NHẬP</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.forgot_pass_blog}
+            onPress={() => navigation.navigate("ForgotPassword")}
+          >
+            <Text style={styles.forgot_password}>Quên mật khẩu</Text>
           </TouchableOpacity>
         </View>
       </View>

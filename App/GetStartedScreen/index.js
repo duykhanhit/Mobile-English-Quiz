@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import {
   Button,
   ImageBackground,
@@ -9,16 +9,26 @@ import {
 } from "react-native";
 import styles from "./styles";
 
-import image from '../../assets/default_background.png'
+import image from "../../assets/default_background.png";
+import { UserContext } from "../../contexts/GlobalState/GlobaleUserState";
 
 const GetStarted = ({ navigation }) => {
+  const { userState } = useContext(UserContext);
+
+  const handleNavigate = () => {
+    if (userState?.dataToken?.success) {
+      navigation.navigate("HomeStack");
+    } else {
+      navigation.navigate("Login");
+    }
+  };
   return (
     <View style={styles.container_started}>
       <ImageBackground source={image} style={styles.image}>
         <View style={styles.view_touchable}>
           <TouchableOpacity
             style={styles.touchable}
-            onPress={() => navigation.navigate("Login")}
+            onPress={() => handleNavigate()}
           >
             <Text style={styles.text}>Get started</Text>
           </TouchableOpacity>

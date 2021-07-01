@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
   },
   login_block: {
     width: 310,
-    height: 230,
+    height: 380,
     backgroundColor: "#fff",
     zIndex: 3,
     borderRadius: 12,
@@ -26,7 +26,6 @@ const styles = StyleSheet.create({
   input_block: {
     position: "relative",
     paddingHorizontal: 21,
-    marginTop: 30,
   },
   text_input: {
     fontWeight: "bold",
@@ -68,6 +67,7 @@ const styles = StyleSheet.create({
     lineHeight: 24,
     textAlign: "center",
     marginTop: 21,
+    marginBottom: 30,
   },
   "continue-button": {
     width: 253,

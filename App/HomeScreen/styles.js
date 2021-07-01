@@ -29,6 +29,7 @@ export default StyleSheet.create({
     backgroundColor: "#E4EBF1",
     flexDirection: "row",
     marginTop: 18,
+    overflow: "hidden",
   },
   "custom-text-blog": {
     marginLeft: 20,

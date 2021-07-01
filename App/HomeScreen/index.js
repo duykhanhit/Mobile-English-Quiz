@@ -2,44 +2,50 @@ import React, { useContext, useEffect, useState } from "react";
 import {
   View,
   Text,
-  Button,
   StatusBar,
   Image,
   SafeAreaView,
   ScrollView,
-  TouchableOpacity
+  TouchableOpacity,
 } from "react-native";
-// import { UserContext } from "../../contexts/GlobalState/GlobaleUserState";
-// import { ExamContext } from "../../contexts/GlobalState/GlobalExamState";
+import { UserContext } from "../../contexts/GlobalState/GlobaleUserState";
+import { ExamContext } from "../../contexts/GlobalState/GlobalExamState";
+import moment from "moment";
 
 import styles from "./styles";
 
 const ListExamScreen = ({ navigation }) => {
-  // const { userState, getListExams } = useContext(UserContext);
+  const { listExams, examState } = useContext(ExamContext);
+  const { userState } = useContext(UserContext);
 
-  // useEffect(() => {
-  //   console.log("ExamContext", userState);
-  //   getListExams(userState);
-  // });
-
-  const examItem = () => {
+  useState(() => {
+    listExams(userState.dataToken.token);
+  }, [userState.dataToken.token]);
+  const examItem = (item, index) => {
     return (
       <TouchableOpacity
         style={styles["exam-blog"]}
         onPress={() => {
           navigation.navigate("RulesScreen");
         }}
+        key={index}
       >
         <Image
           source={require("../../assets/avatar_image.png")}
           style={{ width: 72.14, height: 87 }}
         />
         <View style={styles["custom-text-blog"]}>
-          <Text style={styles["title-text-blog"]}>
-            Tên đề: Tiếng Anh Công Nghệ Thông Tin...
+          <Text
+            style={styles["title-text-blog"]}
+            numberOfLines={1}
+            ellipsizeMode="tail"
+          >
+            {item.name}
           </Text>
-          <Text style={styles["common-text-blog"]}>Loại đề: ABC</Text>
-          <Text style={styles["common-text-blog"]}>Ngày tạo: 24/06/2021</Text>
+          <Text style={styles["common-text-blog"]}>{item.type}</Text>
+          <Text style={styles["common-text-blog"]}>
+            {moment(item.createdAt).format("MMMM DD YYYY")}
+          </Text>
         </View>
       </TouchableOpacity>
     );
@@ -53,20 +59,9 @@ const ListExamScreen = ({ navigation }) => {
       <SafeAreaView style={styles.container}>
         <ScrollView style={styles.scrollView}>
           <View style={styles["view-list-question"]}>
-            {examItem()}
-            {examItem()}
-            {examItem()}
-            {examItem()}
-            {examItem()}
-            {examItem()}
-            {examItem()}
-            {examItem()}
-            {examItem()}
-            {examItem()}
-            {examItem()}
-            {examItem()}
-            {examItem()}
-            {examItem()}
+            {examState.list_exams.map((item, index) => {
+              return examItem(item, index);
+            })}
           </View>
         </ScrollView>
       </SafeAreaView>

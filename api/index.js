@@ -30,23 +30,35 @@ export const getResult = (params) =>
       Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwY2YwYmE4M2ZiNTA2MzAwNDYwODdiOCIsImlhdCI6MTYyNDc4MDU2NiwiZXhwIjoxNjI0ODY2OTY2fQ.irtFUHOX4LapzDNqzCqOcT7MV60YnAm-0kEViiYng_Q`,
     },
   });
-export const getExams = (token) => {
-  axios.get(`${baseUrl}/api/exam`, {
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-  });
-};
-
 // login
 export const loginUser = async (params) => {
-  console.log("api was called");
+  console.log(params);
   return await axios.post(`${baseUrl}/api/auth/login`, params);
 };
 //sign up
 export const registerUser = async (params) => {
   return await axios.post(`${baseUrl}/api/auth/register`, params);
+};
+
+// forgot_password
+// params: email
+export const forgotPassword = (params) => {
+  return axios.post(`${baseUrl}/api/auth/forgot`, params);
+};
+
+export const verifyCode = (params, password) => {
+  return axios.put(`${baseUrl}/api/auth/reset-password/${params}`, {
+    password,
+  });
+};
+
+export const getListExam = (token) => {
+  return axios.get(`${baseUrl}/api/exam`, {
+    headers: {
+      "Content-Type": "json/application",
+      Authorization: `Bearer ${token}`,
+    },
+  });
 };
 
 export const getUser = () =>

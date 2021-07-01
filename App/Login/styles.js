@@ -97,6 +97,13 @@ const styles = StyleSheet.create({
     fontWeight: "normal",
     color: "#fff",
   },
+  forgot_pass_blog: {
+    marginTop: 12,
+  },
+  forgot_password: {
+    color: mainGreen,
+    textDecorationLine: "underline",
+  },
 });
 
 export default styles;
