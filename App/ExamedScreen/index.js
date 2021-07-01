@@ -6,13 +6,15 @@ import styles from "./styles";
 import avatar from "../../assets/avatar.jpg";
 import * as colors from '../../assets/colors';
 import _ from 'lodash';
+import { UserContext } from "../../contexts/GlobalState/GlobaleUserState";
 
 const ExamedScreen = ({ navigation, route }) => {
-
+  
   const { getResult, result } = useContext(ExamContext);
+  const { userState } = useContext(UserContext);
 
   useEffect(() => {
-    getResult(route.params.resultId);
+    getResult(route.params.resultId, userState.dataToken.token);
   }, [route.params.resultId]);
 
   return (
