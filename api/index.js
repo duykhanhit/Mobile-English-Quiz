@@ -9,10 +9,11 @@ export const getExam = (params, token) =>{
       Authorization: `Bearer ${token}`,
     },
   })};
-export const postAnswer = (resultId, answerId, token) =>{
+export const postAnswer = (questionId, resultId, answerId, token) =>{
   return axios.post(
     `${baseUrl}/api/answer/submit`,
     {
+      question_id: questionId,
       result_id: resultId,
       answer_id: answerId,
     },

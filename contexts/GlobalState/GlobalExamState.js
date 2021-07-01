@@ -30,9 +30,9 @@ export default GlobalExamProvider = ({ children }) => {
     }
   };
 
-  const submitAnswer = async (resultId, answerId, token) => {
+  const submitAnswer = async (questionId, resultId, answerId, token) => {
     try {
-      const res = await api.postAnswer(resultId, answerId, token);
+      const res = await api.postAnswer(questionId, resultId, answerId, token);
       if (res?.data.success) {
         dispatch({
           type: types.SUBMIT_ANSWER,
