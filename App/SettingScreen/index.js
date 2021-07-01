@@ -19,7 +19,8 @@ import MaterialIcon from "react-native-vector-icons/MaterialCommunityIcons";
 import Animated from "react-native-reanimated";
 import { RadioButton } from "react-native-paper";
 import * as ImagePicker from "expo-image-picker";
-import _, { isEmpty } from 'lodash';
+import _ from 'lodash';
+import moment from "moment";
 
 import styles from "./styles";
 import avatar from "../../assets/avatar.jpg";
@@ -61,7 +62,7 @@ const SettingScreen = ({ navigation }) => {
       setGender(userState.me.data.gender);
       setDate({
         ...date,
-        date: new Date(userState.me.data.birthday)
+        date: !_.isEmpty(userState.me.data?.birthday) ? new Date(userState.me.data.birthday) : new Date()
       })
     }
   },[userState]);
@@ -286,11 +287,12 @@ const SettingScreen = ({ navigation }) => {
                   }}
                 >
                   <Text>
-                    {date.date
+                    {/* {date.date
                       ? date.date
                           .toLocaleString()
                           .slice(date.date.toLocaleString().indexOf(",") + 2)
-                      : ""}
+                      : ""} */}
+                      {moment(date.date).format("DD MMMM YYYY")}
                   </Text>
                 </TouchableOpacity>
                 <DateTimePickerModal
