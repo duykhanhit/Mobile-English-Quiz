@@ -19,7 +19,8 @@ import MaterialIcon from "react-native-vector-icons/MaterialCommunityIcons";
 import Animated from "react-native-reanimated";
 import { RadioButton } from "react-native-paper";
 import * as ImagePicker from "expo-image-picker";
-import _, { isEmpty } from 'lodash';
+import _ from 'lodash';
+import moment from "moment";
 
 import styles from "./styles";
 import avatar from "../../assets/avatar.jpg";
@@ -28,7 +29,7 @@ import * as colors from "../../assets/colors";
 import { UserContext } from "../../contexts/GlobalState/GlobaleUserState";
 
 const SettingScreen = ({ navigation }) => {
-  const { userState, getUser } = useContext(UserContext);
+  const { userState, getUser, logout } = useContext(UserContext);
   const bs = React.createRef();
   const fall = new Animated.Value(1);
 
@@ -55,17 +56,13 @@ const SettingScreen = ({ navigation }) => {
   }, [image]);
 
   useEffect(() => {
-    !_.isEmpty(userState.dataToken) && getUser(userState.dataToken.token);
-  }, [userState.dataToken]);
-
-  useEffect(() => {
     if(!_.isEmpty(userState.me)) {
       setName(userState.me.data.name);
       setEmail(userState.me.data.email);
       setGender(userState.me.data.gender);
       setDate({
         ...date,
-        date: new Date(userState.me.data.birthday)
+        date: !_.isEmpty(userState.me.data?.birthday) ? new Date(userState.me.data.birthday) : new Date()
       })
     }
   },[userState]);
@@ -290,11 +287,12 @@ const SettingScreen = ({ navigation }) => {
                   }}
                 >
                   <Text>
-                    {date.date
+                    {/* {date.date
                       ? date.date
                           .toLocaleString()
                           .slice(date.date.toLocaleString().indexOf(",") + 2)
-                      : ""}
+                      : ""} */}
+                      {moment(date.date).format("DD MMMM YYYY")}
                   </Text>
                 </TouchableOpacity>
                 <DateTimePickerModal
@@ -318,7 +316,7 @@ const SettingScreen = ({ navigation }) => {
               {!edit && (
                 <View style={styles.buttonContainerLogout}>
                   <TouchableOpacity
-                    onPress={() => navigation.navigate("GetStarted")}
+                    onPress={() => logout()}
                     style={styles.touch}
                   >
                     <View style={styles.logout}>
