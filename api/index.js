@@ -60,6 +60,7 @@ export const getListExam = (token) => {
     },
   });
 };
+
 export const getUser = () =>
   axios.get(`${baseUrl}/api/auth/me`, {
     headers: {
