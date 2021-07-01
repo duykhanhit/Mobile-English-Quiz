@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
   "text-rules": {
     fontStyle: "normal",
     fontWeight: "500",
-    fontSize: 20,
+    fontSize: 18,
     lineHeight: 24,
     textAlign: "center",
     marginTop: 21,

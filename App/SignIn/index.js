@@ -80,67 +80,69 @@ const SignIn = ({ navigation }) => {
   // }, [userState]);
   return (
     <FormAccount>
-      <View style={styles.login_block}>
-        <Text style={styles.text_input}>ĐĂNG KÝ</Text>
+      <View style={styles.wrapper_container}>
+        <View style={styles.login_block}>
+          <Text style={styles.text_input}>ĐĂNG KÝ</Text>
 
-        {InputField(account("user"), "Họ tên", setName, false)}
-        {InputField(account("mail"), "Email", setEmail, false)}
-        {InputField(account("lock"), "Mật khẩu", setPassword, true)}
-        {InputField(
-          account("lock"),
-          "Nhập lại mật khẩu",
-          setComfirmPassword,
-          true
-        )}
+          {InputField(account("user"), "Họ tên", setName, false)}
+          {InputField(account("mail"), "Email", setEmail, false)}
+          {InputField(account("lock"), "Mật khẩu", setPassword, true)}
+          {InputField(
+            account("lock"),
+            "Nhập lại mật khẩu",
+            setComfirmPassword,
+            true
+          )}
 
-        <View style={styles["checkbox-block"]}>
-          <CheckBox
-            center
-            title="Nam"
-            checkedIcon={<CheckIcon name="radio-button-checked" size={25} />}
-            uncheckedIcon={
-              <CheckIcon name="radio-button-unchecked" size={25} />
-            }
-            checked={check}
-            onPress={() => {
-              setCheck(true);
-              setUncheck(false);
-            }}
-          />
-          <CheckBox
-            title="Nữ"
-            checkedIcon={<CheckIcon name="radio-button-checked" size={25} />}
-            uncheckedIcon={
-              <CheckIcon name="radio-button-unchecked" size={25} />
-            }
-            checked={uncheck}
-            onPress={() => {
-              setUncheck(true);
-              setCheck(false);
-            }}
-          />
+          <View style={styles["checkbox-block"]}>
+            <CheckBox
+              center
+              title="Nam"
+              checkedIcon={<CheckIcon name="radio-button-checked" size={25} />}
+              uncheckedIcon={
+                <CheckIcon name="radio-button-unchecked" size={25} />
+              }
+              checked={check}
+              onPress={() => {
+                setCheck(true);
+                setUncheck(false);
+              }}
+            />
+            <CheckBox
+              title="Nữ"
+              checkedIcon={<CheckIcon name="radio-button-checked" size={25} />}
+              uncheckedIcon={
+                <CheckIcon name="radio-button-unchecked" size={25} />
+              }
+              checked={uncheck}
+              onPress={() => {
+                setUncheck(true);
+                setCheck(false);
+              }}
+            />
+          </View>
+
+          <View style={styles["login-button-block"]}>
+            <TouchableOpacity
+              onPress={() => handleRegister()}
+              style={styles.login_button}
+            >
+              <Text style={styles.text_button}>ĐĂNG KÝ</Text>
+            </TouchableOpacity>
+          </View>
         </View>
 
-        <View style={styles["login-button-block"]}>
-          <TouchableOpacity
-            onPress={() => handleRegister()}
-            style={styles.login_button}
-          >
-            <Text style={styles.text_button}>ĐĂNG KÝ</Text>
+        <View style={styles["checking-account-block"]}>
+          <Text style={styles["register-account"]}>Bạn đã có tài khoản?</Text>
+          <TouchableOpacity style={styles.touchable}>
+            <Text
+              style={styles["text-touchable"]}
+              onPress={() => navigation.goBack()}
+            >
+              ĐĂNG NHẬP
+            </Text>
           </TouchableOpacity>
         </View>
-      </View>
-
-      <View style={styles["checking-account-block"]}>
-        <Text style={styles["register-account"]}>Bạn đã có tài khoản?</Text>
-        <TouchableOpacity style={styles.touchable}>
-          <Text
-            style={styles["text-touchable"]}
-            onPress={() => navigation.goBack()}
-          >
-            ĐĂNG NHẬP
-          </Text>
-        </TouchableOpacity>
       </View>
     </FormAccount>
   );

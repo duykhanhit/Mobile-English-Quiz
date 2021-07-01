@@ -31,6 +31,16 @@ export default StyleSheet.create({
     marginTop: 18,
     overflow: "hidden",
   },
+  last_item: {
+    marginBottom: 70,
+    width: "94%",
+    height: 114,
+    padding: 18,
+    backgroundColor: "#E4EBF1",
+    flexDirection: "row",
+    marginTop: 18,
+    overflow: "hidden",
+  },
   "custom-text-blog": {
     marginLeft: 20,
     flexDirection: "column",

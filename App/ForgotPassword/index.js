@@ -26,35 +26,37 @@ const ForgotPassword = ({ navigation }) => {
   };
   return (
     <FormAccount>
-      <View style={styles.container_block}>
-        <View style={styles.login_block}>
-          <Text style={styles["text-title"]}>Quên mật khẩu</Text>
-          <Text style={styles["text-rules"]}>
-            Vui lòng nhập email của bạn để tiếp tục.
-          </Text>
-          <View style={styles.input_block}>
-            <MaterialIcon
-              name="mail"
-              size={20}
-              color="#A0A0A0"
-              style={styles.icons}
-            />
-            <TextInput
-              style={styles.input}
-              placeholder="Email"
-              value={email}
-              onChangeText={(text) => setEmail(text)}
-            />
+      <View style={styles.wrapper_container}>
+        <View style={styles.container_block}>
+          <View style={styles.login_block}>
+            <Text style={styles["text-title"]}>Quên mật khẩu</Text>
+            <Text style={styles["text-rules"]}>
+              Vui lòng nhập email của bạn để tiếp tục.
+            </Text>
+            <View style={styles.input_block}>
+              <MaterialIcon
+                name="mail"
+                size={20}
+                color="#A0A0A0"
+                style={styles.icons}
+              />
+              <TextInput
+                style={styles.input}
+                placeholder="Email"
+                value={email}
+                onChangeText={(text) => setEmail(text)}
+              />
+            </View>
           </View>
+          <TouchableOpacity
+            style={styles["continue-button"]}
+            onPress={() => {
+              handleForgot();
+            }}
+          >
+            <Text style={styles["continue-text"]}>Tiếp tục</Text>
+          </TouchableOpacity>
         </View>
-        <TouchableOpacity
-          style={styles["continue-button"]}
-          onPress={() => {
-            handleForgot();
-          }}
-        >
-          <Text style={styles["continue-text"]}>Tiếp tục</Text>
-        </TouchableOpacity>
       </View>
     </FormAccount>
   );
