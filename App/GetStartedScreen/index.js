@@ -16,11 +16,7 @@ const GetStarted = ({ navigation }) => {
   const { userState } = useContext(UserContext);
 
   const handleNavigate = () => {
-    if (userState?.dataToken?.success) {
-      navigation.navigate("HomeStack");
-    } else {
-      navigation.navigate("Login");
-    }
+    navigation.navigate("Login");
   };
   return (
     <View style={styles.container_started}>
