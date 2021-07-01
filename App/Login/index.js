@@ -4,6 +4,7 @@ import styles from "./styles";
 import FormAccount from "../../components/FormAccount/index";
 import MaterialIcon from "react-native-vector-icons/AntDesign";
 import { UserContext } from "../../contexts/GlobalState/GlobaleUserState";
+import _ from "lodash";
 
 const Login = ({ navigation }) => {
   const { userLogin, userState } = useContext(UserContext);
@@ -15,7 +16,7 @@ const Login = ({ navigation }) => {
       alert("Please enter your email and password");
       return;
     }
-    if (userState.dataToken.success === false) {
+    if (!_.isEmpty(userState.dataToken) && userState.dataToken.success === false) {
       alert(userState.dataToken.data);
       return;
     }
@@ -24,10 +25,9 @@ const Login = ({ navigation }) => {
     setPassword("");
   };
   useEffect(() => {
-    !!userState &&
-      userState.dataToken.success &&
-      navigation.navigate("HomeStack");
-  }, [userState]);
+    !_.isEmpty(userState.dataToken) && navigation.navigate("HomeStack");
+  }, [userState.dataToken]);
+
   return (
     <FormAccount>
       <View style={styles.login_block}>

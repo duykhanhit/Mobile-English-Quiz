@@ -6,6 +6,7 @@ import UserReducer from "../Reducer/UserReducer";
 export const initialState = {
   dataToken: {},
   userInfor: {}, // using for save user infor (success, data) when forgot password combine:
+  me: {}
 };
 
 export const UserContext = createContext(initialState);
@@ -14,7 +15,6 @@ export default GlobalUserProvider = ({ children }) => {
   const userLogin = async (email, password) => {
     try {
       const { data } = await api.loginUser({ email, password });
-      console.log("data", data);
       dispatch({
         type: types.LOGIN,
         payload: data,
@@ -30,7 +30,6 @@ export default GlobalUserProvider = ({ children }) => {
   const userRegister = async (params) => {
     try {
       const { data } = await api.registerUser(params);
-      console.log("data", data);
       dispatch({
         type: types.SIGNUP,
         payload: data,
@@ -46,7 +45,6 @@ export default GlobalUserProvider = ({ children }) => {
   const forgotPasswordUser = async (email) => {
     try {
       const { data } = await api.forgotPassword({ email });
-      console.log("data", data);
       dispatch({
         type: types.FORGOT_PASSWORD,
         payload: data,
@@ -63,7 +61,6 @@ export default GlobalUserProvider = ({ children }) => {
   const verifyCodeUser = async (verifyCode, password) => {
     try {
       const { data } = await api.verifyCode(verifyCode, password);
-      console.log("data", data);
       dispatch({
         type: types.VERIFY_CODE,
         payload: data,
@@ -117,6 +114,7 @@ export default GlobalUserProvider = ({ children }) => {
         // getListExams,
         forgotPasswordUser,
         verifyCodeUser,
+        getUser
       }}
     >
       {children}
