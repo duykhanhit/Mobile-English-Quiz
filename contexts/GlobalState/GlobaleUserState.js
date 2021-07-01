@@ -35,6 +35,7 @@ export default GlobalUserProvider = ({ children }) => {
     try {
       const { data } = await api.registerUser(params);
       if (data?.success) {
+        await AsyncStorage.setItem("dataToken", JSON.stringify(data));
         dispatch({
           type: types.SIGNUP,
           payload: data,
