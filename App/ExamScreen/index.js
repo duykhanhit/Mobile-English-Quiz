@@ -14,10 +14,12 @@ import _ from "lodash";
 import styles from "./styles";
 import * as colors from "../../assets/colors";
 import { ExamContext } from "../../contexts/GlobalState/GlobalExamState";
+import { UserContext } from "../../contexts/GlobalState/GlobaleUserState";
 
 const ExamScreen = ({ navigation, route }) => {
   const id = route.params.id;
   const { getExam, exam, submitAnswer } = useContext(ExamContext);
+  const {userState} = useContext(UserContext);
 
   const [selected, setSelected] = useState({
     cauA: false,
@@ -43,7 +45,7 @@ const ExamScreen = ({ navigation, route }) => {
   }, [numberQues, listQues]);
 
   useEffect(() => {
-    getExam(id);
+    getExam(id, userState.dataToken.token);
   }, [id]);
 
   useEffect(() => {
@@ -148,7 +150,7 @@ const ExamScreen = ({ navigation, route }) => {
     if (!_.isEmpty(exam) && indexAnswer !== -1) {
       const resultId = exam.result;
       const answerId = exam.data[numberQues].answers[indexAnswer]._id;
-      submitAnswer(resultId, answerId);
+      submitAnswer(resultId, answerId, userState.dataToken.token);
     } else {
       setListQues([
         ...listQues.slice(0, numberQues),

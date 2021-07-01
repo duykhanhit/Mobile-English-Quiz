@@ -14,9 +14,9 @@ export const ExamContext = createContext(initialState);
 export default GlobalExamProvider = ({ children }) => {
   const [examState, dispatch] = useReducer(ExamReducer, initialState);
 
-  const getExam = async (id) => {
+  const getExam = async (id, token) => {
     try {
-      const res = await api.getExam(id);
+      const res = await api.getExam(id, token);
       if (res?.data.success) {
         dispatch({
           type: types.GET_EXAM,
@@ -30,9 +30,9 @@ export default GlobalExamProvider = ({ children }) => {
     }
   };
 
-  const submitAnswer = async (resultId, answerId) => {
+  const submitAnswer = async (resultId, answerId, token) => {
     try {
-      const res = await api.postAnswer(resultId, answerId);
+      const res = await api.postAnswer(resultId, answerId, token);
       if (res?.data.success) {
         dispatch({
           type: types.SUBMIT_ANSWER,
@@ -46,9 +46,9 @@ export default GlobalExamProvider = ({ children }) => {
     }
   };
 
-  const getResult = async (resultId) => {
+  const getResult = async (resultId, token) => {
     try {
-      const res = await api.getResult(resultId);
+      const res = await api.getResult(resultId, token);
       if (res?.data.success) {
         dispatch({
           type: types.GET_RESULT,
