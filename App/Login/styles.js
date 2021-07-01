@@ -2,11 +2,18 @@ import { StyleSheet } from "react-native";
 import { mainGreen } from "../../assets/colors/index";
 
 const styles = StyleSheet.create({
-  login_block: {
-    width: 310,
-    height: 328,
+  wrapper_container: {
+    flex: 1,
+    height: "100%",
     position: "absolute",
-    top: 234,
+    top: 0,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  login_block: {
+    top: -20,
+    width: 310,
+    height: 340,
     backgroundColor: "#fff",
     zIndex: 3,
     borderRadius: 12,
@@ -20,12 +27,7 @@ const styles = StyleSheet.create({
     elevation: 10,
   },
   "checking-account-block": {
-    flex: 1,
     flexDirection: "row",
-    position: "absolute",
-    top: 589,
-    left: 0,
-    right: 0,
     justifyContent: "center",
   },
   touchable: {
@@ -46,7 +48,6 @@ const styles = StyleSheet.create({
     marginLeft: 5,
   },
   input_block: {
-    position: "relative",
     paddingHorizontal: 21,
   },
   text_input: {
@@ -67,6 +68,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: "#A0A0A0",
     paddingLeft: 41,
+    paddingRight: 12,
     marginBottom: 26.17,
   },
   icons: {
@@ -99,6 +101,7 @@ const styles = StyleSheet.create({
   },
   forgot_pass_blog: {
     marginTop: 12,
+    marginBottom: 12
   },
   forgot_password: {
     color: mainGreen,

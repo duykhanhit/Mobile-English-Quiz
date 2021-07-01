@@ -31,7 +31,11 @@ const ListExamScreen = ({ navigation }) => {
   const examItem = (item, index) => {
     return (
       <TouchableOpacity
-        style={styles["exam-blog"]}
+        style={
+          index === examState.list_exams.length - 1
+            ? styles.last_item
+            : styles["exam-blog"]
+        }
         onPress={() => {
           navigation.navigate("RulesScreen", { id: item._id});
         }}

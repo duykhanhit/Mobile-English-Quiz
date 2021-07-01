@@ -2,11 +2,17 @@ import { StyleSheet } from "react-native";
 import { mainGreen, darkGreen } from "../../assets/colors/index";
 
 const styles = StyleSheet.create({
+  wrapper_container: {
+    flex: 1,
+    height: "100%",
+    position: "absolute",
+    top: 0,
+    alignItems: "center",
+    justifyContent: "center",
+  },
   login_block: {
     width: 310,
     height: 538,
-    position: "absolute",
-    top: 112,
     backgroundColor: "#fff",
     zIndex: 3,
     borderRadius: 12,
@@ -22,12 +28,9 @@ const styles = StyleSheet.create({
   "checking-account-block": {
     width: "100%",
     flexDirection: "row",
-    position: "relative",
-    top: 380,
-    left: 0,
-    right: 0,
     justifyContent: "center",
     zIndex: 10,
+    marginTop: 20,
   },
   touchable: {
     height: 18.18,
