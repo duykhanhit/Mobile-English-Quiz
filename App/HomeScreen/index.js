@@ -11,12 +11,12 @@ import {
 import { UserContext } from "../../contexts/GlobalState/GlobaleUserState";
 import { ExamContext } from "../../contexts/GlobalState/GlobalExamState";
 import moment from "moment";
-import _ from 'lodash';
+import _ from "lodash";
 
 import styles from "./styles";
 
 const ListExamScreen = ({ navigation }) => {
-  const { listExams, examState} = useContext(ExamContext);
+  const { listExams, examState } = useContext(ExamContext);
   const { userState } = useContext(UserContext);
 
   useState(() => {
@@ -25,9 +25,13 @@ const ListExamScreen = ({ navigation }) => {
   const examItem = (item, index) => {
     return (
       <TouchableOpacity
-        style={styles["exam-blog"]}
+        style={
+          index === examState.list_exams.length - 1
+            ? styles.last_item
+            : styles["exam-blog"]
+        }
         onPress={() => {
-          navigation.navigate("RulesScreen", { id: item._id});
+          navigation.navigate("RulesScreen", { id: item._id });
         }}
         key={index}
       >
