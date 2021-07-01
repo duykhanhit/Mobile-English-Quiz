@@ -150,7 +150,8 @@ const ExamScreen = ({ navigation, route }) => {
     if (!_.isEmpty(exam) && indexAnswer !== -1) {
       const resultId = exam.result;
       const answerId = exam.data[numberQues].answers[indexAnswer]._id;
-      submitAnswer(resultId, answerId, userState.dataToken.token);
+      const questionId = exam.data[numberQues]._id;
+      submitAnswer(questionId, resultId, answerId, userState.dataToken.token);
     } else {
       setListQues([
         ...listQues.slice(0, numberQues),
