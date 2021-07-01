@@ -2,14 +2,14 @@ import axios from "axios";
 
 const baseUrl = "http://13.229.240.165:3000";
 
-export const getExam = (params) =>{
+export const getExam = (params, token) =>{
   return axios.get(`${baseUrl}/api/exam/${params}`, {
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwY2YwYmE4M2ZiNTA2MzAwNDYwODdiOCIsImlhdCI6MTYyNTE0MTkzNywiZXhwIjoxNjI1MjI4MzM3fQ.r4J23FuEKQLW2VmE5W6DIOBxOB8W-Zxrs70CsClbX50`,
+      Authorization: `Bearer ${token}`,
     },
   })};
-export const postAnswer = (resultId, answerId) =>{
+export const postAnswer = (resultId, answerId, token) =>{
   return axios.post(
     `${baseUrl}/api/answer/submit`,
     {
@@ -19,15 +19,15 @@ export const postAnswer = (resultId, answerId) =>{
     {
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwY2YwYmE4M2ZiNTA2MzAwNDYwODdiOCIsImlhdCI6MTYyNTE0MTkzNywiZXhwIjoxNjI1MjI4MzM3fQ.r4J23FuEKQLW2VmE5W6DIOBxOB8W-Zxrs70CsClbX50`,
+        Authorization: `Bearer ${token}`,
       },
     }
   )};
-export const getResult = (params) =>{
+export const getResult = (params, token) =>{
   return axios.get(`${baseUrl}/api/result/${params}`, {
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwY2YwYmE4M2ZiNTA2MzAwNDYwODdiOCIsImlhdCI6MTYyNTE0MTkzNywiZXhwIjoxNjI1MjI4MzM3fQ.r4J23FuEKQLW2VmE5W6DIOBxOB8W-Zxrs70CsClbX50`,
+      Authorization: `Bearer ${token}`,
     },
   })};
 // login
