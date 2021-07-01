@@ -11,22 +11,23 @@ import {
 import { UserContext } from "../../contexts/GlobalState/GlobaleUserState";
 import { ExamContext } from "../../contexts/GlobalState/GlobalExamState";
 import moment from "moment";
+import _ from 'lodash';
 
 import styles from "./styles";
 
 const ListExamScreen = ({ navigation }) => {
-  const { listExams, examState } = useContext(ExamContext);
+  const { listExams, examState} = useContext(ExamContext);
   const { userState } = useContext(UserContext);
 
   useState(() => {
-    listExams(userState.dataToken.token);
-  }, [userState.dataToken.token]);
+    !_.isEmpty(userState.dataToken) && listExams(userState.dataToken.token);
+  }, [userState.dataToken]);
   const examItem = (item, index) => {
     return (
       <TouchableOpacity
         style={styles["exam-blog"]}
         onPress={() => {
-          navigation.navigate("RulesScreen");
+          navigation.navigate("RulesScreen", { id: item._id});
         }}
         key={index}
       >
