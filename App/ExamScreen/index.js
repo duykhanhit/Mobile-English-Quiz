@@ -15,8 +15,8 @@ import styles from "./styles";
 import * as colors from "../../assets/colors";
 import { ExamContext } from "../../contexts/GlobalState/GlobalExamState";
 
-const ExamScreen = ({ navigation }) => {
-  const id = "60d35577691f2b0970fd711d";
+const ExamScreen = ({ navigation, route }) => {
+  const id = route.params.id;
   const { getExam, exam, submitAnswer } = useContext(ExamContext);
 
   const [selected, setSelected] = useState({
@@ -81,15 +81,20 @@ const ExamScreen = ({ navigation }) => {
 
   useEffect(() => {
     if (!_.isEmpty(listQues)) {
-      listQues[numberQues].choseA &&
+      // for (const property in selected) {
+      //   if (selected[property]) {
+          
+      //   }
+      // }
+      if(listQues[numberQues].choseA) {
         setSelected({
           cauA: true,
           cauB: false,
           cauC: false,
           cauD: false,
         });
-
-      listQues[numberQues].choseB &&
+      }
+      else if(listQues[numberQues].choseB) {
         setSelected({
           cauA: false,
           cauB: true,
@@ -97,23 +102,34 @@ const ExamScreen = ({ navigation }) => {
           cauD: false,
         });
 
-      listQues[numberQues].choseD &&
-        setSelected({
-          cauA: false,
-          cauB: false,
-          cauC: false,
-          cauD: true,
-        });
-
-      listQues[numberQues].choseC &&
+      }
+      else if(listQues[numberQues].choseC) {
         setSelected({
           cauA: false,
           cauB: false,
           cauC: true,
           cauD: false,
         });
+      }
+      else if(listQues[numberQues].choseD) {
+        setSelected({
+          cauA: false,
+          cauB: false,
+          cauC: false,
+          cauD: true,
+        });
+      }
+      else {
+        setSelected({
+          cauA: false,
+          cauB: false,
+          cauC: false,
+          cauD: false,
+        })
+      }
     }
   }, [listQues[numberQues]]);
+
 
   const handleButtonContinute = () => {
     let index = -1;
@@ -179,10 +195,11 @@ const ExamScreen = ({ navigation }) => {
                 },
                 {
                   text: "Đồng ý",
-                  onPress: () =>  navigation.navigate("ExamedScreen", {
-                    resultId: exam.result,
-                    totalQuesNumber: exam.data.length,
-                  }),
+                  onPress: () =>
+                    navigation.navigate("ExamedScreen", {
+                      resultId: exam.result,
+                      totalQuesNumber: exam.data.length,
+                    }),
                 },
               ]);
             }}

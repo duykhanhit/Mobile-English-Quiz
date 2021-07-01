@@ -26,7 +26,7 @@ const ListExamScreen = ({ navigation }) => {
       <TouchableOpacity
         style={styles["exam-blog"]}
         onPress={() => {
-          navigation.navigate("RulesScreen");
+          navigation.navigate("RulesScreen", { id: item._id});
         }}
         key={index}
       >
