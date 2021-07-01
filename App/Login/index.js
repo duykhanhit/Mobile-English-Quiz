@@ -16,20 +16,10 @@ const Login = ({ navigation }) => {
       alert("Please enter your email and password");
       return;
     }
-    if (
-      !_.isEmpty(userState.dataToken) &&
-      userState.dataToken.success === false
-    ) {
-      alert(userState.dataToken.data);
-      return;
-    }
     userLogin(email, password);
     setEmail("");
     setPassword("");
   };
-  useEffect(() => {
-    !_.isEmpty(userState.dataToken) && navigation.navigate("HomeStack");
-  }, [userState.dataToken]);
 
   return (
     <FormAccount>

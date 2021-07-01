@@ -28,7 +28,7 @@ import * as colors from "../../assets/colors";
 import { UserContext } from "../../contexts/GlobalState/GlobaleUserState";
 
 const SettingScreen = ({ navigation }) => {
-  const { userState, getUser } = useContext(UserContext);
+  const { userState, getUser, logout } = useContext(UserContext);
   const bs = React.createRef();
   const fall = new Animated.Value(1);
 
@@ -53,10 +53,6 @@ const SettingScreen = ({ navigation }) => {
   useEffect(() => {
     bs.current.snapTo(1);
   }, [image]);
-
-  useEffect(() => {
-    !_.isEmpty(userState.dataToken) && getUser(userState.dataToken.token);
-  }, [userState.dataToken]);
 
   useEffect(() => {
     if(!_.isEmpty(userState.me)) {
@@ -318,7 +314,7 @@ const SettingScreen = ({ navigation }) => {
               {!edit && (
                 <View style={styles.buttonContainerLogout}>
                   <TouchableOpacity
-                    onPress={() => navigation.navigate("GetStarted")}
+                    onPress={() => logout()}
                     style={styles.touch}
                   >
                     <View style={styles.logout}>
