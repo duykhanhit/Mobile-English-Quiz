@@ -69,7 +69,7 @@ const CameraScreen = ({ navigation, route }) => {
   ) : (
     <View style={styles.containerCamera}>
       <StatusBar hidden={true} />
-      <Camera ref={cam} style={styles.camera} type={type}>
+      <Camera ref={cam} style={styles.camera} ratio={'1:1'} type={type}>
         <View style={styles.buttonTakePhotoContainer}>
           <View style={styles.headerCamera}>
             <TouchableOpacity onPress={() => navigation.goBack()}>

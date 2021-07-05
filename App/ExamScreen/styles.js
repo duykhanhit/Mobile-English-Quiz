@@ -53,7 +53,7 @@ export default StyleSheet.create({
     borderRadius: 2,
   },
   quizContainer: {
-    maxHeight: 200,
+    maxHeight: 150,
     width: '100%',
     borderRadius: 10,
     shadowColor: colors.lightGreen,

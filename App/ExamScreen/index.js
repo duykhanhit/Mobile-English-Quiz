@@ -6,6 +6,8 @@ import {
   ScrollView,
   TouchableOpacity,
   Alert,
+  ActivityIndicator,
+  BackHandler,
 } from "react-native";
 import MaterialIcon from "react-native-vector-icons/MaterialCommunityIcons";
 import * as Animatable from "react-native-animatable";
@@ -19,7 +21,9 @@ import { UserContext } from "../../contexts/GlobalState/GlobaleUserState";
 const ExamScreen = ({ navigation, route }) => {
   const id = route.params.id;
   const { getExam, exam, submitAnswer } = useContext(ExamContext);
-  const {userState} = useContext(UserContext);
+  const { userState } = useContext(UserContext);
+
+  const [disableSubmit, setDisableSubmit] = useState(true);
 
   const [selected, setSelected] = useState({
     cauA: false,
@@ -39,6 +43,33 @@ const ExamScreen = ({ navigation, route }) => {
   });
 
   const [numberQues, setNumberQues] = useState(0);
+
+  useEffect(() => {
+    const backAction = () => {
+      Alert.alert("Thông báo", "Bạn chắc chắn muốn thoát?", [
+        {
+          text: "Hủy",
+          onPress: () => {},
+          style: "cancel",
+        },
+        {
+          text: "Đồng ý",
+          onPress: () =>
+          navigation.navigate("ExamedScreen", {
+            resultId: exam.result,
+            totalQuesNumber: !_.isEmpty(exam.data) ? exam.data.length : 0,
+          }),
+        },
+      ]);
+      return true;
+    };
+
+    BackHandler.addEventListener(
+      "hardwareBackPress",
+      backAction
+    );
+
+  }, []);
 
   useEffect(() => {
     !_.isEmpty(listQues) && setDisplayQues(listQues[numberQues]);
@@ -83,55 +114,50 @@ const ExamScreen = ({ navigation, route }) => {
 
   useEffect(() => {
     if (!_.isEmpty(listQues)) {
-      // for (const property in selected) {
-      //   if (selected[property]) {
-          
-      //   }
-      // }
-      if(listQues[numberQues].choseA) {
+      if (listQues[numberQues].choseA) {
         setSelected({
           cauA: true,
           cauB: false,
           cauC: false,
           cauD: false,
         });
-      }
-      else if(listQues[numberQues].choseB) {
+      } else if (listQues[numberQues].choseB) {
         setSelected({
           cauA: false,
           cauB: true,
           cauC: false,
           cauD: false,
         });
-
-      }
-      else if(listQues[numberQues].choseC) {
+      } else if (listQues[numberQues].choseC) {
         setSelected({
           cauA: false,
           cauB: false,
           cauC: true,
           cauD: false,
         });
-      }
-      else if(listQues[numberQues].choseD) {
+      } else if (listQues[numberQues].choseD) {
         setSelected({
           cauA: false,
           cauB: false,
           cauC: false,
           cauD: true,
         });
-      }
-      else {
+      } else {
         setSelected({
           cauA: false,
           cauB: false,
           cauC: false,
           cauD: false,
-        })
+        });
       }
     }
   }, [listQues[numberQues]]);
 
+  useEffect(() => {
+    setTimeout(() => {
+      setDisableSubmit(false);
+    }, 3000);
+  }, [numberQues]);
 
   const handleButtonContinute = () => {
     let index = -1;
@@ -152,12 +178,14 @@ const ExamScreen = ({ navigation, route }) => {
       const answerId = exam.data[numberQues].answers[indexAnswer]._id;
       const questionId = exam.data[numberQues]._id;
       submitAnswer(questionId, resultId, answerId, userState.dataToken.token);
-    } else {
+    } 
+    if (!_.isEmpty(exam) && indexAnswer === -1) {
       setListQues([
         ...listQues.slice(0, numberQues),
         { ...listQues[numberQues], touched: false },
         ...listQues.slice(numberQues + 1),
       ]);
+      submitAnswer(exam.data[numberQues]._id, exam.result, null, userState.dataToken.token);
     }
     setSelected({
       cauA: false,
@@ -174,6 +202,7 @@ const ExamScreen = ({ navigation, route }) => {
     if (!_.isEmpty(exam.data) && numberQues < exam.data.length - 1) {
       setNumberQues(numberQues + 1);
     }
+    setDisableSubmit(true);
   };
 
   return (
@@ -202,7 +231,7 @@ const ExamScreen = ({ navigation, route }) => {
                     navigation.navigate("ExamedScreen", {
                       resultId: exam.result,
                       totalQuesNumber: exam.data.length,
-                    }),
+                  }),
                 },
               ]);
             }}
@@ -254,7 +283,7 @@ const ExamScreen = ({ navigation, route }) => {
               style={[
                 !_.isEmpty(listQues) && listQues[numberQues].choseA
                   ? styles.textSelected
-                  : {color: '#000'},
+                  : { color: "#000" },
               ]}
             >
               A: {displayQues.cauA}
@@ -292,7 +321,7 @@ const ExamScreen = ({ navigation, route }) => {
               style={[
                 !_.isEmpty(listQues) && listQues[numberQues].choseB
                   ? styles.textSelected
-                  : {color: '#000'},
+                  : { color: "#000" },
               ]}
             >
               B: {displayQues.cauB}
@@ -330,7 +359,7 @@ const ExamScreen = ({ navigation, route }) => {
               style={[
                 !_.isEmpty(listQues) && listQues[numberQues].choseC
                   ? styles.textSelected
-                  : {color: '#000'},
+                  : { color: "#000" },
               ]}
             >
               C: {displayQues.cauC}
@@ -367,44 +396,50 @@ const ExamScreen = ({ navigation, route }) => {
               style={[
                 !_.isEmpty(listQues) && listQues[numberQues].choseD
                   ? styles.textSelected
-                  : {color: '#000'},
+                  : { color: "#000" },
               ]}
             >
               D: {displayQues.cauD}
             </Text>
           </TouchableOpacity>
         </View>
-        <View style={styles.footer}>
-          {!_.isEmpty(exam.data) && numberQues !== 0 && (
+        {disableSubmit ? (
+          <View style={{ justifyContent: "center", width: "100%" }}>
+            <ActivityIndicator size="small" color={colors.mainGreen} />
+          </View>
+        ) : (
+          <View style={styles.footer}>
+            {!_.isEmpty(exam.data) && numberQues !== 0 && (
+              <TouchableOpacity
+                onPress={() => {
+                  setNumberQues(numberQues - 1);
+                }}
+                style={[styles.touch, { marginRight: 5 }]}
+              >
+                <View style={styles.previous}>
+                  <Text style={styles.textPre}>Quay lại</Text>
+                </View>
+              </TouchableOpacity>
+            )}
             <TouchableOpacity
-              onPress={() => {
-                setNumberQues(numberQues - 1);
-              }}
-              style={[styles.touch, { marginRight: 5 }]}
+              onPress={() => handleButtonContinute()}
+              style={[
+                styles.touch,
+                !_.isEmpty(exam.data) &&
+                  numberQues !== 0 &&
+                  numberQues === exam.data.length && { marginLeft: 5 },
+              ]}
             >
-              <View style={styles.previous}>
-                <Text style={styles.textPre}>Quay lại</Text>
+              <View style={styles.next}>
+                <Text style={styles.textNext}>
+                  {!_.isEmpty(exam.data) && numberQues !== exam.data.length - 1
+                    ? "Tiếp theo"
+                    : "Nộp bài"}
+                </Text>
               </View>
             </TouchableOpacity>
-          )}
-          <TouchableOpacity
-            onPress={() => handleButtonContinute()}
-            style={[
-              styles.touch,
-              !_.isEmpty(exam.data) &&
-                numberQues !== 0 &&
-                numberQues === exam.data.length && { marginLeft: 5 },
-            ]}
-          >
-            <View style={styles.next}>
-              <Text style={styles.textNext}>
-                {!_.isEmpty(exam.data) && numberQues !== exam.data.length - 1
-                  ? "Tiếp theo"
-                  : "Nộp bài"}
-              </Text>
-            </View>
-          </TouchableOpacity>
-        </View>
+          </View>
+        )}
       </Animatable.View>
     </SafeAreaView>
   );

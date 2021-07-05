@@ -7,9 +7,12 @@ import {
   TouchableOpacity,
   ImageBackground,
 } from "react-native";
+import { StackActions } from '@react-navigation/native';
 
 import styles from "./styles";
 import rules from "../../assets/rules.png";
+
+// import { StackActions } from '@react-navigation/native'
 
 const RulesScreen = ({ navigation, route }) => {
   return (
@@ -35,7 +38,12 @@ const RulesScreen = ({ navigation, route }) => {
           </View>
           <View style={styles.buttonContainer}>
             <TouchableOpacity
-              onPress={() => navigation.navigate("ExamScreen", { id: route.params.id})}
+              onPress={() => 
+                navigation.dispatch(
+                  StackActions.replace('ExamScreen', { id: route.params.id })
+                )
+                // navigation.navigate("ExamScreen", { id: route.params.id})
+              }
               style={styles.touch}
             >
               <View style={styles.degree}>
