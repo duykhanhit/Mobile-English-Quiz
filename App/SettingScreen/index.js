@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef, useMemo, createRef, useCallback } from "react";
 import {
   View,
   Text,
@@ -14,12 +14,12 @@ import {
   StatusBar,
 } from "react-native";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
-import BottomSheet from "reanimated-bottom-sheet";
+import BottomSheet from "react-native-bottomsheet-reanimated";
 import MaterialIcon from "react-native-vector-icons/MaterialCommunityIcons";
 import Animated from "react-native-reanimated";
 import { RadioButton } from "react-native-paper";
 import * as ImagePicker from "expo-image-picker";
-import _ from 'lodash';
+import _ from "lodash";
 import moment from "moment";
 
 import styles from "./styles";
@@ -30,10 +30,14 @@ import { UserContext } from "../../contexts/GlobalState/GlobaleUserState";
 
 const SettingScreen = ({ navigation }) => {
   const { userState, getUser, logout } = useContext(UserContext);
-  const bs = React.createRef();
-  const fall = new Animated.Value(1);
+  const [focusInput, setFocusInput] = useState(false);
+  // let bs = React.createRef();
+  let fall = new Animated.Value(1);
 
-  const [closeButtomSheet, setCloseButtomSheet] = useState(false);
+  //
+  const bottomSheetRef = createRef();
+  const snapPoints = useMemo(() => ['0%', '50%'], []);
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [image, setImage] = useState(null);
@@ -46,48 +50,39 @@ const SettingScreen = ({ navigation }) => {
   });
 
   useEffect(() => {
-    if (edit === false && closeButtomSheet === true) {
-      bs.current.snapTo(1);
-    }
-  }, [edit, closeButtomSheet]);
-
-  useEffect(() => {
-    bs.current.snapTo(1);
-  }, [image]);
-
-  useEffect(() => {
-    if(!_.isEmpty(userState.me)) {
+    if (!_.isEmpty(userState.me)) {
       setName(userState.me.data.name);
       setEmail(userState.me.data.email);
       setGender(userState.me.data.gender);
       setDate({
         ...date,
-        date: !_.isEmpty(userState.me.data?.birthday) ? new Date(userState.me.data.birthday) : new Date()
-      })
+        date: !_.isEmpty(userState.me.data?.birthday)
+          ? new Date(userState.me.data.birthday)
+          : new Date(),
+      });
     }
-  },[userState]);
+  }, [userState]);
 
-  const renderHeader = () => {
-    return (
-      <TouchableHighlight
-        underlayColor="#DDDDDD"
-        onPress={() => {
-          bs.current.snapTo(1);
-        }}
-        style={styles.barContainer}
-      >
-        <View
-          style={{
-            justifyContent: "center",
-            alignItems: "center",
-            width: "100%",
-            height: "100%",
-          }}
-        >
-          <View style={styles.bar} />
-        </View>
-      </TouchableHighlight>
-    );
+  const callBack = (image) => {
+    setImage(image);
+  };
+
+  const takePhotoFromCamera = () => {
+    navigation.navigate("CameraScreen", {
+      callBack: callBack,
+    });
+  };
+
+  const choosePhotoFromLibrary = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+    if (!result.cancelled) {
+      setImage(result.uri);
+    }
   };
 
   const renderContent = () => {
@@ -116,41 +111,9 @@ const SettingScreen = ({ navigation }) => {
               </View>
             </TouchableOpacity>
           </View>
-          <View style={styles.buttonContainer}>
-            <TouchableOpacity
-              onPress={() => bs.current.snapTo(1)}
-              style={styles.touch}
-            >
-              <View style={styles.photo}>
-                <Text style={styles.textLogout}>Đóng</Text>
-              </View>
-            </TouchableOpacity>
-          </View>
         </View>
       </View>
     );
-  };
-
-  const callBack = (image) => {
-    setImage(image);
-  };
-
-  const takePhotoFromCamera = () => {
-    navigation.navigate("CameraScreen", {
-      callBack: callBack,
-    });
-  };
-
-  const choosePhotoFromLibrary = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
-      allowsEditing: true,
-      aspect: [4, 3],
-      quality: 1,
-    });
-    if (!result.cancelled) {
-      setImage(result.uri);
-    }
   };
 
   return (
@@ -161,17 +124,12 @@ const SettingScreen = ({ navigation }) => {
       >
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <View style={{ flex: 1, width: "100%" }}>
-            {/* <StatusBar animated={true} barStyle="dark-content" hidden={false} /> */}
-            {/* <View style={styles.backgroundContainer}>
-              <View style={styles.background} />
-            </View> */}
             <View style={styles.container}>
               {!edit ? (
                 <TouchableOpacity
                   onPress={() => {
                     setEdit(!edit);
                     setDisable(!disable);
-                    setCloseButtomSheet(true);
                   }}
                   style={styles.buttonEdit}
                 >
@@ -187,7 +145,6 @@ const SettingScreen = ({ navigation }) => {
                     onPress={() => {
                       setEdit(!edit);
                       setDisable(!disable);
-                      setCloseButtomSheet(true);
                     }}
                   >
                     <MaterialIcon
@@ -200,7 +157,6 @@ const SettingScreen = ({ navigation }) => {
                     onPress={() => {
                       setEdit(!edit);
                       setDisable(!disable);
-                      setCloseButtomSheet(true);
                     }}
                   >
                     <MaterialIcon
@@ -220,7 +176,9 @@ const SettingScreen = ({ navigation }) => {
               </View>
               {edit && (
                 <TouchableOpacity
-                  onPress={() => bs.current.snapTo(0)}
+                  onPress={() => {
+                    bottomSheetRef.current.snapTo(1);
+                  }}
                   style={styles.cameraIcon}
                 >
                   <MaterialIcon
@@ -231,12 +189,20 @@ const SettingScreen = ({ navigation }) => {
                 </TouchableOpacity>
               )}
               <View style={styles.inforContainer}>
-                {/* <Text style={styles.lableInput}>Mã sinh viên</Text>
-                <TextInput editable={disable} style={styles.input} /> */}
                 <Text style={styles.lableInput}>Họ và tên</Text>
-                <TextInput value={name} onChangeText={text => setName(text)} editable={disable} style={styles.input} />
+                <TextInput
+                  value={name}
+                  onChangeText={(text) => setName(text)}
+                  editable={disable}
+                  style={styles.input}
+                />
                 <Text style={styles.lableInput}>Email</Text>
-                <TextInput value={email} onChangeText={text => setEmail(text)} editable={disable} style={styles.input} />
+                <TextInput
+                  value={email}
+                  onChangeText={(text) => setEmail(text)}
+                  editable={disable}
+                  style={styles.input}
+                />
                 <View
                   style={{
                     flexDirection: "row",
@@ -247,18 +213,26 @@ const SettingScreen = ({ navigation }) => {
                   <Text style={styles.textGender}>Giới tính:</Text>
                   <View style={styles.genderContainer}>
                     <TouchableOpacity
-                      onPress={() => edit && setGender("male")}
+                      onPress={() => {
+                  
+                        edit && setGender("male");
+                      }}
                       style={{ flexDirection: "row", alignItems: "center" }}
                     >
                       <Text style={styles.textGender}>Nam</Text>
                       <RadioButton
                         value="male"
                         status={gender === "male" ? "checked" : "unchecked"}
-                        onPress={() => edit && setGender("male")}
+                        onPress={() => {
+                          edit && setGender("male");
+                        }}
                       />
                     </TouchableOpacity>
                     <TouchableOpacity
-                      onPress={() => edit && setGender("female")}
+                      onPress={() => {
+                  
+                        edit && setGender("female");
+                      }}
                       style={{ flexDirection: "row", alignItems: "center" }}
                     >
                       <Text style={styles.textGender}>Nữ</Text>
@@ -266,7 +240,10 @@ const SettingScreen = ({ navigation }) => {
                         color="red"
                         value="female"
                         status={gender === "female" ? "checked" : "unchecked"}
-                        onPress={() => edit && setGender("female")}
+                        onPress={() => {
+                    
+                          edit && setGender("female");
+                        }}
                       />
                     </TouchableOpacity>
                   </View>
@@ -279,6 +256,7 @@ const SettingScreen = ({ navigation }) => {
                     { justifyContent: "center", fontSize: 16 },
                   ]}
                   onPress={() => {
+              
                     disable &&
                       setDate({
                         ...date,
@@ -292,7 +270,7 @@ const SettingScreen = ({ navigation }) => {
                           .toLocaleString()
                           .slice(date.date.toLocaleString().indexOf(",") + 2)
                       : ""} */}
-                      {moment(date.date).format("DD MMMM YYYY")}
+                    {moment(date.date).format("DD MMMM YYYY")}
                   </Text>
                 </TouchableOpacity>
                 <DateTimePickerModal
@@ -328,13 +306,15 @@ const SettingScreen = ({ navigation }) => {
               )}
             </View>
             <BottomSheet
-              ref={bs}
-              snapPoints={[400, 0]}
-              renderContent={renderContent}
-              renderHeader={renderHeader}
-              initialSnap={1}
-              callbackNode={fall}
-              enabledGestureInteraction={true}
+              bottomSheerColor="#FFFFFF"
+              ref={bottomSheetRef}
+              initialPosition={'0%'}
+              snapPoints={snapPoints}
+              isBackDrop={true}
+              isBackDropDismissByPress={true}
+              isRoundBorderWithTipHeader={true}
+              containerStyle={{background: '#fff'}}
+              body={renderContent()}
             />
           </View>
         </TouchableWithoutFeedback>

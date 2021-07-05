@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { View, Text, Image, SafeAreaView, TouchableOpacity } from "react-native";
+import { View, Text, Image, SafeAreaView, TouchableOpacity, BackHandler, Alert } from "react-native";
 import { ExamContext } from "../../contexts/GlobalState/GlobalExamState";
 
 import styles from "./styles";
@@ -12,6 +12,29 @@ const ExamedScreen = ({ navigation, route }) => {
   
   const { getResult, result } = useContext(ExamContext);
   const { userState } = useContext(UserContext);
+
+  useEffect(() => {
+    const backAction = () => {
+      Alert.alert("Thông báo", "Bạn không thể quay lại!", [
+        // {
+        //   text: "Hủy",
+        //   onPress: () => {},
+        //   style: "cancel",
+        // },
+        {
+          text: "Đồng ý",
+          onPress: () => {}
+        },
+      ]);
+      return true;
+    };
+
+    BackHandler.addEventListener(
+      "hardwareBackPress",
+      backAction
+    );
+
+  }, []);
 
   useEffect(() => {
     getResult(route.params.resultId, userState.dataToken.token);
