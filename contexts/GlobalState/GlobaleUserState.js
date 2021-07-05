@@ -114,10 +114,14 @@ export default GlobalUserProvider = ({ children }) => {
   };
 
   const logout = async () => {
-    await AsyncStorage.removeItem("dataToken");
-    dispatch({
-      type: types.LOGOUT,
-    });
+    try {
+      await AsyncStorage.removeItem("dataToken");
+      dispatch({
+        type: types.LOGOUT,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const retrieveToken = async () => {

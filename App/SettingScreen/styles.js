@@ -140,10 +140,8 @@ export default StyleSheet.create({
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
     height: 30,
-    shadowOffset: { width: 0, height: -2 },
-    shadowOpacity: 0.2,
-    shadowColor: "#000",
-    backgroundColor: "#eee",
+    
+    // backgroundColor: "transparent",
   },
   bar: {
     width: 50,
@@ -153,9 +151,13 @@ export default StyleSheet.create({
   },
   buttonsAvatar: {
     width: '100%',
-    height: '100%',
-    backgroundColor: '#f9f9f9',
-    padding: 20
+    height: '50%',
+    padding: 20,
+    // borderTopLeftRadius: 30,
+    // borderTopRightRadius: 30,
+    // shadowOffset: { width: 0, height: 3 },
+    // shadowOpacity: 0.2,
+    // shadowColor: "#000",
   },
   textUploadPhoto: {
     textAlign: 'center',
