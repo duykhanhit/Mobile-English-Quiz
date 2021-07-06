@@ -25,7 +25,6 @@ const Login = ({ navigation }) => {
       return;
     }
     userLogin(email.toLowerCase(), password);
-  };
     userLogin(email, password);
     setEmail("");
     setPassword("");

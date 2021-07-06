@@ -2,14 +2,19 @@ import { StyleSheet } from "react-native";
 import { mainGreen } from "../../assets/colors/index";
 
 const styles = StyleSheet.create({
+  wrapper_container: {
+    position: "absolute",
+    height: "100%",
+    width: "100%",
+    top: 0,
+    alignItems: "center",
+    justifyContent: "center",
+  },
   container_block: {
     width: "100%",
     height: "100%",
-    top: 0,
     justifyContent: "center",
     alignItems: "center",
-    position: "absolute",
-    flex: 1,
   },
   login_block: {
     width: "80%",
