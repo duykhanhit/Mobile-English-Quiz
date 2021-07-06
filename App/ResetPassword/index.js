@@ -63,6 +63,12 @@ const ResetPassword = ({ navigation, route }) => {
               secureTextEntry={true}
             />
           </View>
+          <TouchableOpacity
+            style={styles["continue-button"]}
+            onPress={() => handleVerify()}
+          >
+            <Text style={styles["continue-text"]}>Tiếp tục</Text>
+          </TouchableOpacity>
         </View>
         <TouchableOpacity
           style={styles["continue-button"]}

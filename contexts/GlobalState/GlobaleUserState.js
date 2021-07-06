@@ -3,7 +3,6 @@ import * as types from "../../constants";
 import * as api from "../../api";
 import UserReducer from "../Reducer/UserReducer";
 import { AsyncStorage } from "react-native";
-import ModelError from "../../components/ModelError";
 
 export const initialState = {
   dataToken: {},

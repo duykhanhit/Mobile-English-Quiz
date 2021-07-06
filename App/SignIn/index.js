@@ -131,6 +131,7 @@ const SignIn = ({ navigation }) => {
             passwordValidate,
             "Mật khẩu cần ít nhất 6 ký tự"
           )}
+
           {InputField(
             account("lock"),
             "Nhập lại mật khẩu",

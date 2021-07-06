@@ -16,6 +16,8 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   login_block: {
+    width: 310,
+    height: 236,
     backgroundColor: "#fff",
     zIndex: 3,
     borderRadius: 12,

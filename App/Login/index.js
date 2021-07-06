@@ -26,6 +26,10 @@ const Login = ({ navigation }) => {
     }
     userLogin(email.toLowerCase(), password);
   };
+    userLogin(email, password);
+    setEmail("");
+    setPassword("");
+  };
   return (
     <FormAccount>
       <View style={styles.wrapper_container}>
