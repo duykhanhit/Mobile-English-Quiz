@@ -7,11 +7,7 @@ import { AsyncStorage } from "react-native";
 export const initialState = {
   dataToken: {},
   userInfor: {}, // using for save user infor (success, data) when forgot password combine:
-<<<<<<< HEAD
   me: {},
-=======
-  me: {}
->>>>>>> 2ff525b (fix-conflict)
 };
 
 export const UserContext = createContext(initialState);
@@ -20,7 +16,6 @@ export default GlobalUserProvider = ({ children }) => {
   const userLogin = async (email, password) => {
     try {
       const { data } = await api.loginUser({ email, password });
-<<<<<<< HEAD
       if (data?.success) {
         await AsyncStorage.setItem("dataToken", JSON.stringify(data));
         dispatch({
@@ -28,12 +23,6 @@ export default GlobalUserProvider = ({ children }) => {
           payload: data,
         });
       }
-=======
-      dispatch({
-        type: types.LOGIN,
-        payload: data,
-      });
->>>>>>> 2ff525b (fix-conflict)
     } catch (error) {
       console.log(error.response.data);
       dispatch({
@@ -45,7 +34,6 @@ export default GlobalUserProvider = ({ children }) => {
   const userRegister = async (params) => {
     try {
       const { data } = await api.registerUser(params);
-<<<<<<< HEAD
       if (data?.success) {
         await AsyncStorage.setItem("dataToken", JSON.stringify(data));
         dispatch({
@@ -53,12 +41,6 @@ export default GlobalUserProvider = ({ children }) => {
           payload: data,
         });
       }
-=======
-      dispatch({
-        type: types.SIGNUP,
-        payload: data,
-      });
->>>>>>> 2ff525b (fix-conflict)
     } catch (error) {
       console.log(error.response.data);
       dispatch({
@@ -168,13 +150,9 @@ export default GlobalUserProvider = ({ children }) => {
         // getListExams,
         forgotPasswordUser,
         verifyCodeUser,
-<<<<<<< HEAD
         getUser,
         logout,
         retrieveToken,
-=======
-        getUser
->>>>>>> 2ff525b (fix-conflict)
       }}
     >
       {children}

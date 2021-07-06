@@ -16,12 +16,18 @@ import _ from "lodash";
 import styles from "./styles";
 
 const ListExamScreen = ({ navigation }) => {
-  const { listExams, examState } = useContext(ExamContext);
-  const { userState } = useContext(UserContext);
+  const { listExams, examState} = useContext(ExamContext);
+  const { userState, getUser } = useContext(UserContext);
+
+  // useEffect(() => {
+  //   
+  // }, [userState.dataToken]);
 
   useState(() => {
     !_.isEmpty(userState.dataToken) && listExams(userState.dataToken.token);
+    !_.isEmpty(userState.dataToken) && getUser(userState.dataToken.token);
   }, [userState.dataToken]);
+  
   const examItem = (item, index) => {
     return (
       <TouchableOpacity
