@@ -64,6 +64,6 @@ export const getUser = () =>
   axios.get(`${baseUrl}/api/auth/me`, {
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwY2YwYmE4M2ZiNTA2MzAwNDYwODdiOCIsImlhdCI6MTYyNTEwMjI5MiwiZXhwIjoxNjI1MTg4NjkyfQ.dsZS9bOsJD4-tA9-qCYMD0JHvlPdnCPVQHNfYoyTCYE`,
+      Authorization: `Bearer ${token}`,
     },
   });

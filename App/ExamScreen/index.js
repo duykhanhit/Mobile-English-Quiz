@@ -251,7 +251,7 @@ const ExamScreen = ({ navigation, route }) => {
               style={[
                 !_.isEmpty(listQues) && listQues[numberQues].choseA
                   ? styles.textSelected
-                  : {},
+                  : {color: '#000'},
               ]}
             >
               A: {displayQues.cauA}
@@ -289,7 +289,7 @@ const ExamScreen = ({ navigation, route }) => {
               style={[
                 !_.isEmpty(listQues) && listQues[numberQues].choseB
                   ? styles.textSelected
-                  : {},
+                  : {color: '#000'},
               ]}
             >
               B: {displayQues.cauB}
@@ -327,7 +327,7 @@ const ExamScreen = ({ navigation, route }) => {
               style={[
                 !_.isEmpty(listQues) && listQues[numberQues].choseC
                   ? styles.textSelected
-                  : {},
+                  : {color: '#000'},
               ]}
             >
               C: {displayQues.cauC}
@@ -364,7 +364,7 @@ const ExamScreen = ({ navigation, route }) => {
               style={[
                 !_.isEmpty(listQues) && listQues[numberQues].choseD
                   ? styles.textSelected
-                  : {},
+                  : {color: '#000'},
               ]}
             >
               D: {displayQues.cauD}

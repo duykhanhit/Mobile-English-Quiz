@@ -19,6 +19,7 @@ import MaterialIcon from "react-native-vector-icons/MaterialCommunityIcons";
 import Animated from "react-native-reanimated";
 import { RadioButton } from "react-native-paper";
 import * as ImagePicker from "expo-image-picker";
+import _, { isEmpty } from 'lodash';
 
 import styles from "./styles";
 import avatar from "../../assets/avatar.jpg";
@@ -27,12 +28,13 @@ import * as colors from "../../assets/colors";
 import { UserContext } from "../../contexts/GlobalState/GlobaleUserState";
 
 const SettingScreen = ({ navigation }) => {
-
-  const { userState } = useContext(UserContext);
+  const { userState, getUser } = useContext(UserContext);
   const bs = React.createRef();
   const fall = new Animated.Value(1);
 
   const [closeButtomSheet, setCloseButtomSheet] = useState(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [image, setImage] = useState(null);
   const [gender, setGender] = useState("male");
   const [edit, setEdit] = useState(false);
@@ -53,8 +55,20 @@ const SettingScreen = ({ navigation }) => {
   }, [image]);
 
   useEffect(() => {
-    console.log(userState);
-  }, [userState])
+    !_.isEmpty(userState.dataToken) && getUser(userState.dataToken.token);
+  }, [userState.dataToken]);
+
+  useEffect(() => {
+    if(!_.isEmpty(userState.me)) {
+      setName(userState.me.data.name);
+      setEmail(userState.me.data.email);
+      setGender(userState.me.data.gender);
+      setDate({
+        ...date,
+        date: new Date(userState.me.data.birthday)
+      })
+    }
+  },[userState]);
 
   const renderHeader = () => {
     return (
@@ -205,23 +219,27 @@ const SettingScreen = ({ navigation }) => {
                   source={image === null ? avatar : { uri: image }}
                   style={styles.image}
                 />
-                {edit &&<View style={styles.backgroundCamera}/>}
+                {edit && <View style={styles.backgroundCamera} />}
               </View>
               {edit && (
                 <TouchableOpacity
                   onPress={() => bs.current.snapTo(0)}
                   style={styles.cameraIcon}
                 >
-                  <MaterialIcon name="camera-outline" style={{color: '#ddd'}} size={30} />
+                  <MaterialIcon
+                    name="camera-outline"
+                    style={{ color: "#ddd" }}
+                    size={30}
+                  />
                 </TouchableOpacity>
               )}
               <View style={styles.inforContainer}>
-                <Text style={styles.lableInput}>Mã sinh viên</Text>
-                <TextInput editable={disable} style={styles.input} />
+                {/* <Text style={styles.lableInput}>Mã sinh viên</Text>
+                <TextInput editable={disable} style={styles.input} /> */}
                 <Text style={styles.lableInput}>Họ và tên</Text>
-                <TextInput editable={disable} style={styles.input} />
+                <TextInput value={name} onChangeText={text => setName(text)} editable={disable} style={styles.input} />
                 <Text style={styles.lableInput}>Email</Text>
-                <TextInput editable={disable} style={styles.input} />
+                <TextInput value={email} onChangeText={text => setEmail(text)} editable={disable} style={styles.input} />
                 <View
                   style={{
                     flexDirection: "row",
