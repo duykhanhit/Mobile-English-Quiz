@@ -10,7 +10,7 @@ const VerifyCode = ({ navigation }) => {
   const [verifyCode, setVerifyCode] = useState();
   const handleVerify = () => {
     if (!verifyCode) {
-      alert("Vui lòng nhập mã xác nhận được gửi vào mail của bạn");
+      alert("Please enter the confirmation code sent to your email");
       return;
     }
     navigation.navigate("ResetPassword", {

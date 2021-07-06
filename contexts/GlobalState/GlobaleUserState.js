@@ -24,9 +24,7 @@ export default GlobalUserProvider = ({ children }) => {
         });
       }
     } catch (error) {
-      if (error.response.data.data === "User is not exists.") {
-        alert("Không tồn tại tài khoản");
-      }
+      alert(error.response.data.data);
     }
   };
   const userRegister = async (params) => {
@@ -40,9 +38,7 @@ export default GlobalUserProvider = ({ children }) => {
         });
       }
     } catch (error) {
-      if (error.response.data.data === "Duplicate value") {
-        alert("Email đã tồn tại, vui lòng đăng ký bằng tài khoản khác");
-      }
+      alert(error.response.data.data);
     }
   };
   const forgotPasswordUser = async (email) => {
@@ -53,12 +49,7 @@ export default GlobalUserProvider = ({ children }) => {
         payload: data,
       });
     } catch (error) {
-      if (
-        error.response.data.data ===
-        `There is no user with email ${email.email}`
-      ) {
-        alert(`Không tồn tại ${email.email}, vui lòng nhập đúng email của bạn`);
-      }
+      alert(error.response.data.data);
     }
   };
 
@@ -70,9 +61,7 @@ export default GlobalUserProvider = ({ children }) => {
         payload: data,
       });
     } catch (error) {
-      if (error.response.data.data === "Reset code is invalid.") {
-        alert("Vui lòng nhập đúng mã xác nhận được gửi trong mail của bạn");
-      }
+      alert(error.response.data.data);
     }
   };
   // const getListExams = async (token) => {

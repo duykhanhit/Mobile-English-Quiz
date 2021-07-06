@@ -19,15 +19,13 @@ const Login = ({ navigation }) => {
     setEmailValidate(validateEmail(email));
     setPasswordValidate(validatePassword(password));
     if (!email || !password) {
-      alert("Vui lòng nhập đầy đủ các trường!!!");
+      alert("Please enter entire field");
     }
     if (!emailValidate || !passwordValidate) {
       return;
     }
     userLogin(email.toLowerCase(), password);
     userLogin(email, password);
-    setEmail("");
-    setPassword("");
   };
   return (
     <FormAccount>
@@ -48,7 +46,9 @@ const Login = ({ navigation }) => {
               defaultValue={email}
             />
             <Text style={styles.validate_text}>
-              {!emailValidate ? "Email cần nhập đúng định dạng" : null}
+              {!emailValidate
+                ? "Email needs to be entered in the correct format"
+                : null}
             </Text>
           </View>
           <View style={styles.input_block}>
@@ -66,7 +66,9 @@ const Login = ({ navigation }) => {
               secureTextEntry={true}
             />
             <Text style={styles.validate_text}>
-              {!passwordValidate ? "Mật khẩu phải từ 6 ký tự" : null}
+              {!passwordValidate
+                ? "Password must be at least 6 characters"
+                : null}
             </Text>
           </View>
 

@@ -63,11 +63,11 @@ const SignIn = ({ navigation }) => {
 
   const handleRegister = () => {
     if (!name || !email || !password || !gender || !confirmPassword) {
-      alert("Vui lòng nhập đầy đủ thông tin");
+      alert("Please enter entire field");
       return;
     }
     if (password !== confirmPassword) {
-      alert("Mật khẩu phải trùng với xác nhận mật khẩu");
+      alert("Password must match confirm password");
       return;
     }
 
@@ -89,18 +89,6 @@ const SignIn = ({ navigation }) => {
       gender,
     });
   };
-  // useEffect(() => {
-  //   !!userState &&
-  //     userState.success &&
-  //     navigation.reset({
-  //       index: 0,
-  //       routes: [
-  //         {
-  //           name: "HomeStack",
-  //         },
-  //       ],
-  //     });
-  // }, [userState]);
   return (
     <FormAccount>
       <View style={styles.wrapper_container}>
@@ -113,7 +101,7 @@ const SignIn = ({ navigation }) => {
             setName,
             false,
             nameValidate,
-            "Bạn cần nhập họ tên"
+            "Please enter your name"
           )}
           {InputField(
             account("mail"),
@@ -121,7 +109,7 @@ const SignIn = ({ navigation }) => {
             setEmail,
             false,
             emailValidate,
-            "Email cần nhập đúng định dạng"
+            "Email needs to be entered in the correct format"
           )}
           {InputField(
             account("lock"),
@@ -129,7 +117,7 @@ const SignIn = ({ navigation }) => {
             setPassword,
             true,
             passwordValidate,
-            "Mật khẩu cần ít nhất 6 ký tự"
+            "Password needs at least 6 characters"
           )}
 
           {InputField(
@@ -138,7 +126,7 @@ const SignIn = ({ navigation }) => {
             setComfirmPassword,
             true,
             confirmPasswordValidate,
-            "Xác nhận cần ít nhất 6 ký tự"
+            "Confirmation requires at least 6 characters"
           )}
 
           <View style={styles["checkbox-block"]}>

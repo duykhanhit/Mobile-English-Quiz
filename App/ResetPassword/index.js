@@ -17,7 +17,9 @@ const ResetPassword = ({ navigation, route }) => {
   const [confirmPasswordValidate, setConfirmPasswordValidate] = useState(true);
   const handleConfirm = () => {
     if (password !== confirmPassword) {
-      alert("Mật khẩu vừa nhập cần trùng với xác nhận mật khẩu");
+      alert(
+        "The password you just entered must match the confirmation password"
+      );
       return;
     }
     setPasswordValidate(validatePassword(password));

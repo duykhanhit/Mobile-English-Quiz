@@ -17,7 +17,7 @@ const ForgotPassword = ({ navigation }) => {
   }, [userState]);
   const handleForgot = () => {
     if (!email) {
-      alert("Vui lòng nhập email của bạn");
+      alert("Please enter your email");
       return;
     }
     if (!emailValidate) {
@@ -49,7 +49,9 @@ const ForgotPassword = ({ navigation }) => {
                 onChangeText={(text) => setEmail(text)}
               />
               <Text>
-                {!emailValidate ? "Email cần nhập đúng định dạng" : null}
+                {!emailValidate
+                  ? "Email needs to be entered in the correct format"
+                  : null}
               </Text>
             </View>
           </View>
