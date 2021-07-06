@@ -4,6 +4,8 @@ import Login from "../../App/Login";
 import SignIn from "../../App/SignIn";
 import ForgotPassword from "../../App/ForgotPassword";
 import { createStackNavigator } from "@react-navigation/stack";
+import VerifyCode from "../../App/VerifyCode";
+import ResetPassword from "../../App/ResetPassword";
 
 const LoginStack = () => {
   const Stack = createStackNavigator();
@@ -13,6 +15,8 @@ const LoginStack = () => {
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="SignIn" component={SignIn} />
       <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
+      <Stack.Screen name="VerifyCode" component={VerifyCode} />
+      <Stack.Screen name="ResetPassword" component={ResetPassword} />
     </Stack.Navigator>
   );
 };

@@ -5,22 +5,31 @@ import FormAccount from "../../components/FormAccount/index";
 import MaterialIcon from "react-native-vector-icons/AntDesign";
 import { UserContext } from "../../contexts/GlobalState/GlobaleUserState";
 import _ from "lodash";
+import { validateEmail, validatePassword } from "../../validate/validate";
 
 const Login = ({ navigation }) => {
   const { userLogin, userState } = useContext(UserContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const [emailValidate, setEmailValidate] = useState(true);
+  const [passwordValidate, setPasswordValidate] = useState(true);
+
   const handleLogin = () => {
+    setEmailValidate(validateEmail(email));
+    setPasswordValidate(validatePassword(password));
     if (!email || !password) {
-      alert("Please enter your email and password");
+      alert("Vui lòng nhập đầy đủ các trường!!!");
+    }
+    if (!emailValidate || !passwordValidate) {
       return;
     }
+    userLogin(email.toLowerCase(), password);
+  };
     userLogin(email, password);
     setEmail("");
     setPassword("");
   };
-
   return (
     <FormAccount>
       <View style={styles.wrapper_container}>
@@ -39,6 +48,9 @@ const Login = ({ navigation }) => {
               onChangeText={(text) => setEmail(text)}
               defaultValue={email}
             />
+            <Text style={styles.validate_text}>
+              {!emailValidate ? "Email cần nhập đúng định dạng" : null}
+            </Text>
           </View>
           <View style={styles.input_block}>
             <MaterialIcon
@@ -54,6 +66,9 @@ const Login = ({ navigation }) => {
               defaultValue={password}
               secureTextEntry={true}
             />
+            <Text style={styles.validate_text}>
+              {!passwordValidate ? "Mật khẩu phải từ 6 ký tự" : null}
+            </Text>
           </View>
 
           <View style={styles["login-button-block"]}>

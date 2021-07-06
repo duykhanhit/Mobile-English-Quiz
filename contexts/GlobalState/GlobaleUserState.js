@@ -1,4 +1,4 @@
-import React, { createContext, useReducer, useState, useEffect } from "react";
+import React, { createContext, useReducer, useEffect } from "react";
 import * as types from "../../constants";
 import * as api from "../../api";
 import UserReducer from "../Reducer/UserReducer";
@@ -24,11 +24,9 @@ export default GlobalUserProvider = ({ children }) => {
         });
       }
     } catch (error) {
-      console.log(error.response.data);
-      dispatch({
-        type: types.LOGIN,
-        payload: error.response.data,
-      });
+      if (error.response.data.data === "User is not exists.") {
+        alert("Không tồn tại tài khoản");
+      }
     }
   };
   const userRegister = async (params) => {
@@ -42,26 +40,25 @@ export default GlobalUserProvider = ({ children }) => {
         });
       }
     } catch (error) {
-      console.log(error.response.data);
-      dispatch({
-        type: types.SIGNUP,
-        payload: error.response.data,
-      });
+      if (error.response.data.data === "Duplicate value") {
+        alert("Email đã tồn tại, vui lòng đăng ký bằng tài khoản khác");
+      }
     }
   };
   const forgotPasswordUser = async (email) => {
     try {
-      const { data } = await api.forgotPassword({ email });
+      const { data } = await api.forgotPassword(email);
       dispatch({
         type: types.FORGOT_PASSWORD,
         payload: data,
       });
     } catch (error) {
-      console.log(error.response.data);
-      dispatch({
-        type: types.FORGOT_PASSWORD,
-        payload: error.response.data,
-      });
+      if (
+        error.response.data.data ===
+        `There is no user with email ${email.email}`
+      ) {
+        alert(`Không tồn tại ${email.email}, vui lòng nhập đúng email của bạn`);
+      }
     }
   };
 
@@ -73,11 +70,9 @@ export default GlobalUserProvider = ({ children }) => {
         payload: data,
       });
     } catch (error) {
-      console.log(error.response.data);
-      dispatch({
-        type: types.VERIFY_CODE,
-        payload: error.response.data,
-      });
+      if (error.response.data.data === "Reset code is invalid.") {
+        alert("Vui lòng nhập đúng mã xác nhận được gửi trong mail của bạn");
+      }
     }
   };
   // const getListExams = async (token) => {

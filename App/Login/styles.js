@@ -3,17 +3,15 @@ import { mainGreen } from "../../assets/colors/index";
 
 const styles = StyleSheet.create({
   wrapper_container: {
-    flex: 1,
-    height: "100%",
     position: "absolute",
+    height: "100%",
+    width: "100%",
     top: 0,
     alignItems: "center",
     justifyContent: "center",
   },
   login_block: {
-    top: -20,
-    width: 310,
-    height: 340,
+    width: "80%",
     backgroundColor: "#fff",
     zIndex: 3,
     borderRadius: 12,
@@ -29,6 +27,7 @@ const styles = StyleSheet.create({
   "checking-account-block": {
     flexDirection: "row",
     justifyContent: "center",
+    marginTop: 20,
   },
   touchable: {
     height: 18.18,
@@ -37,23 +36,21 @@ const styles = StyleSheet.create({
     fontStyle: "normal",
     fontWeight: "bold",
     fontSize: 15,
-    lineHeight: 19,
     color: "#000000",
   },
   "text-touchable": {
     fontWeight: "bold",
     fontSize: 15,
-    lineHeight: 19,
     color: mainGreen,
     marginLeft: 5,
   },
   input_block: {
     paddingHorizontal: 21,
+    marginBottom: 10.17,
   },
   text_input: {
     fontWeight: "bold",
     fontSize: 32,
-    lineHeight: 37,
     textAlign: "center",
     marginTop: 19,
     marginBottom: 25.64,
@@ -69,7 +66,9 @@ const styles = StyleSheet.create({
     color: "#A0A0A0",
     paddingLeft: 41,
     paddingRight: 12,
-    marginBottom: 26.17,
+  },
+  validate_text: {
+    color: "red",
   },
   icons: {
     width: 20,
@@ -81,7 +80,6 @@ const styles = StyleSheet.create({
   },
   "login-button-block": {
     alignItems: "center",
-    flex: 1,
     marginTop: 8.83,
     paddingHorizontal: 21,
   },
@@ -95,13 +93,12 @@ const styles = StyleSheet.create({
   },
   text_button: {
     fontSize: 22,
-    lineHeight: 27,
     fontWeight: "normal",
     color: "#fff",
   },
   forgot_pass_blog: {
     marginTop: 12,
-    marginBottom: 12
+    marginBottom: 12,
   },
   forgot_password: {
     color: mainGreen,

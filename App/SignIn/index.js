@@ -7,6 +7,7 @@ import MaterialIcon from "react-native-vector-icons/AntDesign";
 import DatetimeIcon from "react-native-vector-icons/Fontisto";
 import CheckIcon from "react-native-vector-icons/MaterialIcons";
 import { UserContext } from "../../contexts/GlobalState/GlobaleUserState";
+import { validateEmail, validatePassword } from "../../validate/validate";
 
 const SignIn = ({ navigation }) => {
   const [check, setCheck] = useState(true);
@@ -20,6 +21,11 @@ const SignIn = ({ navigation }) => {
   const [confirmPassword, setComfirmPassword] = useState("");
   const [gender, setGender] = useState("male");
 
+  const [nameValidate, setNameValidate] = useState(true);
+  const [emailValidate, setEmailValidate] = useState(true);
+  const [passwordValidate, setPasswordValidate] = useState(true);
+  const [confirmPasswordValidate, setConfirmPasswordValidate] = useState(true);
+
   const account = (name) => {
     return (
       <MaterialIcon
@@ -31,7 +37,14 @@ const SignIn = ({ navigation }) => {
     );
   };
 
-  const InputField = (source, placeholder, setState, secureTextEntry) => {
+  const InputField = (
+    source,
+    placeholder,
+    setState,
+    secureTextEntry,
+    stateValidate,
+    errorText
+  ) => {
     return (
       <View style={styles.input_block}>
         {source}
@@ -41,17 +54,27 @@ const SignIn = ({ navigation }) => {
           onChangeText={(text) => setState(text)}
           secureTextEntry={secureTextEntry}
         />
+        <Text style={styles.textbox_validate}>
+          {!stateValidate ? errorText : null}
+        </Text>
       </View>
     );
   };
 
   const handleRegister = () => {
     if (!name || !email || !password || !gender || !confirmPassword) {
-      alert("Please enter entire field");
+      alert("Vui lòng nhập đầy đủ thông tin");
       return;
     }
     if (password !== confirmPassword) {
-      alert("Password must be match with confirm password");
+      alert("Mật khẩu phải trùng với xác nhận mật khẩu");
+      return;
+    }
+
+    setEmailValidate(validateEmail(email));
+    setPasswordValidate(validatePassword(password));
+    setConfirmPasswordValidate(validatePassword(confirmPassword));
+    if (!emailValidate || !passwordValidate || !confirmPasswordValidate) {
       return;
     }
     if (check === true) {
@@ -61,7 +84,7 @@ const SignIn = ({ navigation }) => {
     }
     userRegister({
       name,
-      email,
+      email: email.toLowerCase(),
       password,
       gender,
     });
@@ -84,14 +107,38 @@ const SignIn = ({ navigation }) => {
         <View style={styles.login_block}>
           <Text style={styles.text_input}>ĐĂNG KÝ</Text>
 
-          {InputField(account("user"), "Họ tên", setName, false)}
-          {InputField(account("mail"), "Email", setEmail, false)}
-          {InputField(account("lock"), "Mật khẩu", setPassword, true)}
+          {InputField(
+            account("user"),
+            "Họ tên",
+            setName,
+            false,
+            nameValidate,
+            "Bạn cần nhập họ tên"
+          )}
+          {InputField(
+            account("mail"),
+            "Email",
+            setEmail,
+            false,
+            emailValidate,
+            "Email cần nhập đúng định dạng"
+          )}
+          {InputField(
+            account("lock"),
+            "Mật khẩu",
+            setPassword,
+            true,
+            passwordValidate,
+            "Mật khẩu cần ít nhất 6 ký tự"
+          )}
+
           {InputField(
             account("lock"),
             "Nhập lại mật khẩu",
             setComfirmPassword,
-            true
+            true,
+            confirmPasswordValidate,
+            "Xác nhận cần ít nhất 6 ký tự"
           )}
 
           <View style={styles["checkbox-block"]}>

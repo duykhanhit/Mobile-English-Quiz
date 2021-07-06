@@ -11,7 +11,7 @@ import {
 import { UserContext } from "../../contexts/GlobalState/GlobaleUserState";
 import { ExamContext } from "../../contexts/GlobalState/GlobalExamState";
 import moment from "moment";
-import _ from 'lodash';
+import _ from "lodash";
 
 import styles from "./styles";
 
@@ -37,7 +37,7 @@ const ListExamScreen = ({ navigation }) => {
             : styles["exam-blog"]
         }
         onPress={() => {
-          navigation.navigate("RulesScreen", { id: item._id});
+          navigation.navigate("RulesScreen", { id: item._id });
         }}
         key={index}
       >

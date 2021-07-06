@@ -2,16 +2,20 @@ import { StyleSheet } from "react-native";
 import { mainGreen } from "../../assets/colors/index";
 
 const styles = StyleSheet.create({
-  container_block: {
+  wrapper_container: {
+    flex: 1,
+    height: "100%",
+    width: "80%",
     position: "absolute",
     top: 0,
-    bottom: 0,
+  },
+  container_block: {
     justifyContent: "center",
     alignItems: "center",
+    height: "100%",
+    width: "100%",
   },
   login_block: {
-    width: 310,
-    height: 380,
     backgroundColor: "#fff",
     zIndex: 3,
     borderRadius: 12,
@@ -26,11 +30,11 @@ const styles = StyleSheet.create({
   input_block: {
     position: "relative",
     paddingHorizontal: 21,
+    marginTop: 30,
   },
   text_input: {
     fontWeight: "bold",
     fontSize: 32,
-    lineHeight: 37,
     textAlign: "center",
     marginTop: 19,
     marginBottom: 25.64,
@@ -55,19 +59,18 @@ const styles = StyleSheet.create({
   "text-title": {
     fontWeight: "bold",
     fontSize: 32,
-    lineHeight: 37,
     color: "#000000",
     textAlign: "center",
     marginTop: 17,
+    color: mainGreen,
   },
   "text-rules": {
     fontStyle: "normal",
     fontWeight: "500",
-    fontSize: 20,
-    lineHeight: 24,
+    fontSize: 18,
     textAlign: "center",
     marginTop: 21,
-    marginBottom: 30,
+    paddingHorizontal: 20,
   },
   "continue-button": {
     width: 253,
@@ -76,12 +79,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 10,
-    marginTop: 38,
+    marginTop: 20,
   },
   "continue-text": {
     fontWeight: "normal",
     fontSize: 22,
-    lineHeight: 27,
     color: "#fff",
   },
 });

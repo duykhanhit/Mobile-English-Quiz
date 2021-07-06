@@ -3,15 +3,17 @@ import { mainGreen } from "../../assets/colors/index";
 
 const styles = StyleSheet.create({
   container_block: {
-    position: "absolute",
+    width: "100%",
+    height: "100%",
     top: 0,
-    bottom: 0,
     justifyContent: "center",
     alignItems: "center",
+    position: "absolute",
+    flex: 1,
   },
   login_block: {
-    width: 310,
-    height: 380,
+    width: "80%",
+    paddingHorizontal: 12,
     backgroundColor: "#fff",
     zIndex: 3,
     borderRadius: 12,
@@ -25,7 +27,7 @@ const styles = StyleSheet.create({
   },
   input_block: {
     position: "relative",
-    paddingHorizontal: 21,
+    paddingHorizontal: 9,
   },
   text_input: {
     fontWeight: "bold",
@@ -48,7 +50,7 @@ const styles = StyleSheet.create({
   },
   icons: {
     position: "absolute",
-    left: 30,
+    left: 20,
     top: 12,
     zIndex: 3,
   },
@@ -59,6 +61,7 @@ const styles = StyleSheet.create({
     color: "#000000",
     textAlign: "center",
     marginTop: 17,
+    color: mainGreen,
   },
   "text-rules": {
     fontStyle: "normal",
