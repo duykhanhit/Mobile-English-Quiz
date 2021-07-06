@@ -2,16 +2,21 @@ import { StyleSheet } from "react-native";
 import { mainGreen } from "../../assets/colors/index";
 
 const styles = StyleSheet.create({
-  container_block: {
+  wrapper_container: {
+    flex: 1,
+    height: "100%",
     position: "absolute",
     top: 0,
-    bottom: 0,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  container_block: {
     justifyContent: "center",
     alignItems: "center",
   },
   login_block: {
     width: 310,
-    height: 230,
+    height: 236,
     backgroundColor: "#fff",
     zIndex: 3,
     borderRadius: 12,
@@ -60,14 +65,16 @@ const styles = StyleSheet.create({
     color: "#000000",
     textAlign: "center",
     marginTop: 17,
+    color: mainGreen,
   },
   "text-rules": {
     fontStyle: "normal",
     fontWeight: "500",
-    fontSize: 20,
+    fontSize: 18,
     lineHeight: 24,
     textAlign: "center",
     marginTop: 21,
+    paddingHorizontal: 20,
   },
   "continue-button": {
     width: 253,
@@ -76,7 +83,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 10,
-    marginTop: 38,
+    marginTop: 20,
   },
   "continue-text": {
     fontWeight: "normal",
