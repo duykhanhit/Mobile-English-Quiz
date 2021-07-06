@@ -15,10 +15,14 @@ export default UserReducer = (prevState, action) => {
     // case types.GET_EXAMS:
     // return { ...prevState, ...action.payload };
     case types.GET_USER:
+<<<<<<< HEAD
       return { ...prevState, me: {...action.payload} };
     case types.LOGOUT: 
     // console.log({...prevState});
     return {...prevState, dataToken: { success: false, token: ""}}
+=======
+      return { ...prevState, me: { ...action.payload } };
+>>>>>>> 2ff525b (fix-conflict)
     default:
       return { ...prevState };
   }

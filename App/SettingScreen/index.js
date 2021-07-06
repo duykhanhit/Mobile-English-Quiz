@@ -19,8 +19,7 @@ import MaterialIcon from "react-native-vector-icons/MaterialCommunityIcons";
 import Animated from "react-native-reanimated";
 import { RadioButton } from "react-native-paper";
 import * as ImagePicker from "expo-image-picker";
-import _ from 'lodash';
-import moment from "moment";
+import _, { isEmpty } from 'lodash';
 
 import styles from "./styles";
 import avatar from "../../assets/avatar.jpg";
