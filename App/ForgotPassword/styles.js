@@ -5,18 +5,17 @@ const styles = StyleSheet.create({
   wrapper_container: {
     flex: 1,
     height: "100%",
+    width: "80%",
     position: "absolute",
     top: 0,
-    alignItems: "center",
-    justifyContent: "center",
   },
   container_block: {
     justifyContent: "center",
     alignItems: "center",
+    height: "100%",
+    width: "100%",
   },
   login_block: {
-    width: 310,
-    height: 236,
     backgroundColor: "#fff",
     zIndex: 3,
     borderRadius: 12,
@@ -36,7 +35,6 @@ const styles = StyleSheet.create({
   text_input: {
     fontWeight: "bold",
     fontSize: 32,
-    lineHeight: 37,
     textAlign: "center",
     marginTop: 19,
     marginBottom: 25.64,
@@ -61,7 +59,6 @@ const styles = StyleSheet.create({
   "text-title": {
     fontWeight: "bold",
     fontSize: 32,
-    lineHeight: 37,
     color: "#000000",
     textAlign: "center",
     marginTop: 17,
@@ -71,7 +68,6 @@ const styles = StyleSheet.create({
     fontStyle: "normal",
     fontWeight: "500",
     fontSize: 18,
-    lineHeight: 24,
     textAlign: "center",
     marginTop: 21,
     paddingHorizontal: 20,
@@ -88,7 +84,6 @@ const styles = StyleSheet.create({
   "continue-text": {
     fontWeight: "normal",
     fontSize: 22,
-    lineHeight: 27,
     color: "#fff",
   },
 });

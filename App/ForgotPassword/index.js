@@ -4,25 +4,27 @@ import FormAccount from "../../components/FormAccount";
 import styles from "./styles";
 import MaterialIcon from "react-native-vector-icons/AntDesign";
 import { UserContext } from "../../contexts/GlobalState/GlobaleUserState";
+import { validateEmail } from "../../validate/validate";
 
 const ForgotPassword = ({ navigation }) => {
   const [email, setEmail] = useState();
+  const [emailValidate, setEmailValidate] = useState(true);
   const { userState, forgotPasswordUser } = useContext(UserContext);
   useEffect(() => {
     !!userState &&
-      userState.userInfor.success &&
+      userState.userInfor?.success &&
       navigation.navigate("VerifyCode");
   }, [userState]);
   const handleForgot = () => {
     if (!email) {
-      alert("Please enter your email");
+      alert("Vui lòng nhập email của bạn");
       return;
     }
-    if (!userState.userInfor.success) {
-      alert(userState.userInfor.data);
+    if (!emailValidate) {
       return;
     }
-    forgotPasswordUser(email);
+    setEmailValidate(validateEmail(email));
+    forgotPasswordUser({ email: email.toLowerCase() });
   };
   return (
     <FormAccount>
@@ -46,6 +48,9 @@ const ForgotPassword = ({ navigation }) => {
                 value={email}
                 onChangeText={(text) => setEmail(text)}
               />
+              <Text>
+                {!emailValidate ? "Email cần nhập đúng định dạng" : null}
+              </Text>
             </View>
           </View>
           <TouchableOpacity

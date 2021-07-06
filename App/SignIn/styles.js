@@ -5,14 +5,13 @@ const styles = StyleSheet.create({
   wrapper_container: {
     flex: 1,
     height: "100%",
-    position: "absolute",
-    top: 0,
+    width: "80%",
     alignItems: "center",
     justifyContent: "center",
+    position: "absolute",
   },
   login_block: {
-    width: 310,
-    height: 538,
+    width: "100%",
     backgroundColor: "#fff",
     zIndex: 3,
     borderRadius: 12,
@@ -40,27 +39,28 @@ const styles = StyleSheet.create({
     fontStyle: "normal",
     fontWeight: "bold",
     fontSize: 15,
-    lineHeight: 19,
     color: "#000000",
   },
   "text-touchable": {
     fontWeight: "bold",
     fontSize: 15,
-    lineHeight: 19,
     color: mainGreen,
   },
   input_block: {
     position: "relative",
     paddingHorizontal: 21,
+    marginBottom: 10.17,
+  },
+  textbox_validate: {
+    color: "red",
   },
   text_input: {
     fontWeight: "bold",
     fontSize: 32,
-    lineHeight: 37,
     textAlign: "center",
-    marginTop: 19,
-    marginBottom: 25.64,
     color: mainGreen,
+    paddingBottom: 20,
+    paddingTop: 20,
   },
   input: {
     backgroundColor: "#E4EBF1",
@@ -71,7 +71,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: "#A0A0A0",
     paddingLeft: 41,
-    marginBottom: 26.17,
     justifyContent: "center",
   },
   icons: {
@@ -84,9 +83,8 @@ const styles = StyleSheet.create({
   },
   "login-button-block": {
     alignItems: "center",
-    flex: 1,
-    marginTop: 8.83,
     paddingHorizontal: 21,
+    marginBottom: 30,
   },
   login_button: {
     width: "100%",
@@ -98,7 +96,6 @@ const styles = StyleSheet.create({
   },
   text_button: {
     fontSize: 22,
-    lineHeight: 27,
     fontWeight: "normal",
     color: "#fff",
   },
