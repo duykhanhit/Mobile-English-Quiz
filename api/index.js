@@ -2,15 +2,15 @@ import axios from "axios";
 
 const baseUrl = "http://13.229.240.165:3000";
 
-export const getExam = (params) =>
-  axios.get(`${baseUrl}/api/exam/${params}`, {
+export const getExam = (params) =>{
+  return axios.get(`${baseUrl}/api/exam/${params}`, {
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwY2YwYmE4M2ZiNTA2MzAwNDYwODdiOCIsImlhdCI6MTYyNTEwMjI5MiwiZXhwIjoxNjI1MTg4NjkyfQ.dsZS9bOsJD4-tA9-qCYMD0JHvlPdnCPVQHNfYoyTCYE`,
+      Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwY2YwYmE4M2ZiNTA2MzAwNDYwODdiOCIsImlhdCI6MTYyNTE0MTkzNywiZXhwIjoxNjI1MjI4MzM3fQ.r4J23FuEKQLW2VmE5W6DIOBxOB8W-Zxrs70CsClbX50`,
     },
-  });
-export const postAnswer = (resultId, answerId) =>
-  axios.post(
+  })};
+export const postAnswer = (resultId, answerId) =>{
+  return axios.post(
     `${baseUrl}/api/answer/submit`,
     {
       result_id: resultId,
@@ -19,20 +19,19 @@ export const postAnswer = (resultId, answerId) =>
     {
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwY2YwYmE4M2ZiNTA2MzAwNDYwODdiOCIsImlhdCI6MTYyNTEwMjI5MiwiZXhwIjoxNjI1MTg4NjkyfQ.dsZS9bOsJD4-tA9-qCYMD0JHvlPdnCPVQHNfYoyTCYE`,
+        Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwY2YwYmE4M2ZiNTA2MzAwNDYwODdiOCIsImlhdCI6MTYyNTE0MTkzNywiZXhwIjoxNjI1MjI4MzM3fQ.r4J23FuEKQLW2VmE5W6DIOBxOB8W-Zxrs70CsClbX50`,
       },
     }
-  );
-export const getResult = (params) =>
-  axios.get(`${baseUrl}/api/result/${params}`, {
+  )};
+export const getResult = (params) =>{
+  return axios.get(`${baseUrl}/api/result/${params}`, {
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwY2YwYmE4M2ZiNTA2MzAwNDYwODdiOCIsImlhdCI6MTYyNTEwMjI5MiwiZXhwIjoxNjI1MTg4NjkyfQ.dsZS9bOsJD4-tA9-qCYMD0JHvlPdnCPVQHNfYoyTCYE`,
+      Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwY2YwYmE4M2ZiNTA2MzAwNDYwODdiOCIsImlhdCI6MTYyNTE0MTkzNywiZXhwIjoxNjI1MjI4MzM3fQ.r4J23FuEKQLW2VmE5W6DIOBxOB8W-Zxrs70CsClbX50`,
     },
-  });
+  })};
 // login
 export const loginUser = async (params) => {
-  console.log(params);
   return await axios.post(`${baseUrl}/api/auth/login`, params);
 };
 //sign up
@@ -60,10 +59,11 @@ export const getListExam = (token) => {
     },
   });
 };
-export const getUser = () =>
-  axios.get(`${baseUrl}/api/auth/me`, {
+
+export const getUser = (token) =>{
+  return axios.get(`${baseUrl}/api/auth/me`, {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-  });
+  })};

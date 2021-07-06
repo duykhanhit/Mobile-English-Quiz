@@ -16,6 +16,9 @@ export default UserReducer = (prevState, action) => {
     // return { ...prevState, ...action.payload };
     case types.GET_USER:
       return { ...prevState, me: {...action.payload} };
+    case types.LOGOUT: 
+    // console.log({...prevState});
+    return {...prevState, dataToken: { success: false, token: ""}}
     default:
       return { ...prevState };
   }

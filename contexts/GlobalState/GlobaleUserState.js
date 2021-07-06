@@ -2,11 +2,12 @@ import React, { createContext, useReducer, useState, useEffect } from "react";
 import * as types from "../../constants";
 import * as api from "../../api";
 import UserReducer from "../Reducer/UserReducer";
+import { AsyncStorage } from "react-native";
 
 export const initialState = {
   dataToken: {},
   userInfor: {}, // using for save user infor (success, data) when forgot password combine:
-  me: {}
+  me: {},
 };
 
 export const UserContext = createContext(initialState);
@@ -15,10 +16,13 @@ export default GlobalUserProvider = ({ children }) => {
   const userLogin = async (email, password) => {
     try {
       const { data } = await api.loginUser({ email, password });
-      dispatch({
-        type: types.LOGIN,
-        payload: data,
-      });
+      if (data?.success) {
+        await AsyncStorage.setItem("dataToken", JSON.stringify(data));
+        dispatch({
+          type: types.LOGIN,
+          payload: data,
+        });
+      }
     } catch (error) {
       console.log(error.response.data);
       dispatch({
@@ -30,10 +34,12 @@ export default GlobalUserProvider = ({ children }) => {
   const userRegister = async (params) => {
     try {
       const { data } = await api.registerUser(params);
-      dispatch({
-        type: types.SIGNUP,
-        payload: data,
-      });
+      if (data?.success) {
+        dispatch({
+          type: types.SIGNUP,
+          payload: data,
+        });
+      }
     } catch (error) {
       console.log(error.response.data);
       dispatch({
@@ -90,13 +96,13 @@ export default GlobalUserProvider = ({ children }) => {
   //   }
   // };
 
-  const getUser = async ( token ) => {
+  const getUser = async (token) => {
     try {
       const res = await api.getUser(token);
       if (res?.data.success) {
         dispatch({
           type: types.GET_USER,
-          payload: res?.data
+          payload: res?.data,
         });
       } else {
         console.log(res?.data.data);
@@ -104,7 +110,36 @@ export default GlobalUserProvider = ({ children }) => {
     } catch (error) {
       console.log(error);
     }
-  }
+  };
+
+  const logout = async () => {
+    await AsyncStorage.removeItem("dataToken");
+    dispatch({
+      type: types.LOGOUT,
+    });
+  };
+
+  const retrieveToken = async () => {
+    try {
+      const dataToken = JSON.parse(await AsyncStorage.getItem("dataToken"));
+      if (dataToken !== null) {
+        const res = await api.getUser(dataToken.token);
+        if (res?.data.success) {
+          await AsyncStorage.setItem(
+            "dataToken",
+            JSON.stringify({ token: dataToken.token, success: true })
+          );
+          dispatch({
+            type: types.LOGIN,
+            payload: { token: dataToken.token, success: true },
+          });
+        } else {
+          console.log(res?.data.data);
+          await AsyncStorage.removeItem("dataToken");
+        }
+      }
+    } catch (error) {}
+  };
   return (
     <UserContext.Provider
       value={{
@@ -114,7 +149,9 @@ export default GlobalUserProvider = ({ children }) => {
         // getListExams,
         forgotPasswordUser,
         verifyCodeUser,
-        getUser
+        getUser,
+        logout,
+        retrieveToken,
       }}
     >
       {children}

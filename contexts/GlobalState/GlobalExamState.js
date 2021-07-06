@@ -69,7 +69,7 @@ export default GlobalExamProvider = ({ children }) => {
         payload: data,
       });
     } catch (error) {
-      console.log(error.response.data);
+      console.log("abc: ",error.response.data);
       dispatch({
         type: types.GET_LIST_EXAM,
         payload: error.response.data,
