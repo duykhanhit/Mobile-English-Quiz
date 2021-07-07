@@ -1,10 +1,17 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Text, View, TextInput, Image, TouchableOpacity } from "react-native";
+import {
+  Text,
+  View,
+  TextInput,
+  Image,
+  TouchableOpacity,
+  ActivityIndicator,
+} from "react-native";
 import FormAccount from "../../components/FormAccount";
 import styles from "./styles";
 import MaterialIcon from "react-native-vector-icons/AntDesign";
 import { UserContext } from "../../contexts/GlobalState/GlobaleUserState";
-import { red } from "../../assets/colors";
+import { mainGreen, red } from "../../assets/colors";
 const re =
   /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
@@ -13,6 +20,7 @@ const ForgotPassword = ({ navigation }) => {
   const [emailValidate, setEmailValidate] = useState(true);
   const [status, setStatus] = useState(true);
   const [check, setCheck] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const { forgotPasswordUser } = useContext(UserContext);
 
   const handleForgot = async () => {
@@ -25,16 +33,19 @@ const ForgotPassword = ({ navigation }) => {
         setEmailValidate(false);
       };
     }
+    setIsLoading(true);
     const state = await forgotPasswordUser({ email: email.toLowerCase() });
-    console.log("aa", state);
     if (state) {
+      setIsLoading(false);
       navigation.navigate("VerifyCode");
     } else {
+      setIsLoading(false);
       setCheck(false);
     }
   };
   const handleChange = () => {
     return (text) => {
+      setCheck(true);
       const state = re.test(String(text).toLowerCase());
       setEmailValidate(state);
       setStatus(true);
@@ -76,6 +87,11 @@ const ForgotPassword = ({ navigation }) => {
                 {!status ? "Vui lòng nhập email." : ""}
                 {!check ? "Thất bại." : ""}
               </Text>
+              {isLoading ? (
+                <ActivityIndicator size="small" color={mainGreen} />
+              ) : (
+                <></>
+              )}
             </View>
           </View>
           <TouchableOpacity

@@ -1,10 +1,19 @@
 import React, { useContext, useState } from "react";
-import { Image, Text, TextInput, TouchableOpacity, View } from "react-native";
+import {
+  Image,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+  Modal,
+  ActivityIndicator,
+} from "react-native";
 import styles from "./styles";
 import FormAccount from "../../components/FormAccount/index";
 import MaterialIcon from "react-native-vector-icons/AntDesign";
 import { UserContext } from "../../contexts/GlobalState/GlobaleUserState";
 import _ from "lodash";
+import { mainGreen } from "../../assets/colors";
 
 const re =
   /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -20,6 +29,7 @@ const Login = ({ navigation }) => {
     password: "",
   });
   const [status, setStatus] = useState(true);
+  const [modalVisible, setModalVisible] = useState(false);
 
   const handleLogin = async () => {
     if (!user.email || !user.password) {
@@ -28,10 +38,12 @@ const Login = ({ navigation }) => {
         password: false,
       });
     }
+    setModalVisible(true);
     const state = await userLogin(user.email.toLowerCase(), user.password);
     if (!state) {
       setStatus(false);
     }
+    setModalVisible(false);
   };
 
   const handleChangeText = (name) => {
@@ -81,6 +93,24 @@ const Login = ({ navigation }) => {
   return (
     <FormAccount>
       <View style={styles.wrapper_container}>
+        <Modal visible={modalVisible} transparent={true}>
+          <View
+            style={{
+              flex: 1,
+              justifyContent: "center",
+              alignItems: "center",
+              marginTop: 22,
+            }}
+          >
+            <ActivityIndicator
+              size="small"
+              color={mainGreen}
+              style={{
+                opacity: 0.5,
+              }}
+            />
+          </View>
+        </Modal>
         <View style={styles.login_block}>
           <Text style={styles.text_input}>ĐĂNG NHẬP</Text>
           <Text
