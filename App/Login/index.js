@@ -1,39 +1,97 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { Image, Text, TextInput, TouchableOpacity, View } from "react-native";
 import styles from "./styles";
 import FormAccount from "../../components/FormAccount/index";
 import MaterialIcon from "react-native-vector-icons/AntDesign";
 import { UserContext } from "../../contexts/GlobalState/GlobaleUserState";
 import _ from "lodash";
-import { validateEmail, validatePassword } from "../../validate/validate";
+
+const re =
+  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 const Login = ({ navigation }) => {
-  const { userLogin, userState } = useContext(UserContext);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const { userLogin } = useContext(UserContext);
+  const [isValid, setIsValid] = useState({
+    email: true,
+    password: true,
+  });
+  const [user, setUser] = useState({
+    email: "",
+    password: "",
+  });
+  const [status, setStatus] = useState(true);
 
-  const [emailValidate, setEmailValidate] = useState(true);
-  const [passwordValidate, setPasswordValidate] = useState(true);
-
-  const handleLogin = () => {
-    setEmailValidate(validateEmail(email));
-    setPasswordValidate(validatePassword(password));
-    if (!email || !password) {
-      alert("Vui lòng nhập đầy đủ các trường!!!");
+  const handleLogin = async () => {
+    if (!user.email || !user.password) {
+      return setIsValid({
+        email: false,
+        password: false,
+      });
     }
-    if (!emailValidate || !passwordValidate) {
-      return;
+    const state = await userLogin(user.email.toLowerCase(), user.password);
+    if (!state) {
+      setStatus(false);
     }
-    userLogin(email.toLowerCase(), password);
-    userLogin(email, password);
-    setEmail("");
-    setPassword("");
   };
+
+  const handleChangeText = (name) => {
+    return (text) => {
+      setStatus(true);
+      if (name === "password" && text.trim().length >= 6) {
+        setIsValid({
+          ...isValid,
+          [name]: true,
+        });
+      }
+      if (name === "email" && re.test(String(text).toLowerCase())) {
+        setIsValid({
+          ...isValid,
+          [name]: true,
+        });
+      }
+      setUser({
+        ...user,
+        [name]: text,
+      });
+    };
+  };
+
+  const handleOnBlur = (name) => {
+    return () => {
+      setStatus(true);
+      setIsValid({
+        ...isValid,
+        [name]: false,
+      });
+      if (name === "password" && user[name].trim().length >= 6) {
+        setIsValid({
+          ...isValid,
+          [name]: true,
+        });
+      }
+      if (name === "email" && re.test(String(user[name]).toLowerCase())) {
+        setIsValid({
+          ...isValid,
+          [name]: true,
+        });
+      }
+    };
+  };
+
   return (
     <FormAccount>
       <View style={styles.wrapper_container}>
         <View style={styles.login_block}>
           <Text style={styles.text_input}>ĐĂNG NHẬP</Text>
+          <Text
+            style={{
+              ...styles.validate_text,
+              textAlign: "center",
+              paddingBottom: 5,
+            }}
+          >
+            {!status ? "Thông tin đăng nhập không chính xác!" : ""}
+          </Text>
           <View style={styles.input_block}>
             <MaterialIcon
               name="mail"
@@ -44,11 +102,12 @@ const Login = ({ navigation }) => {
             <TextInput
               style={styles.input}
               placeholder="Email"
-              onChangeText={(text) => setEmail(text)}
-              defaultValue={email}
+              onChangeText={handleChangeText("email")}
+              defaultValue={user.email}
+              onBlur={handleOnBlur("email")}
             />
             <Text style={styles.validate_text}>
-              {!emailValidate ? "Email cần nhập đúng định dạng" : null}
+              {!isValid.email ? "Email cần nhập đúng định dạng" : ""}
             </Text>
           </View>
           <View style={styles.input_block}>
@@ -61,12 +120,13 @@ const Login = ({ navigation }) => {
             <TextInput
               style={styles.input}
               placeholder="Mật khẩu"
-              onChangeText={(text) => setPassword(text)}
-              defaultValue={password}
+              onChangeText={handleChangeText("password")}
+              defaultValue={user.password}
               secureTextEntry={true}
+              onBlur={handleOnBlur("password")}
             />
             <Text style={styles.validate_text}>
-              {!passwordValidate ? "Mật khẩu phải từ 6 ký tự" : null}
+              {!isValid.password ? "Mật khẩu phải từ 6 ký tự" : ""}
             </Text>
           </View>
 

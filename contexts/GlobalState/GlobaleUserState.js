@@ -24,8 +24,8 @@ export default GlobalUserProvider = ({ children }) => {
         });
       }
     } catch (error) {
-      if (error.response.data.data === "User is not exists.") {
-        alert("Không tồn tại tài khoản");
+      if (!error.response.data.success) {
+        return false;
       }
     }
   };
