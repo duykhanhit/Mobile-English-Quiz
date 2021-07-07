@@ -52,12 +52,10 @@ export default GlobalUserProvider = ({ children }) => {
         type: types.FORGOT_PASSWORD,
         payload: data,
       });
+      return true;
     } catch (error) {
-      if (
-        error.response.data.data ===
-        `There is no user with email ${email.email}`
-      ) {
-        alert(`Không tồn tại ${email.email}, vui lòng nhập đúng email của bạn`);
+      if (!error.response.data.success) {
+        return false;
       }
     }
   };

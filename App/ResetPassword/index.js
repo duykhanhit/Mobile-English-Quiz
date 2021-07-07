@@ -30,7 +30,7 @@ const ResetPassword = ({ navigation, route }) => {
       <View style={styles.wrapper_container}>
         <View style={styles.container_block}>
           <View style={styles.login_block}>
-            <Text style={styles["text-title"]}>Quên mật khẩu</Text>
+            <Text style={styles["text-title"]}>QUÊN MẬT KHẨU</Text>
             <Text style={styles["text-rules"]}>
               Nhập mã xác minh đã được gửi đến email của bạn
             </Text>
@@ -69,7 +69,7 @@ const ResetPassword = ({ navigation, route }) => {
             style={styles["continue-button"]}
             onPress={() => handleConfirm()}
           >
-            <Text style={styles["continue-text"]}>Tiếp tục</Text>
+            <Text style={styles["continue-text"]}>TIẾP TỤC</Text>
           </TouchableOpacity>
         </View>
       </View>

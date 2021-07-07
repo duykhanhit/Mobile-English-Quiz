@@ -16,8 +16,7 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   login_block: {
-    width: 310,
-    height: 236,
+    padding: 30,
     backgroundColor: "#fff",
     zIndex: 3,
     borderRadius: 12,
@@ -32,7 +31,6 @@ const styles = StyleSheet.create({
   input_block: {
     position: "relative",
     paddingHorizontal: 21,
-    marginTop: 30,
   },
   text_input: {
     fontWeight: "bold",
@@ -50,7 +48,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: "#A0A0A0",
     paddingLeft: 41,
-    marginBottom: 26.17,
+    marginBottom: "4%",
   },
   icons: {
     position: "absolute",
@@ -63,15 +61,17 @@ const styles = StyleSheet.create({
     fontSize: 32,
     color: "#000000",
     textAlign: "center",
-    marginTop: 17,
+    marginTop: "5%",
     color: mainGreen,
+    marginBottom: "5%",
   },
   "text-rules": {
     fontStyle: "normal",
     fontWeight: "500",
     fontSize: 18,
     textAlign: "center",
-    marginTop: 21,
+    paddingTop: "5%",
+    paddingBottom: "5%",
     paddingHorizontal: 20,
   },
   "continue-button": {

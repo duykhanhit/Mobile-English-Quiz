@@ -4,37 +4,59 @@ import FormAccount from "../../components/FormAccount";
 import styles from "./styles";
 import MaterialIcon from "react-native-vector-icons/AntDesign";
 import { UserContext } from "../../contexts/GlobalState/GlobaleUserState";
-import { validateEmail } from "../../validate/validate";
+import { red } from "../../assets/colors";
+const re =
+  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 const ForgotPassword = ({ navigation }) => {
-  const [email, setEmail] = useState();
+  const [email, setEmail] = useState("");
   const [emailValidate, setEmailValidate] = useState(true);
-  const { userState, forgotPasswordUser } = useContext(UserContext);
-  useEffect(() => {
-    !!userState &&
-      userState.userInfor?.success &&
-      navigation.navigate("VerifyCode");
-  }, [userState]);
-  const handleForgot = () => {
-    if (!email) {
-      alert("Vui lòng nhập email của bạn");
-      return;
+  const [status, setStatus] = useState(true);
+  const [check, setCheck] = useState(true);
+  const { forgotPasswordUser } = useContext(UserContext);
+
+  const handleForgot = async () => {
+    if (!email.trim().length) {
+      return setStatus(false);
     }
     if (!emailValidate) {
-      return;
+      return () => {
+        setStatus(true);
+        setEmailValidate(false);
+      };
     }
-    setEmailValidate(validateEmail(email));
-    forgotPasswordUser({ email: email.toLowerCase() });
+    const state = await forgotPasswordUser({ email: email.toLowerCase() });
+    console.log("aa", state);
+    if (state) {
+      navigation.navigate("VerifyCode");
+    } else {
+      setCheck(false);
+    }
+  };
+  const handleChange = () => {
+    return (text) => {
+      const state = re.test(String(text).toLowerCase());
+      setEmailValidate(state);
+      setStatus(true);
+      setEmail(text);
+    };
+  };
+  const handleBlur = () => {
+    return () => {
+      if (email.length === 0) {
+        setStatus(false);
+        setEmailValidate(true);
+      } else {
+        setStatus(true);
+      }
+    };
   };
   return (
     <FormAccount>
       <View style={styles.wrapper_container}>
         <View style={styles.container_block}>
           <View style={styles.login_block}>
-            <Text style={styles["text-title"]}>Quên mật khẩu</Text>
-            <Text style={styles["text-rules"]}>
-              Vui lòng nhập email của bạn để tiếp tục.
-            </Text>
+            <Text style={styles["text-title"]}>QUÊN MẬT KHẨU</Text>
             <View style={styles.input_block}>
               <MaterialIcon
                 name="mail"
@@ -44,12 +66,15 @@ const ForgotPassword = ({ navigation }) => {
               />
               <TextInput
                 style={styles.input}
-                placeholder="Email"
+                placeholder="Nhập địa chỉ email"
                 value={email}
-                onChangeText={(text) => setEmail(text)}
+                onChangeText={handleChange()}
+                onBlur={handleBlur()}
               />
-              <Text>
-                {!emailValidate ? "Email cần nhập đúng định dạng" : null}
+              <Text style={{ color: red, textAlign: "center" }}>
+                {!emailValidate ? "Email cần nhập đúng định dạng." : ""}
+                {!status ? "Vui lòng nhập email." : ""}
+                {!check ? "Thất bại." : ""}
               </Text>
             </View>
           </View>
@@ -59,7 +84,7 @@ const ForgotPassword = ({ navigation }) => {
               handleForgot();
             }}
           >
-            <Text style={styles["continue-text"]}>Tiếp tục</Text>
+            <Text style={styles["continue-text"]}>TIẾP TỤC</Text>
           </TouchableOpacity>
         </View>
       </View>
