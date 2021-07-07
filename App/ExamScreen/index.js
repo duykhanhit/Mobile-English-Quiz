@@ -23,7 +23,7 @@ const ExamScreen = ({ navigation, route }) => {
   const { getExam, exam, submitAnswer } = useContext(ExamContext);
   const { userState } = useContext(UserContext);
 
-  const [disableSubmit, setDisableSubmit] = useState(true);
+  const [disableSubmit, setDisableSubmit] = useState(false);
 
   const [selected, setSelected] = useState({
     cauA: false,
@@ -55,20 +55,16 @@ const ExamScreen = ({ navigation, route }) => {
         {
           text: "Đồng ý",
           onPress: () =>
-          navigation.navigate("ExamedScreen", {
-            resultId: exam.result,
-            totalQuesNumber: !_.isEmpty(exam.data) ? exam.data.length : 0,
-          }),
+            navigation.navigate("ExamedScreen", {
+              resultId: exam.result,
+              totalQuesNumber: !_.isEmpty(exam.data) ? exam.data.length : 0,
+            }),
         },
       ]);
       return true;
     };
 
-    BackHandler.addEventListener(
-      "hardwareBackPress",
-      backAction
-    );
-
+    BackHandler.addEventListener("hardwareBackPress", backAction);
   }, []);
 
   useEffect(() => {
@@ -154,9 +150,9 @@ const ExamScreen = ({ navigation, route }) => {
   }, [listQues[numberQues]]);
 
   useEffect(() => {
-    setTimeout(() => {
-      setDisableSubmit(false);
-    }, 3000);
+    // setTimeout(() => {
+    setDisableSubmit(false);
+    // }, 0);
   }, [numberQues]);
 
   const handleButtonContinute = () => {
@@ -178,14 +174,19 @@ const ExamScreen = ({ navigation, route }) => {
       const answerId = exam.data[numberQues].answers[indexAnswer]._id;
       const questionId = exam.data[numberQues]._id;
       submitAnswer(questionId, resultId, answerId, userState.dataToken.token);
-    } 
+    }
     if (!_.isEmpty(exam) && indexAnswer === -1) {
       setListQues([
         ...listQues.slice(0, numberQues),
         { ...listQues[numberQues], touched: false },
         ...listQues.slice(numberQues + 1),
       ]);
-      submitAnswer(exam.data[numberQues]._id, exam.result, null, userState.dataToken.token);
+      submitAnswer(
+        exam.data[numberQues]._id,
+        exam.result,
+        null,
+        userState.dataToken.token
+      );
     }
     setSelected({
       cauA: false,
@@ -202,7 +203,7 @@ const ExamScreen = ({ navigation, route }) => {
     if (!_.isEmpty(exam.data) && numberQues < exam.data.length - 1) {
       setNumberQues(numberQues + 1);
     }
-    setDisableSubmit(true);
+    // setDisableSubmit(true);
   };
 
   return (
@@ -231,7 +232,7 @@ const ExamScreen = ({ navigation, route }) => {
                     navigation.navigate("ExamedScreen", {
                       resultId: exam.result,
                       totalQuesNumber: exam.data.length,
-                  }),
+                    }),
                 },
               ]);
             }}

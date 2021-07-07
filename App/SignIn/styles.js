@@ -5,10 +5,10 @@ const styles = StyleSheet.create({
   wrapper_container: {
     flex: 1,
     height: "100%",
-    width: "80%",
     alignItems: "center",
-    justifyContent: "center",
+    width: "80%",
     position: "absolute",
+    transform: [{ translateY: 150 }],
   },
   login_block: {
     width: "100%",
@@ -49,10 +49,7 @@ const styles = StyleSheet.create({
   input_block: {
     position: "relative",
     paddingHorizontal: 21,
-    marginBottom: 10.17,
-  },
-  textbox_validate: {
-    color: "red",
+    marginBottom: "-5%",
   },
   text_input: {
     fontWeight: "bold",
@@ -71,6 +68,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: "#A0A0A0",
     paddingLeft: 41,
+    marginBottom: 26.17,
     justifyContent: "center",
   },
   icons: {
