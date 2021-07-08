@@ -73,13 +73,9 @@ export const getUser = (token) => {
   });
 };
 
-export const checkVerifyCode = (code) =>
-  axios.post(
-    `${baseUrl}/api/auth/verify-code`,
-    { code },
-    {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
-  );
+export const checkVerifyCode = (data) =>
+  axios.post(`${baseUrl}/api/auth/verify-code`, data, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });

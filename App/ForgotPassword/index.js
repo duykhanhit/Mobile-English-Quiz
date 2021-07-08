@@ -37,7 +37,7 @@ const ForgotPassword = ({ navigation }) => {
     const state = await forgotPasswordUser({ email: email.toLowerCase() });
     if (state) {
       setIsLoading(false);
-      navigation.navigate("VerifyCode");
+      navigation.navigate("VerifyCode", { email });
     } else {
       setIsLoading(false);
       setCheck(false);
