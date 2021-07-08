@@ -3,21 +3,16 @@ import { mainGreen } from "../../assets/colors/index";
 
 const styles = StyleSheet.create({
   wrapper_container: {
+    flex: 1,
+    height: "100%",
+    alignItems: "center",
+    width: "80%",
     position: "absolute",
-    height: "100%",
-    width: "100%",
-    top: 0,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  container_block: {
-    width: "100%",
-    height: "100%",
-    justifyContent: "center",
-    alignItems: "center",
+    transform: [{ translateY: 150 }],
   },
   login_block: {
-    width: "80%",
+    width: "100%",
+    padding: "5%",
     paddingHorizontal: 12,
     backgroundColor: "#fff",
     zIndex: 3,
@@ -27,6 +22,7 @@ const styles = StyleSheet.create({
       width: 0,
       height: 5,
     },
+    shadowOpacity: 0.34,
     shadowRadius: 6.27,
     elevation: 10,
   },

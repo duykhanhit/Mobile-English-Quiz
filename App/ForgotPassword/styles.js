@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
   wrapper_container: {
     flex: 1,
     height: "100%",
-    width: "80%",
+    width: "90%",
     position: "absolute",
     top: 0,
   },
@@ -25,6 +25,7 @@ const styles = StyleSheet.create({
       width: 0,
       height: 5,
     },
+    shadowOpacity: 0.34,
     shadowRadius: 6.27,
     elevation: 10,
   },

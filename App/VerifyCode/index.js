@@ -12,14 +12,17 @@ import KeyCode from "react-native-vector-icons/Entypo";
 import { UserContext } from "../../contexts/GlobalState/GlobaleUserState";
 import { mainGreen, red } from "../../assets/colors";
 
-const VerifyCode = ({ navigation }) => {
+const VerifyCode = ({ navigation, route }) => {
   const [code, setCode] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const [status, setStatus] = useState();
   const { verifyCode, userState } = useContext(UserContext);
   const handleSubmit = async () => {
     setIsLoading(true);
-    const data = await verifyCode(code);
+    const data = await verifyCode({
+      code,
+      email: route.params.email,
+    });
     setStatus(data);
     if (data === true) {
       setIsLoading(false);
@@ -45,7 +48,7 @@ const VerifyCode = ({ navigation }) => {
           <View style={styles.login_block}>
             <Text style={styles["text-title"]}>Quên mật khẩu</Text>
             <Text style={styles["text-rules"]}>
-              Nhập mã xác minh đã được gửi đến email của bạn
+              Nhập mã OTP đã được gửi đến email của bạn
             </Text>
             <View style={styles.input_block}>
               <KeyCode
@@ -58,7 +61,7 @@ const VerifyCode = ({ navigation }) => {
                 maxLength={6}
                 keyboardType="numeric"
                 style={styles.input}
-                placeholder="Nhập mã xác thực"
+                placeholder="Nhập mã OTP"
                 value={code}
                 onChangeText={handleOnchange()}
               />

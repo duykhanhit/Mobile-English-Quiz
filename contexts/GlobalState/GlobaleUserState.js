@@ -68,15 +68,13 @@ export default GlobalUserProvider = ({ children }) => {
         payload: data,
       });
     } catch (error) {
-      if (error.response.data.data === "Reset code is invalid.") {
-        alert("Vui lòng nhập đúng mã xác nhận được gửi trong mail của bạn");
-      }
+      return false;
     }
   };
 
-  const verifyCode = async (code) => {
+  const verifyCode = async (data) => {
     try {
-      await api.checkVerifyCode(code);
+      await api.checkVerifyCode(data);
       return true;
     } catch (error) {
       if (!error.response.data.success) {
