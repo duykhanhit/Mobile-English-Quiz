@@ -2,14 +2,15 @@ import axios from "axios";
 
 const baseUrl = "http://13.229.240.165:3000";
 
-export const getExam = (params, token) =>{
+export const getExam = (params, token) => {
   return axios.get(`${baseUrl}/api/exam/${params}`, {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-  })};
-export const postAnswer = (questionId, resultId, answerId, token) =>{
+  });
+};
+export const postAnswer = (questionId, resultId, answerId, token) => {
   return axios.post(
     `${baseUrl}/api/answer/submit`,
     {
@@ -23,14 +24,16 @@ export const postAnswer = (questionId, resultId, answerId, token) =>{
         Authorization: `Bearer ${token}`,
       },
     }
-  )};
-export const getResult = (params, token) =>{
+  );
+};
+export const getResult = (params, token) => {
   return axios.get(`${baseUrl}/api/result/${params}`, {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-  })};
+  });
+};
 // login
 export const loginUser = async (params) => {
   return await axios.post(`${baseUrl}/api/auth/login`, params);
@@ -61,10 +64,22 @@ export const getListExam = (token) => {
   });
 };
 
-export const getUser = (token) =>{
+export const getUser = (token) => {
   return axios.get(`${baseUrl}/api/auth/me`, {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-  })};
+  });
+};
+
+export const checkVerifyCode = (code) =>
+  axios.post(
+    `${baseUrl}/api/auth/verify-code`,
+    { code },
+    {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );

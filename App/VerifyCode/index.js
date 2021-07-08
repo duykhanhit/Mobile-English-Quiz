@@ -1,21 +1,41 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Text, TextInput, TouchableOpacity, View } from "react-native";
+import {
+  ActivityIndicator,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import FormAccount from "../../components/FormAccount";
 import styles from "./styles";
 import KeyCode from "react-native-vector-icons/Entypo";
 import { UserContext } from "../../contexts/GlobalState/GlobaleUserState";
-import MaterialIcon from "react-native-vector-icons/AntDesign";
+import { mainGreen, red } from "../../assets/colors";
 
 const VerifyCode = ({ navigation }) => {
-  const [verifyCode, setVerifyCode] = useState();
-  const handleVerify = () => {
-    if (!verifyCode) {
-      alert("Vui lòng nhập mã xác nhận được gửi vào mail của bạn");
-      return;
+  const [code, setCode] = useState();
+  const [isLoading, setIsLoading] = useState(false);
+  const [status, setStatus] = useState();
+  const { verifyCode, userState } = useContext(UserContext);
+  const handleSubmit = async () => {
+    setIsLoading(true);
+    const data = await verifyCode(code);
+    setStatus(data);
+    if (data === true) {
+      setIsLoading(false);
+      navigation.navigate("ResetPassword", {
+        verifyCode: code,
+      });
+    } else {
+      setIsLoading(false);
     }
-    navigation.navigate("ResetPassword", {
-      verifyCode,
-    });
+  };
+
+  const handleOnchange = () => {
+    return (text) => {
+      setStatus(true);
+      setCode(text.replace(/[^0-9]/g, ""));
+    };
   };
 
   return (
@@ -35,16 +55,26 @@ const VerifyCode = ({ navigation }) => {
                 style={styles.icons}
               />
               <TextInput
+                maxLength={6}
+                keyboardType="numeric"
                 style={styles.input}
-                placeholder="Verify code"
-                value={verifyCode}
-                onChangeText={(text) => setVerifyCode(text)}
+                placeholder="Nhập mã xác thực"
+                value={code}
+                onChangeText={handleOnchange()}
               />
             </View>
+            <Text style={{ color: red, textAlign: "center" }}>
+              {status !== true ? status : ""}
+            </Text>
+            {isLoading ? (
+              <ActivityIndicator size="small" color={mainGreen} />
+            ) : (
+              <></>
+            )}
           </View>
           <TouchableOpacity
             style={styles["continue-button"]}
-            onPress={() => handleVerify()}
+            onPress={() => handleSubmit()}
           >
             <Text style={styles["continue-text"]}>Tiếp tục</Text>
           </TouchableOpacity>
