@@ -73,6 +73,17 @@ export default GlobalUserProvider = ({ children }) => {
       }
     }
   };
+
+  const verifyCode = async (code) => {
+    try {
+      await api.checkVerifyCode(code);
+      return true;
+    } catch (error) {
+      if (!error.response.data.success) {
+        return error.response.data.data;
+      }
+    }
+  };
   // const getListExams = async (token) => {
   //   try {
   //     const data = api.getExams(token);
@@ -150,6 +161,7 @@ export default GlobalUserProvider = ({ children }) => {
         getUser,
         logout,
         retrieveToken,
+        verifyCode,
       }}
     >
       {children}

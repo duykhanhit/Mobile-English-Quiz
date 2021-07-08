@@ -16,6 +16,7 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   login_block: {
+    padding: "5%",
     backgroundColor: "#fff",
     zIndex: 3,
     borderRadius: 12,
@@ -37,7 +38,6 @@ const styles = StyleSheet.create({
     fontSize: 32,
     textAlign: "center",
     marginTop: 19,
-    marginBottom: 25.64,
   },
   input: {
     backgroundColor: "#E4EBF1",
