@@ -1,4 +1,12 @@
-import React, { useState, useEffect, useContext, useRef, useMemo, createRef, useCallback } from "react";
+import React, {
+  useState,
+  useEffect,
+  useContext,
+  useRef,
+  useMemo,
+  createRef,
+  useCallback,
+} from "react";
 import {
   View,
   Text,
@@ -12,6 +20,7 @@ import {
   TouchableHighlight,
   Keyboard,
   StatusBar,
+  ActivityIndicator
 } from "react-native";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import BottomSheet from "react-native-bottomsheet-reanimated";
@@ -24,19 +33,19 @@ import moment from "moment";
 
 import styles from "./styles";
 import avatar from "../../assets/avatar.jpg";
-import background from "../../assets/background.jpg";
 import * as colors from "../../assets/colors";
 import { UserContext } from "../../contexts/GlobalState/GlobaleUserState";
+import { Alert } from "react-native";
 
 const SettingScreen = ({ navigation }) => {
-  const { userState, getUser, logout } = useContext(UserContext);
+  const { userState, updateUser, logout } = useContext(UserContext);
   const [focusInput, setFocusInput] = useState(false);
   // let bs = React.createRef();
-  let fall = new Animated.Value(1);
+  // let fall = new Animated.Value(1);
 
   //
   const bottomSheetRef = createRef();
-  const snapPoints = useMemo(() => ['0%', '50%'], []);
+  const snapPoints = useMemo(() => ["0%", "50%"], []);
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -48,6 +57,10 @@ const SettingScreen = ({ navigation }) => {
     date: new Date(),
     open: false,
   });
+  const [errorUserName, setErrorUserName] = useState(false);
+  const [errorEmail, setErrorEmail] = useState(false);
+  const [isFocus, setIsFocus] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (!_.isEmpty(userState.me)) {
@@ -60,16 +73,17 @@ const SettingScreen = ({ navigation }) => {
           ? new Date(userState.me.data.birthday)
           : new Date(),
       });
+      setImage(`http://13.229.240.165:3000${userState.me.data.avatar}`);
     }
   }, [userState]);
 
-  const callBack = (image) => {
-    setImage(image);
-  };
+  useEffect(() => {
+    isLoading && setTimeout(() => setIsLoading(false), 3000)
+  }, [isLoading])
 
   const takePhotoFromCamera = () => {
     navigation.navigate("CameraScreen", {
-      callBack: callBack,
+      setImage,
     });
   };
 
@@ -81,7 +95,25 @@ const SettingScreen = ({ navigation }) => {
       quality: 1,
     });
     if (!result.cancelled) {
+      // console.log(result);
       setImage(result.uri);
+    }
+  };
+
+  const handleCancelEdit = () => {
+    setEdit(!edit);
+    setDisable(!disable);
+    if (!_.isEmpty(userState.me)) {
+      setName(userState.me.data.name);
+      setEmail(userState.me.data.email);
+      setGender(userState.me.data.gender);
+      setDate({
+        ...date,
+        date: !_.isEmpty(userState.me.data?.birthday)
+          ? new Date(userState.me.data.birthday)
+          : new Date(),
+      });
+      setImage(`http://13.229.240.165:3000${userState.me.data.avatar}`);
     }
   };
 
@@ -116,6 +148,63 @@ const SettingScreen = ({ navigation }) => {
     );
   };
 
+  const re =
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+  const handleUpdateUser = () => {
+    if(errorUserName || errorEmail) {
+      Alert.alert("Bạn cần nhập đúng yêu cầu!");
+      return;
+    }
+    setEdit(!edit);
+    setDisable(!disable);
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("email", email);
+    formData.append("gender", gender);
+    formData.append("birthday", moment(date.date).format("YYYY/MM/DD"));
+    formData.append("avatar", {
+      uri: image,
+      name: `${userState.me.data._id}.jpg`,
+      type: "image/jpeg",
+    });
+    !_.isEmpty(userState.dataToken) &&
+      updateUser(formData, userState.dataToken.token);
+    setIsLoading(true);
+  };
+
+  const Error = ({ error }) => {
+    return (
+      <View style={styles.errorContainer}>
+        <Text style={styles.textError}>{error}</Text>
+      </View>
+    );
+  };
+
+  const handleEndEditingName = () => {
+    if (_.isEmpty(name)) {
+      setErrorUserName(true);
+    } else {
+      setErrorUserName(false);
+    }
+    setIsFocus(false);
+  };
+
+  const handleEndEditingEmail = () => {
+    if (!re.test(String(email).toLowerCase())) {
+      setErrorEmail(true);
+    } else {
+      setErrorEmail(false);
+    }
+    setIsFocus(false)
+  };
+
+
+  if(isLoading) 
+    return (<View style={{ justifyContent: "center", width: "100%", flex: 1 }}>
+    <ActivityIndicator size="small" color={colors.mainGreen} />
+  </View>)
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <KeyboardAvoidingView
@@ -141,24 +230,14 @@ const SettingScreen = ({ navigation }) => {
                 </TouchableOpacity>
               ) : (
                 <View style={styles.closeAndCheckContain}>
-                  <TouchableOpacity
-                    onPress={() => {
-                      setEdit(!edit);
-                      setDisable(!disable);
-                    }}
-                  >
+                  <TouchableOpacity onPress={() => handleCancelEdit()}>
                     <MaterialIcon
                       name="close"
                       size={26}
                       color={colors.darkGreen}
                     />
                   </TouchableOpacity>
-                  <TouchableOpacity
-                    onPress={() => {
-                      setEdit(!edit);
-                      setDisable(!disable);
-                    }}
-                  >
+                  <TouchableOpacity onPress={() => !isFocus && handleUpdateUser()}>
                     <MaterialIcon
                       name="check"
                       size={26}
@@ -191,18 +270,26 @@ const SettingScreen = ({ navigation }) => {
               <View style={styles.inforContainer}>
                 <Text style={styles.lableInput}>Họ và tên</Text>
                 <TextInput
+                  onFocus={() => setIsFocus(true)}
+                  onEndEditing={() => handleEndEditingName()}
                   value={name}
                   onChangeText={(text) => setName(text)}
                   editable={disable}
                   style={styles.input}
                 />
+                {errorUserName && <Error error="Tên không được để trống!" />}
                 <Text style={styles.lableInput}>Email</Text>
                 <TextInput
+                  onFocus={() => setIsFocus(true)}
+                  onEndEditing={() => handleEndEditingEmail()}
                   value={email}
                   onChangeText={(text) => setEmail(text)}
                   editable={disable}
                   style={styles.input}
                 />
+                {errorEmail && (
+                  <Error error="Vui lòng nhập đúng định dạng email!" />
+                )}
                 <View
                   style={{
                     flexDirection: "row",
@@ -214,7 +301,6 @@ const SettingScreen = ({ navigation }) => {
                   <View style={styles.genderContainer}>
                     <TouchableOpacity
                       onPress={() => {
-                  
                         edit && setGender("male");
                       }}
                       style={{ flexDirection: "row", alignItems: "center" }}
@@ -230,7 +316,6 @@ const SettingScreen = ({ navigation }) => {
                     </TouchableOpacity>
                     <TouchableOpacity
                       onPress={() => {
-                  
                         edit && setGender("female");
                       }}
                       style={{ flexDirection: "row", alignItems: "center" }}
@@ -241,7 +326,6 @@ const SettingScreen = ({ navigation }) => {
                         value="female"
                         status={gender === "female" ? "checked" : "unchecked"}
                         onPress={() => {
-                    
                           edit && setGender("female");
                         }}
                       />
@@ -256,7 +340,6 @@ const SettingScreen = ({ navigation }) => {
                     { justifyContent: "center", fontSize: 16 },
                   ]}
                   onPress={() => {
-              
                     disable &&
                       setDate({
                         ...date,
@@ -264,16 +347,10 @@ const SettingScreen = ({ navigation }) => {
                       });
                   }}
                 >
-                  <Text>
-                    {/* {date.date
-                      ? date.date
-                          .toLocaleString()
-                          .slice(date.date.toLocaleString().indexOf(",") + 2)
-                      : ""} */}
-                    {moment(date.date).format("DD MMMM YYYY")}
-                  </Text>
+                  <Text>{moment(date.date).format("DD/MM/YYYY")}</Text>
                 </TouchableOpacity>
                 <DateTimePickerModal
+                  maximumDate={new Date()}
                   date={date.date}
                   mode="date"
                   isVisible={date.open}
@@ -308,12 +385,12 @@ const SettingScreen = ({ navigation }) => {
             <BottomSheet
               bottomSheerColor="#FFFFFF"
               ref={bottomSheetRef}
-              initialPosition={'0%'}
+              initialPosition={"0%"}
               snapPoints={snapPoints}
               isBackDrop={true}
               isBackDropDismissByPress={true}
               isRoundBorderWithTipHeader={true}
-              containerStyle={{background: '#fff'}}
+              containerStyle={{ background: "#fff" }}
               body={renderContent()}
             />
           </View>

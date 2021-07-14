@@ -72,7 +72,8 @@ export default StyleSheet.create({
   },
   lableInput: {
     fontWeight: "700",
-    color: colors.darkGreen
+    color: colors.darkGreen,
+    marginTop: 15
   },
   genderContainer: {
     flex: 1, 
@@ -90,7 +91,6 @@ export default StyleSheet.create({
     fontSize: 18,
     height: 50,
     paddingHorizontal: 15,
-    marginBottom: 15,
     // fontFamily: "SwissCondensed"
   },
   buttonContainer: {
@@ -180,4 +180,11 @@ export default StyleSheet.create({
     justifyContent: 'space-around',
     marginBottom: 60
   },
+  errorContainer: {
+    width: "100%",
+  },
+  textError: {
+    color: "red",
+    fontSize: 12
+  }
 });

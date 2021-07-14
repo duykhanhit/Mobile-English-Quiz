@@ -25,6 +25,7 @@ export default GlobalUserProvider = ({ children }) => {
       }
     } catch (error) {
       if (!error.response.data.success) {
+        console.log("userLogin Error: ", error);
         return false;
       }
     }
@@ -40,6 +41,7 @@ export default GlobalUserProvider = ({ children }) => {
         });
       }
     } catch (error) {
+      console.log("userRegister Error: ", error);
       if (error.response.data.data === "Duplicate value") {
         alert("Email đã tồn tại, vui lòng đăng ký bằng tài khoản khác");
       }
@@ -54,6 +56,7 @@ export default GlobalUserProvider = ({ children }) => {
       });
       return true;
     } catch (error) {
+      console.log("forgotPasswordUser Error: ", error);
       if (!error.response.data.success) {
         return false;
       }
@@ -68,6 +71,7 @@ export default GlobalUserProvider = ({ children }) => {
         payload: data,
       });
     } catch (error) {
+      console.log("verifyCodeUser Error: ", error);
       return false;
     }
   };
@@ -82,22 +86,6 @@ export default GlobalUserProvider = ({ children }) => {
       }
     }
   };
-  // const getListExams = async (token) => {
-  //   try {
-  //     const data = api.getExams(token);
-  //     console.log("data", data);
-  //     dispatch({
-  //       type: types.GET_EXAMS,
-  //       payload: data,
-  //     });
-  //   } catch (error) {
-  //     console.log(error.responses);
-  //     dispatch({
-  //       type: types.GET_EXAMS,
-  //       payload: error.responses,
-  //     });
-  //   }
-  // };
 
   const getUser = async (token) => {
     try {
@@ -111,7 +99,7 @@ export default GlobalUserProvider = ({ children }) => {
         console.log(res?.data.data);
       }
     } catch (error) {
-      console.log(error);
+      console.log("getUser Error", error);
     }
   };
 
@@ -122,7 +110,7 @@ export default GlobalUserProvider = ({ children }) => {
         type: types.LOGOUT,
       });
     } catch (error) {
-      console.log(error);
+      console.log("logout Error", error);
     }
   };
 
@@ -145,8 +133,26 @@ export default GlobalUserProvider = ({ children }) => {
           await AsyncStorage.removeItem("dataToken");
         }
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log("retrieveToken Error: ", error);
+    }
   };
+
+  const updateUser = async (formdata, token) => {
+    try {
+      const res = await api.updateUser(formdata, token);
+      if(res?.data.success) {
+        dispatch({
+          type: types.UPDATE_USER,
+          payload: res?.data
+        });
+      } else {
+        console.log("res", res);
+      }
+    } catch (error) {
+      console.log("updateUser Error: ", error);
+    }
+  }
   return (
     <UserContext.Provider
       value={{
@@ -160,6 +166,7 @@ export default GlobalUserProvider = ({ children }) => {
         logout,
         retrieveToken,
         verifyCode,
+        updateUser
       }}
     >
       {children}
