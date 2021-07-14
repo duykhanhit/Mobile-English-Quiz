@@ -79,3 +79,12 @@ export const checkVerifyCode = (data) =>
       "Content-Type": "application/json",
     },
   });
+
+export const updateUser = (formdata, token) => {
+  return axios.put(`${baseUrl}/api/auth/update-details`, formdata, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+      Authorization: `Bearer ${token}`,
+    },
+  })
+}

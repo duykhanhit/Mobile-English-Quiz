@@ -9,3 +9,5 @@ export const VERIFY_CODE = "VERIFY_CODE";
 export const GET_LIST_EXAM = "GET_LIST_EXAM";
 export const GET_USER = "GET_USER";
 export const LOGOUT = "LOGOUT";
+export const UPDATE_USER = "UPDATE_USER"
+export const IS_LOADING = "IS_LOADING"

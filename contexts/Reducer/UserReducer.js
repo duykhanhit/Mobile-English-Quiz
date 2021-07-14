@@ -18,7 +18,11 @@ export default UserReducer = (prevState, action) => {
       return { ...prevState, me: {...action.payload} };
     case types.LOGOUT: 
     // console.log({...prevState});
-    return {...prevState, dataToken: { success: false, token: ""}}
+      return {...prevState, dataToken: { success: false, token: ""}}
+    case types.UPDATE_USER:
+      return {...prevState, me: {...action.payload}};
+    case types.IS_LOADING:
+      return {...prevState}
     default:
       return { ...prevState };
   }

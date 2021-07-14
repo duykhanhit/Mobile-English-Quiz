@@ -26,7 +26,7 @@ export default GlobalExamProvider = ({ children }) => {
         console.log(res?.data.data);
       }
     } catch (error) {
-      console.log(error);
+      console.log("getExam Error: ", error);
     }
   };
 
@@ -42,7 +42,7 @@ export default GlobalExamProvider = ({ children }) => {
         console.log(res?.data.data);
       }
     } catch (error) {
-      console.log(error);
+      console.log("submitAnswer Error: ", error);
     }
   };
 
@@ -58,7 +58,7 @@ export default GlobalExamProvider = ({ children }) => {
         console.log(res?.data.data);
       }
     } catch (error) {
-      console.log(error.responses);
+      console.log("getResult Error", error);
     }
   };
   const listExams = async (token) => {
@@ -69,7 +69,7 @@ export default GlobalExamProvider = ({ children }) => {
         payload: data,
       });
     } catch (error) {
-      console.log("abc: ",error.response.data);
+      console.log("listExams Error: ", error);
       dispatch({
         type: types.GET_LIST_EXAM,
         payload: error.response.data,

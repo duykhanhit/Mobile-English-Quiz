@@ -19,7 +19,7 @@ const CameraScreen = ({ navigation, route }) => {
   //   LogBox.ignoreAllLogs();
   // }, [])
   
-  const { callBack } = route.params;
+  const { setImage } = route.params;
   
   const cam = useRef();
   
@@ -45,10 +45,11 @@ const CameraScreen = ({ navigation, route }) => {
       const options = { quality: 0.5, base64: true, skipProcessing: false};
       try {     
         let photo = await cam.current.takePictureAsync(options);
+        console.log(photo.uri);
         const source = photo.uri;
   
         if(source) {
-          callBack(source);
+          setImage(source);
           navigation.goBack();
         }
       } catch (error) {
