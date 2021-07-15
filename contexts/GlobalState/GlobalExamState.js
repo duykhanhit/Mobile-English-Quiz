@@ -7,6 +7,7 @@ const initialState = {
   exam: {},
   result: {},
   list_exams: [],
+  list_exam_history: {}
 };
 
 export const ExamContext = createContext(initialState);
@@ -76,6 +77,20 @@ export default GlobalExamProvider = ({ children }) => {
       });
     }
   };
+
+  const getExamHistory = async (token) => {
+    try {
+      const res = await api.getExamHistory( token);
+      if (res?.data.success) {
+        dispatch({
+          type: types.GET_HISTORY_EXAM,
+          payload: res?.data,
+        });
+      }
+    } catch (error) {
+      console.log("getExamHistory Error: ", error);
+    }
+  }
   return (
     <ExamContext.Provider
       value={{
@@ -87,6 +102,7 @@ export default GlobalExamProvider = ({ children }) => {
         submitAnswer,
         getResult,
         listExams,
+        getExamHistory
       }}
     >
       {children}

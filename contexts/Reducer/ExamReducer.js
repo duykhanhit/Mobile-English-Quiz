@@ -10,6 +10,8 @@ export default ExamReducer = (prevState, action) => {
       return { ...prevState, result: { ...action.payload } };
     case types.GET_LIST_EXAM:
       return { ...prevState, list_exams: [...action.payload.data] };
+    case types.GET_HISTORY_EXAM:
+      return {...prevState, list_exam_history: {...action.payload}}
     default:
       return { ...prevState };
   }

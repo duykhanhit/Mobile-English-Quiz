@@ -4,49 +4,57 @@ import * as colors from "../../assets/colors";
 export default StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "#4F4789"
   },
-  viewHeader: {
-    width: "100%",
-    height: 88,
-    backgroundColor: colors.yellow,
-    borderBottomRightRadius: 12,
-    borderBottomLeftRadius: 12,
-    justifyContent: "flex-end",
-  },
-  viewTitle: {
+  title: {
+    fontSize: 25,
     fontWeight: "700",
-    fontSize: 29,
-    color: "#fff",
-    textAlign: "center",
-    marginBottom: 14,
+    marginTop: 30,
+    paddingHorizontal: 20,
+    color: "#FFFDED"
   },
-  viewListQuestion: {
-    alignItems: "center",
+  containerScrollView: {
+    flex: 1,
+    padding: 15,
   },
-  examBlog: {
-    width: "94%",
-    height: 114,
-    padding: 18,
-    backgroundColor: "#E4EBF1",
+  examedItem: {
+    backgroundColor: "#FFFDED",
+    borderRadius: 5,
+    padding: 10,
     flexDirection: "row",
-    marginTop: 18,
+    marginTop: 15,
+    shadowColor: "#000",
+    shadowOffset: {width: 0, height: 0},
+    shadowOpacity: .2
   },
-  customTextBlog: {
-    marginLeft: 20,
-    flexDirection: "column",
-    justifyContent: "space-between",
+  rightItem: {
+    paddingLeft: 20,
+    flex: 1,
+    flexDirection: 'row'
   },
-  titleTextBlog: {
-    color: "#0A52A8",
-    fontStyle: "normal",
-    fontWeight: "bold",
-    fontSize: 20,
-    lineHeight: 24,
+  leftItem: {
+    borderLeftWidth: 5,
+    borderRadius: 5,
   },
-  commonTextBlog: {
-    fontStyle: "normal",
-    fontWeight: "bold",
-    fontSize: 15,
-    lineHeight: 18,
+  examName: {
+    fontSize: 18,
+    fontWeight: "700",
+    paddingLeft: 20,
+    opacity: .75,
   },
+  examType: {
+    fontWeight: "500", 
+    opacity: .5
+  },
+  correctNumber: {
+    fontWeight: "500",
+    fontSize: 24,
+  },
+  perNumber: {
+    fontSize: 18
+  },
+  dateExam: {
+    fontWeight: "500",
+    opacity: .5
+  }
 });

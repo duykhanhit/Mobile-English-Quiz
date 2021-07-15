@@ -25,8 +25,8 @@ export default StyleSheet.create({
     padding: 18, 
     top: -20, 
     borderRadius: 200, 
-    shadowColor: '#fff', 
-    shadowOffset: {width: 0, height: 0},
-    shadowOpacity: .6
+    // shadowColor: '#fff', 
+    // shadowOffset: {width: 0, height: 0},
+    // shadowOpacity: .6
   }
 });

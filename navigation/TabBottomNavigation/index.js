@@ -84,7 +84,7 @@ const TabBottomNavigation = ({ navigation }) => {
           backgroundColor: colors.mainGreen,
           borderRadius: 10,
           height: 60,
-          ...styles.shadow,
+          // ...styles.shadow, 
         },
       }}
     >

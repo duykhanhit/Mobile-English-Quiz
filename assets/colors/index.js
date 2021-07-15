@@ -4,3 +4,6 @@ export const lightGreen = "#41e5c4";
 export const red = "#d81e44";
 export const yellow = "#e6c74b";
 export const greenAnswer = "#4ee129";
+export const warning = "#cc3300";
+export const safe = "#ffcc00";
+export const good = "#339900";

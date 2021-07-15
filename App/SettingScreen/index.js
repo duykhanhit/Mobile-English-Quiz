@@ -40,9 +40,6 @@ import { Alert } from "react-native";
 const SettingScreen = ({ navigation }) => {
   const { userState, updateUser, logout } = useContext(UserContext);
   const [focusInput, setFocusInput] = useState(false);
-  // let bs = React.createRef();
-  // let fall = new Animated.Value(1);
-
   //
   const bottomSheetRef = createRef();
   const snapPoints = useMemo(() => ["0%", "50%"], []);
@@ -201,7 +198,7 @@ const SettingScreen = ({ navigation }) => {
 
 
   if(isLoading) 
-    return (<View style={{ justifyContent: "center", width: "100%", flex: 1 }}>
+    return (<View style={{ justifyContent: "center", width: "100%", flex: 1, backgroundColor: "#FFFDED" }}>
     <ActivityIndicator size="small" color={colors.mainGreen} />
   </View>)
 

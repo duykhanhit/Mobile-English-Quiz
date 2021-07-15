@@ -3,6 +3,7 @@ import { mainGreen } from "../../assets/colors/index";
 export default StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "#FFFDED"
   },
   "view-header": {
     width: "100%",
