@@ -11,3 +11,5 @@ export const GET_USER = "GET_USER";
 export const LOGOUT = "LOGOUT";
 export const UPDATE_USER = "UPDATE_USER"
 export const IS_LOADING = "IS_LOADING"
+export const GET_HISTORY_EXAM = "GET_HISTORY_EXAM"
+export const GET_EXAMED = "GET_EXAMED"

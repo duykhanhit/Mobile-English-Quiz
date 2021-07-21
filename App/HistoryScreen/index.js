@@ -1,69 +1,72 @@
-import React, { createRef } from "react";
-import {
-  TouchableOpacity,
-  View,
-  Text,
-  StatusBar,
-  ScrollView,
-  Image
-} from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import React, { createRef, useContext, useEffect } from "react";
+import { View, Text, ScrollView, SafeAreaView, TouchableOpacity } from "react-native";
+import _ from "lodash";
+import moment from "moment";
 
 import * as colors from "../../assets/colors";
 import styles from "./styles";
-
-const examItem = () => {
-  const navigation = useNavigation();
-
-  return (
-    <TouchableOpacity
-      style={styles.examBlog}
-      onPress={() => {
-        navigation.navigate("ExanScreen");
-      }}
-    >
-      <Image
-        source={require("../../assets/avatar_image.png")}
-        style={{ width: 72.14, height: 87 }}
-      />
-      <View style={styles.customTextBlog}>
-        <Text style={styles.titleTextBlog}>
-          Tên đề: Tiếng Anh Công Nghệ Thông Tin...
-        </Text>
-        <Text style={styles.commonTextBlog}>Loại đề: ABC</Text>
-        <Text style={styles.commonTextBlog}>Ngày tạo: 24/06/2021</Text>
-      </View>
-    </TouchableOpacity>
-  );
-};
+import { ExamContext } from "../../contexts/GlobalState/GlobalExamState";
+import { UserContext } from "../../contexts/GlobalState/GlobaleUserState";
 
 const HistoryScreen = ({ navigation }) => {
+  const { examState, getExamHistory } = useContext(ExamContext);
+  const { userState } = useContext(UserContext);
+
+  const listExamHistory = examState.list_exam_history;
+
+  
+
+  useEffect(() => {
+    !_.isEmpty(userState.dataToken) &&
+      getExamHistory(userState.dataToken.token);
+  }, [userState.dataToken]);
 
   return (
-    <View style={styles.container}>
-      <StatusBar animated={true} barStyle="dark-content" hidden={false} />
-      <View style={styles.viewHeader}>
-        <Text style={styles.viewTitle}>Danh sách đề đã thi</Text>
+    <SafeAreaView style={styles.container}>
+      <View
+        style={{
+          borderBottomWidth: 2,
+          borderBottomColor: "#FFFDED",
+        }}
+      >
+        <Text style={styles.title}>Danh sách đề đã thi</Text>
       </View>
-      <ScrollView style={styles.container}>
-        <View style={styles.viewListQuestion}>
-          {examItem()}
-          {examItem()}
-          {examItem()}
-          {examItem()}
-          {examItem()}
-          {examItem()}
-          {examItem()}
-          {examItem()}
-          {examItem()}
-          {examItem()}
-          {examItem()}
-          {examItem()}
-          {examItem()}
-          {examItem()}
-        </View>
+      <ScrollView style={styles.containerScrollView}>
+        {!_.isEmpty(listExamHistory.data) &&
+          listExamHistory.data.map((item, index) => {
+            const color = item.countCorrect <=5 ? colors.warning : item.countCorrect <=15 ? colors.safe : colors.good;
+            return (
+            <TouchableOpacity onPress={() => navigation.navigate("ExamHistoryScreen", {id: item._id})} key={index} style={styles.examedItem}>
+              <View style={[styles.leftItem, {borderColor: color}]}></View>
+              <View style={{ flex: 1, flexDirection: "column" }}>
+                <Text style={styles.examName}>{item.exam_id.name}</Text>
+                <View style={styles.rightItem}>
+                  <View>
+                    <Text style={styles.examType}>
+                      Loại đề: {item.exam_id.type}
+                    </Text>
+                    <Text style={styles.dateExam}>
+                      Ngày tạo: {moment(item.createdAt).format("DD/MM/YYYY")}
+                    </Text>
+                  </View>
+                  <View
+                    style={{
+                      flex: 1,
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    <Text style={[styles.correctNumber, {color: color}]}>
+                      {item.countCorrect}/
+                      <Text style={[styles.perNumber, {color: colors.mainGreen}]}>20</Text>
+                    </Text>
+                  </View>
+                </View>
+              </View>
+            </TouchableOpacity>
+          )})}
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 };
 

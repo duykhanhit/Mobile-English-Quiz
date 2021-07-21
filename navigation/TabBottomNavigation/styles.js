@@ -18,15 +18,15 @@ export default StyleSheet.create({
   },
   customButton: { 
     borderWidth: 2, 
-    borderColor: colors.lightGreen, 
+    borderColor: "#98A6D4", 
     justifyContent: 'center', 
-    backgroundColor: colors.darkGreen, 
+    backgroundColor: "#44344F", 
     position: 'absolute', 
     padding: 18, 
     top: -20, 
     borderRadius: 200, 
-    shadowColor: '#fff', 
-    shadowOffset: {width: 0, height: 0},
-    shadowOpacity: .6
+    // shadowColor: '#fff', 
+    // shadowOffset: {width: 0, height: 0},
+    // shadowOpacity: .6
   }
 });

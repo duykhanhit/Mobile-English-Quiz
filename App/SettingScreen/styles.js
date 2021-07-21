@@ -26,6 +26,7 @@ export default StyleSheet.create({
     width: "100%",
     alignItems: "center",
     paddingHorizontal: 20,
+    backgroundColor: "#FFFDED"
     // marginTop: -130,
   },
   buttonEdit: {
@@ -73,7 +74,7 @@ export default StyleSheet.create({
   lableInput: {
     fontWeight: "700",
     color: colors.darkGreen,
-    marginTop: 15
+    marginTop: 15,
   },
   genderContainer: {
     flex: 1, 
@@ -86,7 +87,7 @@ export default StyleSheet.create({
     color: colors.darkGreen
   },
   input: {
-    borderColor: colors.darkGreen,
+    borderColor: "#999",
     borderWidth: 2,
     fontSize: 18,
     height: 50,

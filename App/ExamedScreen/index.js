@@ -3,8 +3,6 @@ import { View, Text, Image, SafeAreaView, TouchableOpacity, BackHandler, Alert }
 import { ExamContext } from "../../contexts/GlobalState/GlobalExamState";
 
 import styles from "./styles";
-import avatar from "../../assets/avatar.jpg";
-import * as colors from '../../assets/colors';
 import _ from 'lodash';
 import { UserContext } from "../../contexts/GlobalState/GlobaleUserState";
 
@@ -16,11 +14,6 @@ const ExamedScreen = ({ navigation, route }) => {
   useEffect(() => {
     const backAction = () => {
       Alert.alert("Thông báo", "Bạn không thể quay lại!", [
-        // {
-        //   text: "Hủy",
-        //   onPress: () => {},
-        //   style: "cancel",
-        // },
         {
           text: "Đồng ý",
           onPress: () => {}
@@ -48,7 +41,7 @@ const ExamedScreen = ({ navigation, route }) => {
           <Text style={styles.congratulations}>Bạn đã hoàn thành bài thi</Text>
         </View>
         <View style={styles.avatar}>
-          <Image source={avatar} style={styles.image} />
+          <Image source={{uri: `http://13.229.240.165:3000${userState.me.data.avatar}`}} style={styles.image} />
         </View>
         <View style={styles.score}>
           <Text style={styles.textPoint}>Điểm số</Text>

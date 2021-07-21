@@ -88,3 +88,21 @@ export const updateUser = (formdata, token) => {
     },
   })
 }
+
+export const getExamHistory = (token) => {
+  return axios.get(`${baseUrl}/api/history`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  })
+}
+
+export const getExamed = (id, token) => {
+  return axios.get(`${baseUrl}/api/history/${id}`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  })
+}
