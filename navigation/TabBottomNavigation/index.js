@@ -9,11 +9,11 @@ import * as colors from "../../assets/colors";
 import HomeScreen from "../../App/HomeScreen";
 import SettingScreen from "../../App/SettingScreen";
 import HistoryScreen from "../../App/HistoryScreen";
+import HistoryStack from '../HistoryStack';
 
 import styles from "./styles";
 
 const buttonSize = new Animated.Value(1);
-// const mode = new Animated.Value(0);
 
 const handlePress = () => {
   Animated.sequence([
@@ -26,10 +26,6 @@ const handlePress = () => {
       toValue: 1,
       useNativeDriver: true,
     }),
-    // Animated.timing(mode, {
-    //   toValue: mode._value === 0 ? 1 : 0,
-    //   useNativeDriver: false,
-    // }),
   ]).start();
 };
 const CustomTabBarButton = () => {
@@ -39,26 +35,19 @@ const CustomTabBarButton = () => {
     transform: [{ scale: buttonSize }],
   };
 
-  // const spin = mode.interpolate({
-  //   inputRange: [0, 1],
-  //   outputRange: ["0deg", "-270deg"],
-  // });
-
   return (
     <View style={styles.buttonHistory}>
       <Animated.View style={[styles.customButton, sizeStyle]}>
         <TouchableOpacity
           onPress={() => {
             handlePress();
-            navigation.navigate("HistoryScreen");
+            navigation.navigate("HistoryStack");
           }}
         >
-          <Animated.View 
-          // style={[{ transform: [{ rotate: spin }]}]}
-          >
+          <Animated.View >
             <MaterialCommunityIcons
               name="history"
-              color={colors.lightGreen}
+              color="#98A6D4"
               size={26}
             />
           </Animated.View>
@@ -81,9 +70,10 @@ const TabBottomNavigation = ({ navigation }) => {
           bottom: 10,
           left: 10,
           right: 10,
-          backgroundColor: colors.mainGreen,
+          backgroundColor: "#98A6D4",
           borderRadius: 10,
           height: 60,
+          borderTopWidth: 0
           // ...styles.shadow, 
         },
       }}
@@ -95,7 +85,7 @@ const TabBottomNavigation = ({ navigation }) => {
               <MaterialCommunityIcons
                 name="home"
                 size={26}
-                color={focused ? colors.darkGreen : colors.lightGreen}
+                color={focused ? "#44344F" : "#D3FCD5"}
               />
             );
           },
@@ -107,18 +97,17 @@ const TabBottomNavigation = ({ navigation }) => {
         options={{
           tabBarButton: (props) => <CustomTabBarButton {...props} />,
         }}
-        name="HistoryScreen"
-        component={HistoryScreen}
+        name="HistoryStack"
+        component={HistoryStack}
       />
       <Tab.Screen
         options={{
           tabBarIcon: ({ focused }) => {
-            // focused && mode._value === 1 ? handlePress() : null;
             return (
               <MaterialCommunityIcons
                 name="account-cog"
                 size={26}
-                color={focused ? colors.darkGreen : colors.lightGreen}
+                color={focused ? "#44344F" : "#D3FCD5"}
               />
             );
           },

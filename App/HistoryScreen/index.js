@@ -1,5 +1,5 @@
 import React, { createRef, useContext, useEffect } from "react";
-import { View, Text, ScrollView, SafeAreaView } from "react-native";
+import { View, Text, ScrollView, SafeAreaView, TouchableOpacity } from "react-native";
 import _ from "lodash";
 import moment from "moment";
 
@@ -36,7 +36,7 @@ const HistoryScreen = ({ navigation }) => {
           listExamHistory.data.map((item, index) => {
             const color = item.countCorrect <=5 ? colors.warning : item.countCorrect <=15 ? colors.safe : colors.good;
             return (
-            <View key={index} style={styles.examedItem}>
+            <TouchableOpacity onPress={() => navigation.navigate("ExamHistoryScreen", {id: item._id})} key={index} style={styles.examedItem}>
               <View style={[styles.leftItem, {borderColor: color}]}></View>
               <View style={{ flex: 1, flexDirection: "column" }}>
                 <Text style={styles.examName}>{item.exam_id.name}</Text>
@@ -63,7 +63,7 @@ const HistoryScreen = ({ navigation }) => {
                   </View>
                 </View>
               </View>
-            </View>
+            </TouchableOpacity>
           )})}
       </ScrollView>
     </SafeAreaView>

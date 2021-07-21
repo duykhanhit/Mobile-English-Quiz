@@ -89,18 +89,7 @@ const SignIn = ({ navigation }) => {
       gender,
     });
   };
-  // useEffect(() => {
-  //   !!userState &&
-  //     userState.success &&
-  //     navigation.reset({
-  //       index: 0,
-  //       routes: [
-  //         {
-  //           name: "HomeStack",
-  //         },
-  //       ],
-  //     });
-  // }, [userState]);
+
   return (
     <FormAccount>
       <View style={styles.wrapper_container}>

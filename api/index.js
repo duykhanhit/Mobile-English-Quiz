@@ -97,3 +97,12 @@ export const getExamHistory = (token) => {
     },
   })
 }
+
+export const getExamed = (id, token) => {
+  return axios.get(`${baseUrl}/api/history/${id}`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  })
+}

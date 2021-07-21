@@ -18,9 +18,9 @@ export default StyleSheet.create({
   },
   customButton: { 
     borderWidth: 2, 
-    borderColor: colors.lightGreen, 
+    borderColor: "#98A6D4", 
     justifyContent: 'center', 
-    backgroundColor: colors.darkGreen, 
+    backgroundColor: "#44344F", 
     position: 'absolute', 
     padding: 18, 
     top: -20, 

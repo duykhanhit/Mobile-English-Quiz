@@ -18,7 +18,7 @@ export default StyleSheet.create({
   textQuesNumber: {
     fontSize: 24,
     fontWeight: '700',
-    color: colors.mainGreen
+    color: "#9BC53D"
   },
   totalQuesNumber: {
     fontSize: 20,
@@ -30,12 +30,12 @@ export default StyleSheet.create({
     // backgroundColor: 'red',
     flexDirection: 'row'
   },
-  quizBarTouched: {
+  quizBarSuccess: {
     height: 5,
     // width: '100%',
     flex: 1,
     marginHorizontal: 1,
-    backgroundColor: 'green',
+    backgroundColor: '#5BC0EB',
     borderRadius: 2
   },
   quizBar: {
@@ -56,7 +56,7 @@ export default StyleSheet.create({
     maxHeight: 150,
     width: '100%',
     borderRadius: 10,
-    shadowColor: colors.lightGreen,
+    shadowColor: "#9BC53D",
     shadowOffset: { width: 0, height: 0},
     shadowOpacity: .6,
     shadowRadius: 5,
@@ -66,7 +66,7 @@ export default StyleSheet.create({
     borderRadius: 10,
     width: '100%',
     height: '100%',
-    backgroundColor: colors.mainGreen,
+    backgroundColor: "#9BC53D",
     paddingVertical: 20,
   },
   question: {
@@ -93,11 +93,17 @@ export default StyleSheet.create({
   selected: {
     backgroundColor: colors.yellow,
   },
+  answerSuccess : {
+    backgroundColor: "#9BC53D",
+  },
+  selectedSuccess : {
+    backgroundColor: "#5BC0EB"
+  },
   textSelected: {
     color: '#fff'
   },
   footer: {
-    // marginBottom: 80,
+    marginBottom: 80,
     width: '100%',
     flexDirection: 'row',
   },
@@ -105,7 +111,7 @@ export default StyleSheet.create({
     flex: 1,
     height: 50,
     borderWidth: 2,
-    borderColor: colors.mainGreen,
+    borderColor: "#9BC53D",
     borderRadius: 5,
   },
   previous: {
@@ -116,13 +122,13 @@ export default StyleSheet.create({
   textPre:{
     textTransform: 'uppercase',
     fontWeight: '700',
-    color: colors.mainGreen
+    color: "#9BC53D"
   },
   next: {
     justifyContent: 'center',
     alignItems: 'center',
     flex: 1,
-    backgroundColor: colors.mainGreen,
+    backgroundColor: "#9BC53D",
   },
   textNext: {
     color: '#fff',

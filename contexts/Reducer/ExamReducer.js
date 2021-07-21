@@ -11,7 +11,9 @@ export default ExamReducer = (prevState, action) => {
     case types.GET_LIST_EXAM:
       return { ...prevState, list_exams: [...action.payload.data] };
     case types.GET_HISTORY_EXAM:
-      return {...prevState, list_exam_history: {...action.payload}}
+      return {...prevState, list_exam_history: {...action.payload}};
+    case types.GET_EXAMED:
+      return {...prevState, examed: {...action.payload}};
     default:
       return { ...prevState };
   }

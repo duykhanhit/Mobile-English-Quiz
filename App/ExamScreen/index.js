@@ -150,9 +150,9 @@ const ExamScreen = ({ navigation, route }) => {
   }, [listQues[numberQues]]);
 
   useEffect(() => {
-    // setTimeout(() => {
+    setTimeout(() => {
     setDisableSubmit(false);
-    // }, 0);
+    }, 1500);
   }, [numberQues]);
 
   const handleButtonContinute = () => {
