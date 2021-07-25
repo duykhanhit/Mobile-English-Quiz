@@ -48,8 +48,10 @@ const styles = StyleSheet.create({
   },
   input_block: {
     position: "relative",
-    paddingHorizontal: 21,
-    marginBottom: "-5%",
+    paddingHorizontal: 20,
+    marginBottom: 15
+
+    // marginBottom: "-5%",
   },
   text_input: {
     fontWeight: "bold",
@@ -68,7 +70,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: "#A0A0A0",
     paddingLeft: 41,
-    marginBottom: 26.17,
+    // marginBottom: 26.17,
     justifyContent: "center",
   },
   icons: {
@@ -114,6 +116,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     marginBottom: 15,
   },
+  errorContainer: {
+    width: "100%",
+  },
+  textError: {
+    color: "red",
+    fontSize: 12
+  }
 });
 
 export default styles;

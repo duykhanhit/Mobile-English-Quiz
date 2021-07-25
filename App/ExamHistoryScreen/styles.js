@@ -139,5 +139,22 @@ export default StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-end',
     alignItems: 'flex-end'
-  }
+  },
+  // closeIcon: {
+  //   flex: 1,
+  //   justifyContent: 'flex-end',
+  //   alignItems: 'center',
+  //   flexDirection: 'row'
+  // },
+  // timeInterval: {
+  //   color: "#AAC0AA",
+  //   fontWeight: "700",
+  //   fontSize: 16,
+  //   marginRight: 10
+  // },
+  // time: {
+  //   color: "#A18276",
+  //   fontSize: 20,
+  //   fontWeight: "700"
+  // }
 });
