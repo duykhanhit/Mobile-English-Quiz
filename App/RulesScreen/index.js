@@ -42,7 +42,6 @@ const RulesScreen = ({ navigation, route }) => {
                 navigation.dispatch(
                   StackActions.replace('ExamScreen', { id: route.params.id })
                 )
-                // navigation.navigate("ExamScreen", { id: route.params.id})
               }
               style={styles.touch}
             >

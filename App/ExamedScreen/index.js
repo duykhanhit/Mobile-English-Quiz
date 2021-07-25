@@ -5,6 +5,7 @@ import { ExamContext } from "../../contexts/GlobalState/GlobalExamState";
 import styles from "./styles";
 import _ from 'lodash';
 import { UserContext } from "../../contexts/GlobalState/GlobaleUserState";
+import cup from '../../assets/cup.png';
 
 const ExamedScreen = ({ navigation, route }) => {
   
@@ -41,8 +42,10 @@ const ExamedScreen = ({ navigation, route }) => {
           <Text style={styles.congratulations}>Bạn đã hoàn thành bài thi</Text>
         </View>
         <View style={styles.avatar}>
-          <Image source={{uri: `http://13.229.240.165:3000${userState.me.data.avatar}`}} style={styles.image} />
+          <Image source={cup} style={styles.image} />
+
         </View>
+        <Image source={{uri: `http://13.229.240.165:3000${userState.me.data.avatar}`}} style={{width: 75, height: 75, borderRadius: 75, }} />
         <View style={styles.score}>
           <Text style={styles.textPoint}>Điểm số</Text>
           <Text style={styles.point}>
