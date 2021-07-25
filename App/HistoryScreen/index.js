@@ -19,7 +19,7 @@ const HistoryScreen = ({ navigation }) => {
   useEffect(() => {
     !_.isEmpty(userState.dataToken) &&
       getExamHistory(userState.dataToken.token);
-  }, [userState.dataToken]);
+  }, [userState.dataToken, examState.result]);
 
   return (
     <SafeAreaView style={styles.container}>

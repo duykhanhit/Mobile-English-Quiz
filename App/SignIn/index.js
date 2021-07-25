@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext, Button } from "react";
-import { Text, TextInput, TouchableOpacity, View } from "react-native";
+import { Text, TextInput, TouchableOpacity, View,Alert } from "react-native";
 import styles from "./styles";
 import FormAccount from "../../components/FormAccount";
 import { CheckBox } from "react-native-elements";
@@ -8,6 +8,7 @@ import DatetimeIcon from "react-native-vector-icons/Fontisto";
 import CheckIcon from "react-native-vector-icons/MaterialIcons";
 import { UserContext } from "../../contexts/GlobalState/GlobaleUserState";
 import { validateEmail, validatePassword } from "../../validate/validate";
+import _ from "lodash";
 
 const SignIn = ({ navigation }) => {
   const [check, setCheck] = useState(true);
@@ -21,60 +22,74 @@ const SignIn = ({ navigation }) => {
   const [confirmPassword, setComfirmPassword] = useState("");
   const [gender, setGender] = useState("male");
 
-  const [nameValidate, setNameValidate] = useState(true);
-  const [emailValidate, setEmailValidate] = useState(true);
-  const [passwordValidate, setPasswordValidate] = useState(true);
-  const [confirmPasswordValidate, setConfirmPasswordValidate] = useState(true);
+  const [nameValidate, setNameValidate] = useState(false);
+  const [emailValidate, setEmailValidate] = useState(false);
+  const [passwordValidate, setPasswordValidate] = useState(false);
+  const [confirmPasswordValidate, setConfirmPasswordValidate] = useState(false);
 
-  const account = (name) => {
-    return (
-      <MaterialIcon
-        name={name}
-        size={20}
-        color="#A0A0A0"
-        style={styles.icons}
-      />
-    );
-  };
+  const [isFocus, setIsFocus] = useState(false);
 
-  const InputField = (
-    source,
-    placeholder,
-    setState,
-    secureTextEntry,
-    stateValidate,
-    errorText
-  ) => {
+  const re =
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  const rePas = /\S/
+  const Error = ({ error }) => {
     return (
-      <View style={styles.input_block}>
-        {source}
-        <TextInput
-          style={styles.input}
-          placeholder={placeholder}
-          onChangeText={(text) => setState(text)}
-          secureTextEntry={secureTextEntry}
-        />
-        <Text style={styles.textbox_validate}>
-          {!stateValidate ? errorText : null}
-        </Text>
+      <View style={styles.errorContainer}>
+        <Text style={styles.textError}>{error}</Text>
       </View>
     );
   };
 
-  const handleRegister = () => {
-    if (!name || !email || !password || !gender || !confirmPassword) {
-      alert("Vui lòng nhập đầy đủ thông tin");
-      return;
+  const handleEndEditingName = () => {
+    if (_.isEmpty(name.trim())) {
+      setNameValidate(true);
+      return true;
+    } else {
+      setNameValidate(false);
+      return false;
     }
-    if (password !== confirmPassword) {
-      alert("Mật khẩu phải trùng với xác nhận mật khẩu");
-      return;
-    }
+  };
 
-    setEmailValidate(validateEmail(email));
-    setPasswordValidate(validatePassword(password));
-    setConfirmPasswordValidate(validatePassword(confirmPassword));
-    if (!emailValidate || !passwordValidate || !confirmPasswordValidate) {
+  const handleEndEditingEmail = () => {
+    if (!re.test(String(email).toLowerCase())) {
+      setEmailValidate(true);
+      return true;
+    } else {
+      setEmailValidate(false);
+      return false;
+    }
+  };
+
+  const handleEndPassword = () => {
+    if (!rePas.test(password)) {
+      setPasswordValidate(true);
+      return true;
+    }
+    if (password.trim().length < 6) {
+      setPasswordValidate(true);
+      return true;
+    } else {
+      setPasswordValidate(false);
+      return false;
+    }
+  };
+
+  const handleEndConfirmPassword = () => {
+    if (confirmPassword !== password) {
+      setConfirmPasswordValidate(true);
+      return true;
+    } else {
+      setConfirmPasswordValidate(false);
+      return false;
+    }
+  };
+  const handleRegister = () => {
+    if (
+      handleEndEditingName() ||
+      handleEndEditingEmail() ||
+      handleEndPassword() ||
+      handleEndConfirmPassword()
+    ) {
       return;
     }
     if (check === true) {
@@ -96,39 +111,79 @@ const SignIn = ({ navigation }) => {
         <View style={styles.login_block}>
           <Text style={styles.text_input}>ĐĂNG KÝ</Text>
 
-          {InputField(
-            account("user"),
-            "Họ tên",
-            setName,
-            false,
-            nameValidate,
-            "Bạn cần nhập họ tên"
-          )}
-          {InputField(
-            account("mail"),
-            "Email",
-            setEmail,
-            false,
-            emailValidate,
-            "Email cần nhập đúng định dạng"
-          )}
-          {InputField(
-            account("lock"),
-            "Mật khẩu",
-            setPassword,
-            true,
-            passwordValidate,
-            "Mật khẩu cần ít nhất 6 ký tự"
-          )}
+          <View style={styles.input_block}>
+            <MaterialIcon
+              name="user"
+              size={20}
+              color="#A0A0A0"
+              style={styles.icons}
+            />
+            <TextInput
+              
+              onEndEditing={() => handleEndEditingName()}
+              style={styles.input}
+              placeholder="Vui lòng nhập họ tên"
+              onChangeText={(text) => setName(text)}
+              secureTextEntry={false}
+            />
+            {nameValidate && <Error error="Họ tên không được để trống!" />}
+          </View>
 
-          {InputField(
-            account("lock"),
-            "Nhập lại mật khẩu",
-            setComfirmPassword,
-            true,
-            confirmPasswordValidate,
-            "Xác nhận cần ít nhất 6 ký tự"
-          )}
+          <View style={styles.input_block}>
+            <MaterialIcon
+              name="mail"
+              size={20}
+              color="#A0A0A0"
+              style={styles.icons}
+            />
+            <TextInput
+              
+              onEndEditing={() => handleEndEditingEmail()}
+              style={styles.input}
+              placeholder="Vui lòng nhập email"
+              onChangeText={(text) => setEmail(text)}
+              secureTextEntry={false}
+            />
+            {emailValidate && (
+              <Error error="Vui lòng nhập đúng định dạng email!" />
+            )}
+          </View>
+          <View style={styles.input_block}>
+            <MaterialIcon
+              name="lock"
+              size={20}
+              color="#A0A0A0"
+              style={styles.icons}
+            />
+            <TextInput
+              style={styles.input}
+              placeholder="Vui lòng nhập mật khẩu"
+              onChangeText={(text) => setPassword(text)}
+              secureTextEntry={true}
+              
+              onEndEditing={() => handleEndPassword()}
+            />
+            {passwordValidate && <Error error="Mật khẩu ít nhất 6 ký tự và không chứa dấu cách!" />}
+          </View>
+          <View style={styles.input_block}>
+            <MaterialIcon
+              name="lock"
+              size={20}
+              color="#A0A0A0"
+              style={styles.icons}
+            />
+            <TextInput
+              style={styles.input}
+              placeholder="Vui lòng nhập lại mật khẩu"
+              onChangeText={(text) => setComfirmPassword(text)}
+              secureTextEntry={true}
+              
+              onEndEditing={() => handleEndConfirmPassword()}
+            />
+            {confirmPasswordValidate && (
+              <Error error="Nhập lại mật khẩu không khớp!" />
+            )}
+          </View>
 
           <View style={styles["checkbox-block"]}>
             <CheckBox

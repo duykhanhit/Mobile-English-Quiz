@@ -19,6 +19,12 @@ import { ExamContext } from "../../contexts/GlobalState/GlobalExamState";
 import { UserContext } from "../../contexts/GlobalState/GlobaleUserState";
 
 const ExamScreen = ({ navigation, route }) => {
+  const [countDownDate, setCountDownDate] = useState(1200000);
+  // const [now, setNow] = useState(0);
+
+  const [minutes, setMinutes] = useState(0);
+  const [seconds, setSeconds] = useState(0);
+
   const id = route.params.id;
   const { getExam, exam, submitAnswer } = useContext(ExamContext);
   const { userState } = useContext(UserContext);
@@ -151,7 +157,7 @@ const ExamScreen = ({ navigation, route }) => {
 
   useEffect(() => {
     setTimeout(() => {
-    setDisableSubmit(false);
+      setDisableSubmit(false);
     }, 1500);
   }, [numberQues]);
 
@@ -203,8 +209,24 @@ const ExamScreen = ({ navigation, route }) => {
     if (!_.isEmpty(exam.data) && numberQues < exam.data.length - 1) {
       setNumberQues(numberQues + 1);
     }
-    // setDisableSubmit(true);
   };
+
+  useEffect(() => {
+    if (countDownDate === 0) {
+      Alert.alert("Thời gian làm bài thi đã hết.");
+      navigation.navigate("ExamedScreen", {
+        resultId: exam.result,
+        totalQuesNumber: !_.isEmpty(exam.data) ? exam.data.length : 0,
+      });
+    } else {
+      setTimeout(() => {
+        var distance = countDownDate - 1000;
+        setCountDownDate(distance);
+        setMinutes(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)));
+        setSeconds(Math.floor((distance % (1000 * 60)) / 1000));
+      }, 1000);
+    }
+  }, [countDownDate]);
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -218,28 +240,35 @@ const ExamScreen = ({ navigation, route }) => {
           <Text style={styles.totalQuesNumber}>
             /{!_.isEmpty(exam.data) && exam.data.length}
           </Text>
-          <TouchableOpacity
-            onPress={() => {
-              Alert.alert("Thông báo", "Bạn chắc chắn muốn thoát?", [
-                {
-                  text: "Hủy",
-                  onPress: () => {},
-                  style: "cancel",
-                },
-                {
-                  text: "Đồng ý",
-                  onPress: () =>
-                    navigation.navigate("ExamedScreen", {
-                      resultId: exam.result,
-                      totalQuesNumber: exam.data.length,
-                    }),
-                },
-              ]);
-            }}
-            style={styles.closeIcon}
-          >
-            <MaterialIcon name="close" color={colors.darkGreen} size={26} />
-          </TouchableOpacity>
+          <View style={styles.closeIcon}>
+            <Text style={styles.timeInterval}>
+              Thời gian còn lại:{" "}
+              <Text style={styles.time}>
+                {minutes}:{seconds}
+              </Text>
+            </Text>
+            <TouchableOpacity
+              onPress={() => {
+                Alert.alert("Thông báo", "Bạn chắc chắn muốn thoát?", [
+                  {
+                    text: "Hủy",
+                    onPress: () => {},
+                    style: "cancel",
+                  },
+                  {
+                    text: "Đồng ý",
+                    onPress: () =>
+                      navigation.navigate("ExamedScreen", {
+                        resultId: exam.result,
+                        totalQuesNumber: exam.data.length,
+                      }),
+                  },
+                ]);
+              }}
+            >
+              <MaterialIcon name="close" color={colors.darkGreen} size={26} />
+            </TouchableOpacity>
+          </View>
         </View>
         <View style={styles.quizsBar}>
           {!_.isEmpty(listQues) &&

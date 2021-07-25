@@ -18,7 +18,9 @@ import { ExamContext } from "../../contexts/GlobalState/GlobalExamState";
 import { UserContext } from "../../contexts/GlobalState/GlobaleUserState";
 import { getExamHistory } from "../../api";
 
+
 const ExamHistoryScreen = ({ navigation, route }) => {
+
   const id = route.params.id;
   // console.log(id);
   const { getExamed, examState, exam } = useContext(ExamContext);
@@ -49,28 +51,28 @@ const ExamHistoryScreen = ({ navigation, route }) => {
 
   const Bar = ({ val, index }) => {
     let indexSelected = -1;
-    for(var i = 0; i < listSelected.length; i++) {
+    for (var i = 0; i < listSelected.length; i++) {
       switch (listSelected[i].answer_id) {
         case val.answers[0]._id:
-          if(val.answers[0].isCorrect) indexSelected = 0;
+          if (val.answers[0].isCorrect) indexSelected = 0;
           break;
         case val.answers[1]._id:
-          if(val.answers[1].isCorrect) indexSelected = 1;
+          if (val.answers[1].isCorrect) indexSelected = 1;
           break;
         case val.answers[2]._id:
-          if(val.answers[2].isCorrect) indexSelected = 2;
+          if (val.answers[2].isCorrect) indexSelected = 2;
           break;
         case val.answers[3]._id:
-          if(val.answers[3].isCorrect) indexSelected = 3;
+          if (val.answers[3].isCorrect) indexSelected = 3;
           break;
         default:
           indexSelected = -1;
           break;
       }
-      if(indexSelected > -1) {
+      if (indexSelected > -1) {
         break;
       }
-    } 
+    }
     return (
       <View
         style={[
