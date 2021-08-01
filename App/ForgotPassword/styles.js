@@ -2,13 +2,6 @@ import { StyleSheet } from "react-native";
 import { mainGreen } from "../../assets/colors/index";
 
 const styles = StyleSheet.create({
-  wrapper_container: {
-    flex: 1,
-    height: "100%",
-    width: "90%",
-    position: "absolute",
-    top: 0,
-  },
   container_block: {
     justifyContent: "center",
     alignItems: "center",
@@ -16,7 +9,8 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   login_block: {
-    padding: 30,
+    width: '80%',
+    padding: '5%',
     backgroundColor: "#fff",
     zIndex: 3,
     borderRadius: 12,
@@ -45,6 +39,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#E4E4E4",
     borderRadius: 10,
+    width: '100%',
     height: 45,
     fontSize: 14,
     color: "#A0A0A0",

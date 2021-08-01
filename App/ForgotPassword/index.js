@@ -6,6 +6,8 @@ import {
   Image,
   TouchableOpacity,
   ActivityIndicator,
+  Platform,
+  Keyboard,
 } from "react-native";
 import FormAccount from "../../components/FormAccount";
 import styles from "./styles";
@@ -64,45 +66,43 @@ const ForgotPassword = ({ navigation }) => {
   };
   return (
     <FormAccount>
-      <View style={styles.wrapper_container}>
-        <View style={styles.container_block}>
-          <View style={styles.login_block}>
-            <Text style={styles["text-title"]}>QUÊN MẬT KHẨU</Text>
-            <View style={styles.input_block}>
-              <MaterialIcon
-                name="mail"
-                size={20}
-                color="#A0A0A0"
-                style={styles.icons}
-              />
-              <TextInput
-                style={styles.input}
-                placeholder="Nhập địa chỉ email"
-                value={email}
-                onChangeText={handleChange()}
-                onBlur={handleBlur()}
-              />
-              <Text style={{ color: red, textAlign: "center" }}>
-                {!emailValidate ? "Email cần nhập đúng định dạng." : ""}
-                {!status ? "Vui lòng nhập email." : ""}
-                {!check ? "Thất bại." : ""}
-              </Text>
-              {isLoading ? (
-                <ActivityIndicator size="small" color={mainGreen} />
-              ) : (
-                <></>
-              )}
-            </View>
+      <View style={styles.container_block}>
+        <View style={styles.login_block}>
+          <Text style={styles["text-title"]}>QUÊN MẬT KHẨU</Text>
+          <View style={styles.input_block}>
+            <MaterialIcon
+              name="mail"
+              size={20}
+              color="#A0A0A0"
+              style={styles.icons}
+            />
+            <TextInput
+              style={styles.input}
+              placeholder="Nhập địa chỉ email"
+              value={email}
+              onChangeText={handleChange()}
+              onBlur={handleBlur()}
+            />
+            <Text style={{ color: red, textAlign: "center" }}>
+              {!emailValidate ? "Email cần nhập đúng định dạng." : ""}
+              {!status ? "Vui lòng nhập email." : ""}
+              {!check ? "Thất bại." : ""}
+            </Text>
+            {isLoading ? (
+              <ActivityIndicator size="small" color={mainGreen} />
+            ) : (
+              <></>
+            )}
           </View>
-          <TouchableOpacity
-            style={styles["continue-button"]}
-            onPress={() => {
-              handleForgot();
-            }}
-          >
-            <Text style={styles["continue-text"]}>TIẾP TỤC</Text>
-          </TouchableOpacity>
         </View>
+        <TouchableOpacity
+          style={styles["continue-button"]}
+          onPress={() => {
+            handleForgot();
+          }}
+        >
+          <Text style={styles["continue-text"]}>TIẾP TỤC</Text>
+        </TouchableOpacity>
       </View>
     </FormAccount>
   );
