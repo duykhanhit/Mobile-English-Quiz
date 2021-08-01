@@ -4,11 +4,10 @@ import { mainGreen, darkGreen } from "../../assets/colors/index";
 const styles = StyleSheet.create({
   wrapper_container: {
     flex: 1,
+    width: "80%",
     height: "100%",
     alignItems: "center",
-    width: "80%",
-    position: "absolute",
-    transform: [{ translateY: 150 }],
+    justifyContent: "center",
   },
   login_block: {
     width: "100%",
@@ -49,7 +48,7 @@ const styles = StyleSheet.create({
   input_block: {
     position: "relative",
     paddingHorizontal: 20,
-    marginBottom: 15
+    marginBottom: 15,
 
     // marginBottom: "-5%",
   },
@@ -121,8 +120,8 @@ const styles = StyleSheet.create({
   },
   textError: {
     color: "red",
-    fontSize: 12
-  }
+    fontSize: 12,
+  },
 });
 
 export default styles;

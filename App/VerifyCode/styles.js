@@ -2,20 +2,13 @@ import { StyleSheet } from "react-native";
 import { mainGreen } from "../../assets/colors/index";
 
 const styles = StyleSheet.create({
-  wrapper_container: {
-    flex: 1,
-    height: "100%",
-    width: "80%",
-    position: "absolute",
-    top: 0,
-  },
   container_block: {
-    justifyContent: "center",
-    alignItems: "center",
-    height: "100%",
-    width: "100%",
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'yellow'
   },
   login_block: {
+    width: "80%",
     padding: "5%",
     backgroundColor: "#fff",
     zIndex: 3,
@@ -32,13 +25,13 @@ const styles = StyleSheet.create({
   input_block: {
     position: "relative",
     paddingHorizontal: 21,
-    marginTop: 30,
   },
   text_input: {
     fontWeight: "bold",
     fontSize: 32,
     textAlign: "center",
     marginTop: 19,
+    marginBottom: 25.64,
   },
   input: {
     backgroundColor: "#E4EBF1",
@@ -49,7 +42,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: "#A0A0A0",
     paddingLeft: 41,
-    marginBottom: 26.17,
+    marginBottom: "4%",
   },
   icons: {
     position: "absolute",
@@ -62,15 +55,17 @@ const styles = StyleSheet.create({
     fontSize: 32,
     color: "#000000",
     textAlign: "center",
-    marginTop: 17,
+    marginTop: "5%",
     color: mainGreen,
+    marginBottom: "5%",
   },
   "text-rules": {
     fontStyle: "normal",
     fontWeight: "500",
     fontSize: 18,
     textAlign: "center",
-    marginTop: 21,
+    paddingTop: "5%",
+    paddingBottom: "5%",
     paddingHorizontal: 20,
   },
   "continue-button": {
