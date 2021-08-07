@@ -11,7 +11,7 @@ const LoginStack = () => {
   const Stack = createStackNavigator();
   return (
     <Stack.Navigator headerMode="none" initialRouteName="GetStarted">
-      <Stack.Screen name="GetStarted" component={GetStarted} />
+      {/* <Stack.Screen name="GetStarted" component={GetStarted} /> */}
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="SignIn" component={SignIn} />
       <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
