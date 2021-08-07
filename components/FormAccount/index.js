@@ -12,10 +12,10 @@ import default_background from "../../assets/default_background.png";
 
 const FormAccount = ({ children }) => {
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-      style={{flex: 1}}
-    >
+    // <KeyboardAvoidingView
+    //   behavior={Platform.OS === "ios" ? "padding" : "height"}
+    //   style={{flex: 1}}
+    // >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
           <View style={styles.image_block}>
@@ -24,7 +24,7 @@ const FormAccount = ({ children }) => {
           {children}
         </View>
       </TouchableWithoutFeedback>
-    </KeyboardAvoidingView>
+    // </KeyboardAvoidingView>
   );
 };
 
