@@ -27,6 +27,7 @@ const ListExamScreen = ({ navigation }) => {
   }, [userState.dataToken]);
   return (
     <SafeAreaView style={styles.container}>
+      <StatusBar hidden={false} />
       <View
         style={{
           borderBottomWidth: 2,
@@ -47,11 +48,7 @@ const ListExamScreen = ({ navigation }) => {
                 style={styles.examedItem}
               >
                 <View style={styles.leftItem}>
-                  <IconFontAwesome
-                    name="book"
-                    size={40}
-                    color={"#FAA613"}
-                  />
+                  <IconFontAwesome name="book" size={40} color={"#FAA613"} />
                 </View>
                 <View style={{ flex: 1, flexDirection: "column" }}>
                   <Text style={styles.examName}>{item.name}</Text>

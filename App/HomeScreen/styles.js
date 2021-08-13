@@ -67,7 +67,7 @@ import * as colors from "../../assets/colors";
 export default StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#533A71"
+    backgroundColor: "#533A71",
   },
   title: {
     fontSize: 25,
@@ -79,6 +79,7 @@ export default StyleSheet.create({
   containerScrollView: {
     flex: 1,
     padding: 15,
+    marginBottom: 80
   },
   examedItem: {
     backgroundColor: "#FFFDED",
