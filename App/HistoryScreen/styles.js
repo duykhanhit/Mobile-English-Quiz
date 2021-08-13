@@ -16,6 +16,7 @@ export default StyleSheet.create({
   containerScrollView: {
     flex: 1,
     padding: 15,
+    marginBottom: 80
   },
   examedItem: {
     backgroundColor: "#FFFDED",
