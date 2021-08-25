@@ -1,5 +1,11 @@
 import React, { createRef, useContext, useEffect } from "react";
-import { View, Text, ScrollView, SafeAreaView, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  ScrollView,
+  SafeAreaView,
+  TouchableOpacity,
+} from "react-native";
 import _ from "lodash";
 import moment from "moment";
 
@@ -14,8 +20,6 @@ const HistoryScreen = ({ navigation }) => {
 
   const listExamHistory = examState.list_exam_history;
 
-  
-
   useEffect(() => {
     !_.isEmpty(userState.dataToken) &&
       getExamHistory(userState.dataToken.token);
@@ -29,42 +33,61 @@ const HistoryScreen = ({ navigation }) => {
           borderBottomColor: "#FFFDED",
         }}
       >
-        <Text style={styles.title}>Danh sách đề đã thi</Text>
+        <Text style={styles.title}>Lịch sử làm bài</Text>
       </View>
       <ScrollView style={styles.containerScrollView}>
         {!_.isEmpty(listExamHistory.data) &&
           listExamHistory.data.map((item, index) => {
-            const color = item.countCorrect <=5 ? colors.warning : item.countCorrect <=15 ? colors.safe : colors.good;
+            const color =
+              item.countCorrect <= 5
+                ? colors.warning
+                : item.countCorrect <= 15
+                ? colors.safe
+                : colors.good;
             return (
-            <TouchableOpacity onPress={() => navigation.navigate("ExamHistoryScreen", {id: item._id})} key={index} style={styles.examedItem}>
-              <View style={[styles.leftItem, {borderColor: color}]}></View>
-              <View style={{ flex: 1, flexDirection: "column" }}>
-                <Text style={styles.examName}>{item.exam_id.name}</Text>
-                <View style={styles.rightItem}>
-                  <View>
-                    <Text style={styles.examType}>
-                      Loại đề: {item.exam_id.type}
-                    </Text>
-                    <Text style={styles.dateExam}>
-                      Ngày tạo: {moment(item.createdAt).format("DD/MM/YYYY")}
-                    </Text>
-                  </View>
-                  <View
-                    style={{
-                      flex: 1,
-                      justifyContent: "center",
-                      alignItems: "center",
-                    }}
-                  >
-                    <Text style={[styles.correctNumber, {color: color}]}>
-                      {item.countCorrect}/
-                      <Text style={[styles.perNumber, {color: colors.mainGreen}]}>20</Text>
-                    </Text>
+              <TouchableOpacity
+                onPress={() =>
+                  navigation.navigate("ExamHistoryScreen", { id: item._id })
+                }
+                key={index}
+                style={styles.examedItem}
+              >
+                <View style={[styles.leftItem, { borderColor: color }]}></View>
+                <View style={{ flex: 1, flexDirection: "column" }}>
+                  <Text style={styles.examName}>{item.exam_id.name}</Text>
+                  <View style={styles.rightItem}>
+                    <View>
+                      <Text style={styles.examType}>
+                        Loại đề: {item.exam_id.type}
+                      </Text>
+                      <Text style={styles.dateExam}>
+                        Ngày thi: {moment(item.createdAt).format("DD/MM/YYYY")}
+                      </Text>
+                    </View>
+                    <View
+                      style={{
+                        flex: 1,
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                    >
+                      <Text style={[styles.correctNumber, { color: color }]}>
+                        {item.countCorrect}/
+                        <Text
+                          style={[
+                            styles.perNumber,
+                            { color: colors.mainGreen },
+                          ]}
+                        >
+                          20
+                        </Text>
+                      </Text>
+                    </View>
                   </View>
                 </View>
-              </View>
-            </TouchableOpacity>
-          )})}
+              </TouchableOpacity>
+            );
+          })}
       </ScrollView>
     </SafeAreaView>
   );
