@@ -45,7 +45,8 @@ const ListExamScreen = ({ navigation }) => {
                   navigation.navigate("RulesScreen", { id: item._id });
                 }}
                 key={index}
-                style={styles.examedItem}
+
+                style={[styles.examedItem, index === examState.list_exams.length - 1 ? {marginBottom: 30} : {}]}
               >
                 <View style={styles.leftItem}>
                   <IconFontAwesome name="book" size={40} color={"#FAA613"} />

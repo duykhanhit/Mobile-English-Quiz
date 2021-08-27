@@ -50,7 +50,7 @@ const HistoryScreen = ({ navigation }) => {
                   navigation.navigate("ExamHistoryScreen", { id: item._id })
                 }
                 key={index}
-                style={styles.examedItem}
+                style={[styles.examedItem, index === listExamHistory.data.length - 1 ? {marginBottom: 30} : {}]}
               >
                 <View style={[styles.leftItem, { borderColor: color }]}></View>
                 <View style={{ flex: 1, flexDirection: "column" }}>
