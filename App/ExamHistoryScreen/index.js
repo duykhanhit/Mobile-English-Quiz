@@ -22,7 +22,6 @@ import { getExamHistory } from "../../api";
 const ExamHistoryScreen = ({ navigation, route }) => {
 
   const id = route.params.id;
-  // console.log(id);
   const { getExamed, examState, exam } = useContext(ExamContext);
   const { userState } = useContext(UserContext);
 

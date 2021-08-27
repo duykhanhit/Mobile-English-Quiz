@@ -105,6 +105,18 @@ export default StyleSheet.create({
     alignItems: "center",
     marginBottom: 100
   },
+  buttonContainerChangePass: {
+    width: "100%",
+    justifyContent: "flex-end",
+    alignItems: "center",
+    marginBottom: 10
+  },
+  buttonContainerConfirmChangePass: {
+    width: "100%",
+    justifyContent: "flex-end",
+    alignItems: "center",
+    marginTop: 10
+  },
   touch: {
     width: "100%",
   },
@@ -112,6 +124,30 @@ export default StyleSheet.create({
     borderWidth: 2,
     backgroundColor: colors.red,
     borderColor: colors.red,
+    borderRadius: 5,
+    width: "100%",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    height: 50,
+    flexDirection: "row",
+  },
+  btnChangePass: {
+    borderWidth: 2,
+    backgroundColor: "#2C2C54",
+    borderColor: "#2C2C54",
+    borderRadius: 5,
+    width: "100%",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    height: 50,
+    flexDirection: "row",
+  },
+  btnConfirmChangePass: {
+    borderWidth: 2,
+    backgroundColor: "#A40E4C",
+    borderColor: "#A40E4C",
     borderRadius: 5,
     width: "100%",
     display: "flex",
@@ -154,11 +190,11 @@ export default StyleSheet.create({
     width: '100%',
     height: '50%',
     padding: 20,
-    // borderTopLeftRadius: 30,
-    // borderTopRightRadius: 30,
-    // shadowOffset: { width: 0, height: 3 },
-    // shadowOpacity: 0.2,
-    // shadowColor: "#000",
+  },
+  buttonsChangePass: {
+    width: '100%',
+    height: '80%',
+    padding: 20,
   },
   textUploadPhoto: {
     textAlign: 'center',

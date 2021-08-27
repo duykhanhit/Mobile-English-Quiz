@@ -141,10 +141,10 @@ export default GlobalUserProvider = ({ children }) => {
   const updateUser = async (formdata, token) => {
     try {
       const res = await api.updateUser(formdata, token);
-      if(res?.data.success) {
+      if (res?.data.success) {
         dispatch({
           type: types.UPDATE_USER,
-          payload: res?.data
+          payload: res?.data,
         });
       } else {
         console.log("res", res);
@@ -152,21 +152,38 @@ export default GlobalUserProvider = ({ children }) => {
     } catch (error) {
       console.log("updateUser Error: ", error);
     }
-  }
+  };
+
+  const changePass = async (oldPass, newPass, token, callback) => {
+    try {
+      const res = await api.changePass(oldPass, newPass, token);
+      console.log(res)
+      if (res?.data?.success) {
+        console.log("success");
+          callback.success();
+      } else {
+        callback.failed();
+        console.log("res", res);
+      }
+    } catch (error) {
+      callback.failed();
+      console.log("changePass Error: ", error);
+    }
+  };
   return (
     <UserContext.Provider
       value={{
         userState,
         userLogin,
         userRegister,
-        // getListExams,
         forgotPasswordUser,
         verifyCodeUser,
         getUser,
         logout,
         retrieveToken,
         verifyCode,
-        updateUser
+        updateUser,
+        changePass,
       }}
     >
       {children}
