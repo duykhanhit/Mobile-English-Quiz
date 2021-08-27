@@ -83,11 +83,11 @@ export const checkVerifyCode = (data) =>
 export const updateUser = (formdata, token) => {
   return axios.put(`${baseUrl}/api/auth/update-details`, formdata, {
     headers: {
-      'Content-Type': 'multipart/form-data',
+      "Content-Type": "multipart/form-data",
       Authorization: `Bearer ${token}`,
     },
-  })
-}
+  });
+};
 
 export const getExamHistory = (token) => {
   return axios.get(`${baseUrl}/api/history`, {
@@ -95,8 +95,8 @@ export const getExamHistory = (token) => {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-  })
-}
+  });
+};
 
 export const getExamed = (id, token) => {
   return axios.get(`${baseUrl}/api/history/${id}`, {
@@ -104,5 +104,21 @@ export const getExamed = (id, token) => {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-  })
-}
+  });
+};
+
+export const changePass = (oldPass, newPass, token) => {
+  return axios.put(
+    `${baseUrl}/api/auth/update-password`,
+    {
+      currentPassword: oldPass,
+      newPassword: newPass
+    },
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+};

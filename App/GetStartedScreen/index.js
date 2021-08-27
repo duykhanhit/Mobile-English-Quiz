@@ -25,6 +25,7 @@ const GetStarted = ({ navigation }) => {
           <TouchableOpacity
             style={styles.touchable}
             onPress={() => handleNavigate()}
+            
           >
             <Text style={styles.text}>Get started</Text>
           </TouchableOpacity>

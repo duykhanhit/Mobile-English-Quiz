@@ -20,7 +20,7 @@ import {
   TouchableHighlight,
   Keyboard,
   StatusBar,
-  ActivityIndicator
+  ActivityIndicator,
 } from "react-native";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import BottomSheet from "react-native-bottomsheet-reanimated";
@@ -38,11 +38,13 @@ import { UserContext } from "../../contexts/GlobalState/GlobaleUserState";
 import { Alert } from "react-native";
 
 const SettingScreen = ({ navigation }) => {
-  const { userState, updateUser, logout } = useContext(UserContext);
+  const { userState, updateUser, logout, changePass } = useContext(UserContext);
   const [focusInput, setFocusInput] = useState(false);
   //
   const bottomSheetRef = createRef();
   const snapPoints = useMemo(() => ["0%", "50%"], []);
+  const bottomSheetRefChangePass = createRef();
+  const snapPointsChangePass = useMemo(() => ["0%", "80%"], []);
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -54,8 +56,14 @@ const SettingScreen = ({ navigation }) => {
     date: new Date(),
     open: false,
   });
+  const [oldPass, setOldPass] = useState("");
+  const [newPass, setNewPass] = useState("");
+  const [confirmPass, setConfirmPass] = useState("");
   const [errorUserName, setErrorUserName] = useState(false);
   const [errorEmail, setErrorEmail] = useState(false);
+  const [errorOldPass, setErrorOldPass] = useState(false);
+  const [errorNewPass, setErrorNewPass] = useState(false);
+  const [errorConfirmPass, setErrorConfirmPass] = useState(false);
   const [isFocus, setIsFocus] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -75,8 +83,8 @@ const SettingScreen = ({ navigation }) => {
   }, [userState]);
 
   useEffect(() => {
-    isLoading && setTimeout(() => setIsLoading(false), 3000)
-  }, [isLoading])
+    isLoading && setTimeout(() => setIsLoading(false), 3000);
+  }, [isLoading]);
 
   const takePhotoFromCamera = () => {
     navigation.navigate("CameraScreen", {
@@ -92,7 +100,6 @@ const SettingScreen = ({ navigation }) => {
       quality: 1,
     });
     if (!result.cancelled) {
-      // console.log(result);
       setImage(result.uri);
     }
   };
@@ -145,11 +152,58 @@ const SettingScreen = ({ navigation }) => {
     );
   };
 
+  const renderContentChangePass = () => {
+    return (
+      <View style={styles.buttonsChangePass}>
+        <Text style={styles.lableInput}>Nhập mật khẩu hiện tại</Text>
+        <TextInput
+          secureTextEntry={true}
+          onFocus={() => setIsFocus(true)}
+          onEndEditing={() => handleEndEditingOldPass()}
+          value={oldPass}
+          onChangeText={(text) => setOldPass(text)}
+          style={styles.input}
+        />
+        {errorOldPass && (
+          <Error error="Mật khẩu hiện tại không được để trống!" />
+        )}
+        <Text style={styles.lableInput}>Nhập mật khẩu mới</Text>
+        <TextInput
+          secureTextEntry={true}
+          onFocus={() => setIsFocus(true)}
+          onEndEditing={() => handleEndEditingNewPass()}
+          value={newPass}
+          onChangeText={(text) => setNewPass(text)}
+          style={styles.input}
+        />
+        {errorNewPass && <Error error="Mật khẩu ít nhất 6 ký tự và không chứa dấu cách!" />}
+        <Text style={styles.lableInput}>Xác nhận mật khẩu mới</Text>
+        <TextInput
+          secureTextEntry={true}
+          onFocus={() => setIsFocus(true)}
+          onEndEditing={() => handleEndEditingConfirmPass()}
+          value={confirmPass}
+          onChangeText={(text) => setConfirmPass(text)}
+          style={styles.input}
+        />
+        {errorConfirmPass && <Error error="Xác nhận mật khẩu không khớp!" />}
+        <View style={styles.buttonContainerConfirmChangePass}>
+          <TouchableOpacity onPress={handleChangePass} style={styles.touch}>
+            <View style={styles.btnConfirmChangePass}>
+              <MaterialIcon name="check" size={26} color="#fff" />
+              <Text style={styles.textLogout}>Xác nhận thay đổi</Text>
+            </View>
+          </TouchableOpacity>
+        </View>
+      </View>
+    );
+  };
+
   const re =
     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
+  const rePas = /\S/;
   const handleUpdateUser = () => {
-    if(errorUserName || errorEmail) {
+    if (errorUserName || errorEmail) {
       Alert.alert("Bạn cần nhập đúng yêu cầu!");
       return;
     }
@@ -193,14 +247,67 @@ const SettingScreen = ({ navigation }) => {
     } else {
       setErrorEmail(false);
     }
-    setIsFocus(false)
+    setIsFocus(false);
   };
 
+  const handleEndEditingOldPass = () => {
+    if (_.isEmpty(oldPass)) {
+      setErrorOldPass(true);
+    } else {
+      setErrorOldPass(false);
+    }
+    setIsFocus(false);
+  };
 
-  if(isLoading) 
-    return (<View style={{ justifyContent: "center", width: "100%", flex: 1, backgroundColor: "#FFFDED" }}>
-    <ActivityIndicator size="small" color={colors.mainGreen} />
-  </View>)
+  const handleEndEditingNewPass = () => {
+    if (!rePas.test(newPass) && newPass.trim().length < 6) {
+      setErrorNewPass(true);
+    } else {
+      setErrorNewPass(false);
+    }
+    setIsFocus(false);
+  };
+
+  const handleEndEditingConfirmPass = () => {
+    if (confirmPass !== newPass) {
+      setErrorConfirmPass(true);
+    } else {
+      setErrorConfirmPass(false);
+    }
+    setIsFocus(false);
+  };
+
+  const handleChangePass = () => {
+    if (errorConfirmPass || errorOldPass || errorNewPass) {
+      Alert.alert("Bạn cần nhập đúng yêu cầu!");
+      return;
+    }
+    setIsLoading(true);
+    changePass(oldPass, newPass, userState.dataToken.token, {
+      success: () => {
+        setIsLoading(false);
+        Alert.alert("Thay đổi mật khẩu thành công!");
+      },
+      failed: () => {
+        setIsLoading(false);
+        Alert.alert("Thay đổi mật khẩu không thành công. Vui lòng thử lại!");
+      },
+    });
+  };
+
+  if (isLoading)
+    return (
+      <View
+        style={{
+          justifyContent: "center",
+          width: "100%",
+          flex: 1,
+          backgroundColor: "#FFFDED",
+        }}
+      >
+        <ActivityIndicator size="small" color={colors.mainGreen} />
+      </View>
+    );
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -234,7 +341,9 @@ const SettingScreen = ({ navigation }) => {
                       color={colors.darkGreen}
                     />
                   </TouchableOpacity>
-                  <TouchableOpacity onPress={() => !isFocus && handleUpdateUser()}>
+                  <TouchableOpacity
+                    onPress={() => !isFocus && handleUpdateUser()}
+                  >
                     <MaterialIcon
                       name="check"
                       size={26}
@@ -366,6 +475,27 @@ const SettingScreen = ({ navigation }) => {
                 />
               </View>
               {!edit && (
+                <View style={styles.buttonContainerChangePass}>
+                  <TouchableOpacity
+                    onPress={() => {
+                      bottomSheetRefChangePass.current.snapTo(1);
+                      setErrorNewPass(false);
+                      setErrorOldPass(false);
+                      setErrorConfirmPass(false);
+                      setNewPass('');
+                      setOldPass('');
+                      setConfirmPass('');
+                    }}
+                    style={styles.touch}
+                  >
+                    <View style={styles.btnChangePass}>
+                      <Text style={styles.textLogout}>Thay đổi mật khẩu</Text>
+                      <MaterialIcon name="key" size={26} color="#fff" />
+                    </View>
+                  </TouchableOpacity>
+                </View>
+              )}
+              {!edit && (
                 <View style={styles.buttonContainerLogout}>
                   <TouchableOpacity
                     onPress={() => logout()}
@@ -389,6 +519,17 @@ const SettingScreen = ({ navigation }) => {
               isRoundBorderWithTipHeader={true}
               containerStyle={{ background: "#fff" }}
               body={renderContent()}
+            />
+            <BottomSheet
+              bottomSheerColor="#FFFFFF"
+              ref={bottomSheetRefChangePass}
+              initialPosition={"0%"}
+              snapPoints={snapPointsChangePass}
+              isBackDrop={true}
+              isBackDropDismissByPress={true}
+              isRoundBorderWithTipHeader={true}
+              containerStyle={{ background: "#fff" }}
+              body={renderContentChangePass()}
             />
           </View>
         </TouchableWithoutFeedback>
