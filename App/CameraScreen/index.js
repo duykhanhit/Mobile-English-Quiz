@@ -12,12 +12,12 @@ import IconMaterial from 'react-native-vector-icons/MaterialCommunityIcons';
 import { YellowBox, LogBox } from 'react-native';
 
 const CameraScreen = ({ navigation, route }) => {
-  // useEffect(() => {
-  //   YellowBox.ignoreWarnings([
-  //     'Non-serializable values were found in the navigation state',
-  //   ]);
-  //   LogBox.ignoreAllLogs();
-  // }, [])
+  useEffect(() => {
+    YellowBox.ignoreWarnings([
+      'Non-serializable values were found in the navigation state',
+    ]);
+    LogBox.ignoreAllLogs();
+  }, [])
   
   const { setImage } = route.params;
   
@@ -45,7 +45,7 @@ const CameraScreen = ({ navigation, route }) => {
       const options = { quality: 0.5, base64: true, skipProcessing: false};
       try {     
         let photo = await cam.current.takePictureAsync(options);
-        console.log(photo.uri);
+        // console.log(photo.uri);
         const source = photo.uri;
   
         if(source) {
